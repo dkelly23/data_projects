@@ -1,0 +1,264 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ==============================================================================
+%% Encoding & idioma
+% ==============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+% ==============================================================================
+%% Tipografía y diseño
+% ==============================================================================
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% ==============================================================================
+%% Paleta de colores (consistente con plantilla Beamer Colmex)
+% ==============================================================================
+\definecolor{main}{HTML}{5E002B}
+\definecolor{subtitle}{RGB}{75,75,75}
+\definecolor{cerulean}{RGB}{0,123,167}
+\definecolor{redorange}{RGB}{210,77,49}
+\definecolor{forestgreen}{RGB}{36,128,103}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=main,
+    citecolor=main,
+    urlcolor=cerulean,
+    pdftitle={Programación para Proyectos de Datos -- Syllabus},
+    pdfauthor={Daniel Kelly}
+}
+
+% ==============================================================================
+%% Estilo de secciones
+% ==============================================================================
+\titleformat{\section}
+  {\Large\bfseries\color{main}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{main}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{subtitle}}{}{0em}{}
+
+% ==============================================================================
+%% Comandos auxiliares (consistentes con plantilla Beamer)
+% ==============================================================================
+\newcommand{\blue}[1]{{\color{cerulean}#1}}
+\newcommand{\orange}[1]{{\color{redorange}#1}}
+\newcommand{\green}[1]{{\color{forestgreen}#1}}
+
+% Marcador de contenido pendiente (para iterar sesión por sesión)
+\newcommand{\porDesarrollar}{\textit{\color{redorange}[Por desarrollar]}}
+
+% Bloque estandarizado para cada semana (cada semana contiene 2 sesiones de 1:30 hr)
+\newcommand{\semana}[2]{%
+  \subsubsection*{\color{main}Semana #1: #2}%
+}
+
+% ==============================================================================
+%% Bibliografía
+% ==============================================================================
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+
+% ==============================================================================
+%% Encabezado
+% ==============================================================================
+\title{\color{main}\textbf{Programación para Proyectos de Datos}\\[0.3em]
+       \large\color{subtitle}Syllabus}
+\author{Daniel Kelly\\
+        \small El Colegio de México --- Licenciatura en Economía}
+\date{Otoño 2026}
+
+\begin{document}
+\maketitle
+
+% ==============================================================================
+\section{Presentación}
+% ==============================================================================
+
+Este curso complementa la formación cuantitativa de la Licenciatura en Economía con una visión integral del flujo de un proyecto de datos. Los cursos previos del programa equipan al estudiante con \blue{habilidades específicas} de programación y de análisis estadístico; el énfasis aquí está en cómo esas habilidades se \orange{articulan dentro de un mismo proyecto}: desde estructurar un repositorio reproducible y traer datos de fuentes diversas, hasta limpiarlos, modelarlos y producir un entregable comunicable.
+
+La filosofía del curso es \textbf{\textit{zero-to-hero}}: se asume que el estudiante puede llegar con experiencia previa de programación limitada o nula, y termina capaz de levantar por su cuenta un proyecto de datos completo bajo prácticas reproducibles.
+
+El lenguaje del curso es \textbf{R}. La elección se discute en la primera sesión; en términos generales, R es la lingua franca de la investigación cuantitativa académica y ofrece un ecosistema integrado para todas las etapas de un proyecto de datos. El IDE recomendado es \textbf{Positron}.
+
+% ==============================================================================
+\section{Objetivos}
+% ==============================================================================
+
+Al finalizar el curso, el estudiante será capaz de:
+
+\begin{enumerate}[leftmargin=*]
+    \item Estructurar un proyecto de datos completo bajo convenciones reproducibles (control de versiones, organización de directorios, gestión de dependencias).
+    \item Importar, limpiar y transformar datos provenientes de fuentes heterogéneas (archivos planos, hojas de cálculo, bases de datos relacionales).
+    \item Programar funciones reutilizables y aplicar paradigmas de programación funcional para automatizar tareas repetitivas.
+    \item Estimar y reportar modelos estadísticos comunes en investigación económica desde el punto de vista programático.
+    \item Producir entregables comunicables: visualizaciones, documentos automatizados, aplicaciones interactivas e integraciones con servicios externos.
+\end{enumerate}
+
+% ==============================================================================
+\section{Prerrequisitos}
+% ==============================================================================
+
+\begin{itemize}[leftmargin=*]
+    \item No se requiere experiencia previa en programación.
+    \item Se asume manejo básico de estadística descriptiva y nociones iniciales de econometría (regresión lineal). El curso \textit{no} enseña la teoría de los modelos; solo cómo implementarlos.
+\end{itemize}
+
+% ==============================================================================
+\section{Metodología}
+% ==============================================================================
+
+\textbf{Duración:} 16 semanas, con 2 sesiones de 1:30 hr por semana (32 sesiones totales).
+
+\textbf{Estructura semanal.} Cada semana tiene dos sesiones con roles diferenciados:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{\blue{Sesión 1 --- Teoría.}} Exposición conceptual del tema de la semana, con código en vivo a manera de ilustración. La proporción típica es de \textbf{$\approx$60\% teoría / 40\% código demostrativo}, aunque puede inclinarse hacia la teoría en semanas más conceptualmente densas.
+    \item \textbf{\orange{Sesión 2 --- Práctica.}} Inicia con un \textit{resumen rápido} de los puntos clave de la sesión 1, y se dedica el tiempo restante a \textbf{ejercicios prácticos} resueltos en clase.
+\end{itemize}
+
+\textbf{Tareas.} El curso \textit{no} contempla tareas semanales fuera de clase. El trabajo evaluable se concentra en los ejercicios resueltos en la sesión 2 y en el \orange{proyecto integrador} que los estudiantes construyen a lo largo del semestre (ver sección correspondiente).
+
+% ==============================================================================
+\section{Evaluación}
+% ==============================================================================
+
+\porDesarrollar{} \emph{(porcentajes propuestos, por confirmar:)}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{Componente} & \textbf{Peso} \\
+\midrule
+Checkpoints del proyecto integrador       & 40\% \\
+Proyecto final                            & 30\% \\
+Ejercicios en clase (sesión 2 semanal)    & 25\% \\
+Asistencia                                & 5\%  \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Estructura del curso}
+% ==============================================================================
+
+El curso se organiza en cinco partes:
+
+\begin{description}[leftmargin=2em, style=nextline]
+    \item[\textcolor{main}{Parte I --- Fundamentos (semanas 1--4).}] Introducción a R, estructuras de datos, importación, exploración inicial y estructura reproducible de proyectos.
+    \item[\textcolor{main}{Parte II --- Manipulación (semanas 5--7).}] Manejo de datos con \texttt{dplyr} y manipulación de texto.
+    \item[\textcolor{main}{Parte III --- Programación (semanas 8--10).}] Control de flujo, funciones y programación funcional.
+    \item[\textcolor{main}{Parte IV --- Análisis (semanas 11--12).}] Modelado estadístico (incluyendo series de tiempo a nivel programático) y datos a escala con SQL.
+    \item[\textcolor{main}{Parte V --- Productos (semanas 13--16).}] Visualización con \texttt{ggplot2}, automatización de documentos, aplicaciones \texttt{Shiny} e interfaces de modelos de lenguaje.
+\end{description}
+
+% ==============================================================================
+\section{Temario detallado}
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+\subsection*{\color{main}Parte I --- Fundamentos}
+% ------------------------------------------------------------------------------
+
+\semana{1}{¿Por qué R? Setup y primeros pasos}
+\porDesarrollar
+
+\semana{2}{Estructuras de datos e indexación}
+\porDesarrollar
+
+\semana{3}{Importación de datos y EDA con base R}
+\porDesarrollar
+
+\semana{4}{Estructura de proyectos, Git y reproducibilidad}
+\porDesarrollar
+
+% ------------------------------------------------------------------------------
+\subsection*{\color{main}Parte II --- Manipulación}
+% ------------------------------------------------------------------------------
+
+\semana{5}{dplyr I: pipe y verbos básicos}
+\porDesarrollar
+
+\semana{6}{dplyr II: joins, pivots y manejo de NA}
+\porDesarrollar
+
+\semana{7}{Strings, expresiones regulares y \texttt{stringr}}
+\porDesarrollar
+
+% ------------------------------------------------------------------------------
+\subsection*{\color{main}Parte III --- Programación}
+% ------------------------------------------------------------------------------
+
+\semana{8}{Control de flujo y vectorización}
+\porDesarrollar
+
+\semana{9}{Funciones: diseño, scoping y debugging}
+\porDesarrollar
+
+\semana{10}{Programación funcional: \texttt{purrr} y \texttt{apply}}
+\porDesarrollar
+
+% ------------------------------------------------------------------------------
+\subsection*{\color{main}Parte IV --- Análisis}
+% ------------------------------------------------------------------------------
+
+\semana{11}{Modelado estadístico y series de tiempo}
+\porDesarrollar
+
+\semana{12}{Datos a escala: SQL, \texttt{DBI} y \texttt{dbplyr}}
+\porDesarrollar
+
+% ------------------------------------------------------------------------------
+\subsection*{\color{main}Parte V --- Productos}
+% ------------------------------------------------------------------------------
+
+\semana{13}{Visualización con \texttt{ggplot2}}
+\porDesarrollar
+
+\semana{14}{Automatización con \texttt{officer} y \texttt{googledrive}}
+\porDesarrollar
+
+\semana{15}{Aplicaciones interactivas con Shiny}
+\porDesarrollar
+
+\semana{16}{Interfaces de modelos de lenguaje}
+\porDesarrollar
+
+% ==============================================================================
+\section{Proyecto integrador}
+% ==============================================================================
+
+El curso se articula alrededor de un proyecto que los estudiantes construyen a lo largo del semestre, replicando el flujo completo de un proyecto de datos real:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Input:} adquisición de datos desde fuentes diversas.
+    \item \textbf{Limpieza:} transformación a formato \textit{tidy} y validación.
+    \item \textbf{Modelado:} análisis estadístico apropiado a la pregunta.
+    \item \textbf{Producto:} entregable comunicable (documento, dashboard, app).
+\end{enumerate}
+
+El proyecto se evalúa por \textbf{checkpoints} alineados con las cinco partes del curso, más una entrega final.
+
+\porDesarrollar{} \emph{(dataset recurrente y entregables específicos por definir)}
+
+% ==============================================================================
+\section{Referencias principales}
+% ==============================================================================
+
+Las lecturas específicas por sesión se indican en el temario detallado. Las obras de consulta general son:
+
+\nocite{wickham2023r4ds, wickham2019advr, wickham2016ggplot2, wickham2021mastering-shiny}
+
+\printbibliography[heading=none]
+
+\end{document}
