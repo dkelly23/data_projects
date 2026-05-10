@@ -28,50 +28,60 @@ Curso comprensivo de programación orientado a la construcción de **proyectos c
 | Programa | Licenciatura en Economía |
 | Semestre | Otoño 2026 (agosto–diciembre) |
 | Clave | Pendiente (curso nuevo) |
-| Sesiones | 16 sesiones de 1:30 hr |
-| Distribución | 2 sesiones por semana, 8 semanas |
+| Duración | 16 semanas |
+| Sesiones | 2 sesiones de 1:30 hr por semana (32 sesiones totales) |
 
 ---
+
+## Estructura semanal (default)
+
+Cada semana tiene dos sesiones con roles diferenciados:
+- **Sesión 1 — Teoría.** Exposición conceptual del tema con código en vivo demostrativo. Proporción típica ~60% teoría / 40% código. Puede inclinarse hacia más teoría en semanas conceptualmente densas.
+- **Sesión 2 — Práctica.** Resumen rápido inicial de la sesión 1, seguido de ejercicios prácticos resueltos en clase.
+
+**Sin tareas semanales fuera de clase.** El trabajo evaluable se concentra en ejercicios en clase y en el proyecto integrador.
 
 ## Esquema de evaluación
 
-> **Pendiente:** confirmar porcentajes finales con el componente de asistencia y ejercicios en clase.
+> **Pendiente:** confirmar porcentajes finales.
 
-Esquema base:
-- Tareas semanales — **≈40%**
-- Checkpoints del proyecto integrador — **≈30%**
-- Proyecto final — **≈30%**
-- Asistencia y ejercicios en clase — componente adicional, redistribuir porcentajes
+Propuesta:
+- Checkpoints del proyecto integrador — **40%**
+- Proyecto final — **30%**
+- Ejercicios en clase (sesión 2 semanal) — **25%**
+- Asistencia — **5%**
 
 ---
 
-## Estructura del curso (16 sesiones, 5 partes)
+## Estructura del curso (16 semanas, 5 partes)
 
-### Parte I — Fundamentos (S1–S4)
-- **S1** ¿Por qué R? + setup Positron + primer script + objetos, asignación, vectores, tipos
-- **S2** Estructuras de datos: listas, DataFrames, tibbles, indexación, NA, coerción
-- **S3** Importación de datos (`readr`, `readxl`, `haven`) + EDA con base R + estadística descriptiva + base graphics
-- **S4** Estructura de proyectos + Git + `here` + `renv`
+Cada semana tiene 2 sesiones de 1:30 hr. La granularidad fina (qué se ve en la sesión A vs. B de cada semana) se desarrolla iterativamente como parte del temario detallado.
 
-### Parte II — Manipulación (S5–S7)
-- **S5** dplyr I: pipe + verbos básicos + sistema tidyverse
-- **S6** dplyr II: joins + pivots + NA + `case_when` / `coalesce`
-- **S7** Strings + regex + `stringr` + `glue`
+### Parte I — Fundamentos (Semanas 1–4)
+- **Semana 1** ¿Por qué R? + setup Positron + primer script + objetos, asignación, vectores, tipos
+- **Semana 2** Estructuras de datos: listas, DataFrames, tibbles, indexación, NA, coerción
+- **Semana 3** Importación de datos (`readr`, `readxl`, `haven`) + EDA con base R + estadística descriptiva + base graphics
+- **Semana 4** Estructura de proyectos + Git + `here` + `renv`
 
-### Parte III — Programación (S8–S10)
-- **S8** Control flow + vectorización
-- **S9** Funciones: diseño, scoping, errores, debugging (`browser`, `traceback`)
-- **S10** Programación funcional: `purrr` + familia `apply`
+### Parte II — Manipulación (Semanas 5–7)
+- **Semana 5** dplyr I: pipe + verbos básicos + sistema tidyverse
+- **Semana 6** dplyr II: joins + pivots + NA + `case_when` / `coalesce`
+- **Semana 7** Strings + regex + `stringr` + `glue`
 
-### Parte IV — Análisis (S11–S12)
-- **S11** Modelado: `lm` + `plm` (panel) + categóricos + manejo de fechas y series con `zoo`/`ts` + `broom` + `modelsummary`
-- **S12** Datos a escala: SQL + `DBI` + `dbplyr` (incluye montar MySQL local y queries básicos)
+### Parte III — Programación (Semanas 8–10)
+- **Semana 8** Control flow + vectorización
+- **Semana 9** Funciones: diseño, scoping, errores, debugging (`browser`, `traceback`)
+- **Semana 10** Programación funcional: `purrr` + familia `apply`
 
-### Parte V — Productos (S13–S16)
-- **S13** ggplot2: gramática completa, themes, faceting, export
-- **S14** `officer` + `googledrive` (automatización de PPT/reportes)
-- **S15** Shiny
-- **S16** Interfaces de LLMs: `ellmer` + Gemini API + `telegram_bot`
+### Parte IV — Análisis (Semanas 11–12)
+- **Semana 11** Modelado: `lm` + `plm` (panel) + categóricos + manejo de fechas y series con `zoo`/`ts` + `broom` + `modelsummary`
+- **Semana 12** Datos a escala: SQL + `DBI` + `dbplyr` (incluye montar MySQL local y queries básicos)
+
+### Parte V — Productos (Semanas 13–16)
+- **Semana 13** ggplot2: gramática completa, themes, faceting, export
+- **Semana 14** `officer` + `googledrive` (automatización de PPT/reportes)
+- **Semana 15** Shiny
+- **Semana 16** Interfaces de LLMs: `ellmer` + Gemini API + `telegram_bot`
 
 ---
 
@@ -154,7 +164,7 @@ Programming for Data Projects/
 ├── slides/
 │   ├── assets/         (imágenes compartidas, copia de muestra_ppt)
 │   ├── swjtu.sty       (estilo compartido)
-│   └── sesion_NN/      (una carpeta por sesión)
+│   └── semana_NN/      (una carpeta por semana, contiene ambas sesiones)
 └── muestra_ppt/        (referencia, no tocar)
 ```
 
