@@ -108,6 +108,7 @@ Estas decisiones se tomaron y deben respetarse:
 - **Series de tiempo** solo a nivel programático, NO comprensivo (en S11 junto con modelado).
 - **officeR+googledrive**, **Shiny**, y **LLMs** cada uno como sesión individual.
 - **Modelado de inferencia**: enfoque estrictamente programático — cómo se especifican fórmulas, cómo se extraen coeficientes, cómo se reportan resultados. La teoría estadística la ven en Econometría.
+- **Política sobre LLMs:** se introduce explícitamente en S1.1. La visión es que **depender mal de un LLM atrofia la capacidad individual**, pero usado **como agente integrado al proyecto** (Claude Code, modo agente de Cursor) puede acelerar el trabajo. **Permitido** en el proyecto integrador; **no permitido** en ejercicios de clase. El estudiante debe poder leer y modificar cualquier línea que entregue.
 
 ---
 
