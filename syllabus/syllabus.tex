@@ -63,6 +63,11 @@
   \subsubsection*{\color{main}Semana #1: #2}%
 }
 
+% Sub-bloque para cada sesión dentro de una semana
+\newcommand{\subsesion}[2]{%
+  \medskip\noindent\textbf{\color{main}Sesión #1 --- #2}\par\smallskip%
+}
+
 % ==============================================================================
 %% Bibliografía
 % ==============================================================================
@@ -171,7 +176,53 @@ El curso se organiza en cinco partes:
 % ------------------------------------------------------------------------------
 
 \semana{1}{¿Por qué R? Setup y primeros pasos}
-\porDesarrollar
+
+Esta semana es la entrada al curso. Cubre la motivación detrás de elegir R, la instalación y configuración del entorno de trabajo, los primeros conceptos del lenguaje (asignación, vectores, tipos), y la presentación formal del proyecto integrador. Es la única semana con peso significativo en logística administrativa.
+
+\subsesion{1.1}{Teoría}
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+    \item \textbf{Bienvenida y proyecto integrador} (15 min). Estructura del curso, esquema de evaluación, presentación formal del proyecto integrador y del pipeline ETL ($Extract$ $\to$ $Transform$ $\to$ $Load$ $\to$ análisis $\to$ producto).
+    \item \textbf{¿Por qué R?} (15 min). R en el contexto de la investigación económica académica; contraste con Python; razones para descartar Stata. Ecosistema CRAN, tidyverse y Posit.
+    \item \textbf{Uso responsable de modelos de lenguaje en el curso} (10 min). Diferencia operativa entre usar un LLM como \blue{chatbot} (pegar pregunta, copiar respuesta) y como \orange{agente integrado en el proyecto} (lee archivos, propone cambios, ejecuta comandos con el humano en el \textit{loop} ---por ejemplo, Claude Code o el modo agente de Cursor). Depender mal de un LLM \textbf{atrofia la capacidad individual} de razonar sobre código; usado como agente puede acelerar el trabajo de quien ya domina los fundamentos. \textbf{Política del curso:} agentes permitidos en el proyecto integrador; \textit{no} permitidos en los ejercicios de clase. El estudiante debe ser capaz de leer y modificar cualquier línea que entregue.
+    \item \textbf{Características del lenguaje} (15 min). Interpretado, vectorizado, multiparadigma. Cómo se ejecuta R: REPL, script con \texttt{source()}, ejecutable con \texttt{Rscript}.
+    \item \textbf{Setup de Positron} (15 min). Instalación, layout del IDE (consola, source, environment, plots, packages), configuración mínima.
+    \item \textbf{Primeros objetos en R} (20 min). Asignación (\texttt{<-} vs \texttt{=}); tipos atómicos (\texttt{numeric}, \texttt{integer}, \texttt{logical}, \texttt{character}); vectores con \texttt{c()}, vectorización, operaciones aritméticas; funciones de inspección (\texttt{class}, \texttt{typeof}, \texttt{length}, \texttt{str}).
+\end{itemize}
+
+\subsesion{1.2}{Práctica}
+
+\textbf{Resumen rápido} (15 min): hoja-resumen con asignación, vectores, tipos, funciones de inspección y operaciones aritméticas.
+
+\textbf{Ejercicios en clase} (1:15 hr):
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+    \item \textbf{Verificación de setup.} Cada estudiante abre Positron, crea un proyecto y ejecuta \texttt{hola\_mundo.R}.
+    \item \textbf{Calculadora vectorizada.} Dados vectores de precios y cantidades, calcular ingreso total, promedio y máximo. Introduce \texttt{sum()}, \texttt{mean()}, \texttt{max()}.
+    \item \textbf{Coerción de tipos.} Construir \texttt{c(1, "a")}, \texttt{c(1, TRUE)}, \texttt{c(1L, 2.5)}; observar la jerarquía de coerción y discutir.
+    \item \textbf{Mini-script con \texttt{Rscript}.} Crear un script con comentarios, asignaciones y \texttt{print()} final; correrlo desde la terminal con \texttt{Rscript}.
+    \item \textbf{Cierre + proyecto integrador.} Cada estudiante declara su encuesta INEGI elegida, crea su repositorio Git con estructura \texttt{input/output/docs/files} y hace el primer \textit{commit}.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Justificar la elección de R sobre alternativas en el contexto de un proyecto académico de investigación económica.
+    \item Tener Positron + R instalados y configurados, capaces de ejecutar un \textit{script} básico desde el IDE y desde la terminal.
+    \item Crear, asignar y operar con vectores atómicos en R, identificando su tipo y tamaño.
+    \item Distinguir el uso de un LLM como chatbot frente a su uso como agente integrado al proyecto, y la política del curso al respecto.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 1 (\textit{Introduction}) y Cap.\ 2 (\textit{Workflow: basics}) \cite{wickham2023r4ds}.
+    \item \textit{Advanced R} (2.\textsuperscript{a} ed.), Cap.\ 2 §2.1--2.2 y Cap.\ 3 §3.1--3.2 \cite{wickham2019advr}.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Conexión con proyecto integrador}
+
+Anuncio formal del proyecto en Sesión 1.1 y formalización de la elección de encuesta en Sesión 1.2. El proyecto es \textbf{individual}; cada estudiante elige una encuesta del INEGI sujeta a tres restricciones: (i) debe tener \textbf{microdatos}; (ii) debe contar con \textbf{al menos dos módulos relacionables} (e.g.\ ENSU con CS/CB/VIV; ENIGH con viviendas/hogares/personas/concentrado); y (iii) debe tener \textbf{al menos dos levantamientos en el tiempo}. El producto final será un \blue{Tablero Shiny} acompañado de un \blue{reporte periódico automatizado} con \texttt{officer}. \textbf{Entregable del Checkpoint 1} (cierre de la Parte I, Semana 4): repositorio Git con estructura \texttt{input/output/docs/files}, encuesta justificada en una página, descriptor técnico leído, y primer \textit{script} de extracción.
 
 \semana{2}{Estructuras de datos e indexación}
 \porDesarrollar
