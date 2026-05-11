@@ -75,7 +75,7 @@ Cada semana tiene 2 sesiones de 1:30 hr. La granularidad fina (qué se ve en la 
 
 ### Parte IV — Análisis (Semanas 11–12)
 - **Semana 11** Modelado: `lm` + `plm` (panel) + categóricos + manejo de fechas y series con `zoo`/`ts` + `broom` + `modelsummary`
-- **Semana 12** Datos a escala: SQL + `DBI` + `dbplyr` (incluye montar MySQL local y queries básicos)
+- **Semana 12** Datos a escala: SQL + `DBI` + `dbplyr` (con SQLite local para el proyecto integrador; PostgreSQL/MySQL como referencia, `duckdb` como alternativa moderna)
 
 ### Parte V — Productos (Semanas 13–16)
 - **Semana 13** ggplot2: gramática completa, themes, faceting, export
