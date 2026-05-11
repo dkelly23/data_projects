@@ -16,3 +16,6 @@
 *.nav
 *.snm
 *.vrb
+
+# PDF build outputs
+syllabus/**/*.pdf
