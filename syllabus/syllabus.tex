@@ -84,7 +84,7 @@
 %% Encabezado
 % ==============================================================================
 \title{\color{main}\textbf{Programación para Proyectos de Datos}\\[0.3em]
-       \large\color{subtitle}Syllabus}
+       \large\color{subtitle}Temario del Curso}
 \author{Daniel Kelly\\
         \small El Colegio de México --- Licenciatura en Economía}
 \date{Otoño 2026}
@@ -96,11 +96,11 @@
 \section{Presentación}
 % ==============================================================================
 
-Este curso complementa la formación cuantitativa de la Licenciatura en Economía con una visión integral del flujo de un proyecto de datos. Los cursos previos del programa equipan al estudiante con \blue{habilidades específicas} de programación y de análisis estadístico; el énfasis aquí está en cómo esas habilidades se \orange{articulan dentro de un mismo proyecto}: desde estructurar un repositorio reproducible y traer datos de fuentes diversas, hasta limpiarlos, modelarlos y producir un entregable comunicable.
+El objetivo de este curso es complementar la formación cuantitativa de la Licenciatura en Economía de El Colegio de México, con una visión integral del flujo de un proyecto de datos. Los cursos previos del programa (y los disponibles en otras fuentes) equipan al estudiante con \blue{habilidades específicas} de programación y de análisis estadístico; el énfasis aquí está en cómo esas habilidades se \orange{articulan dentro de un mismo proyecto}: desde estructurar un repositorio reproducible y traer datos de fuentes diversas, hasta limpiarlos, modelarlos y producir un entregable comunicable.
 
 La filosofía del curso es \textbf{\textit{zero-to-hero}}: se asume que el estudiante puede llegar con experiencia previa de programación limitada o nula, y termina capaz de levantar por su cuenta un proyecto de datos completo bajo prácticas reproducibles.
 
-El lenguaje del curso es \textbf{R}. La elección se discute en la primera sesión; en términos generales, R es la lingua franca de la investigación cuantitativa académica y ofrece un ecosistema integrado para todas las etapas de un proyecto de datos. El IDE recomendado es \textbf{Positron}.
+El lenguaje del curso es \textbf{R}. La elección se discute en la primera sesión; en términos generales, R es la lingua franca de la investigación cuantitativa académica y ofrece un ecosistema integrado para todas las etapas de un proyecto de datos. El IDE recomendado para el curso es \textbf{Positron}.
 
 % ==============================================================================
 \section{Objetivos}
@@ -113,7 +113,7 @@ Al finalizar el curso, el estudiante será capaz de:
     \item Importar, limpiar y transformar datos provenientes de fuentes heterogéneas (archivos planos, hojas de cálculo, bases de datos relacionales).
     \item Programar funciones reutilizables y aplicar paradigmas de programación funcional para automatizar tareas repetitivas.
     \item Estimar y reportar modelos estadísticos comunes en investigación económica desde el punto de vista programático.
-    \item Producir entregables comunicables: visualizaciones, documentos automatizados, aplicaciones interactivas e integraciones con servicios externos.
+    \item Construir entregables comunicables: visualizaciones, documentos automatizados, aplicaciones interactivas e integraciones con servicios externos.
 \end{enumerate}
 
 % ==============================================================================
@@ -122,7 +122,7 @@ Al finalizar el curso, el estudiante será capaz de:
 
 \begin{itemize}[leftmargin=*]
     \item No se requiere experiencia previa en programación.
-    \item Se asume manejo básico de estadística descriptiva y nociones iniciales de econometría (regresión lineal). El curso \textit{no} enseña la teoría de los modelos; solo cómo implementarlos.
+    \item Se asume manejo básico de estadística descriptiva y nociones iniciales de econometría (regresión lineal univariable). Es importante precisar que el curso \textit{no} enseña la teoría de los modelos; solo su implementación programática.
 \end{itemize}
 
 % ==============================================================================
@@ -134,27 +134,29 @@ Al finalizar el curso, el estudiante será capaz de:
 \textbf{Estructura semanal.} Cada semana tiene dos sesiones con roles diferenciados:
 
 \begin{itemize}[leftmargin=*]
-    \item \textbf{\blue{Sesión 1 --- Teoría.}} Exposición conceptual del tema de la semana, con código en vivo a manera de ilustración. La proporción típica es de \textbf{$\approx$60\% teoría / 40\% código demostrativo}, aunque puede inclinarse hacia la teoría en semanas más conceptualmente densas.
+    \item \textbf{\blue{Sesión 1 --- Teoría.}} Exposición conceptual del tema de la semana, con código en vivo a manera de ilustración. 
     \item \textbf{\orange{Sesión 2 --- Práctica.}} Inicia con un \textit{resumen rápido} de los puntos clave de la sesión 1, y se dedica el tiempo restante a \textbf{ejercicios prácticos} resueltos en clase.
 \end{itemize}
 
-\textbf{Tareas.} El curso \textit{no} contempla tareas semanales fuera de clase. El trabajo evaluable se concentra en los ejercicios resueltos en la sesión 2 y en el \orange{proyecto integrador} que los estudiantes construyen a lo largo del semestre (ver sección correspondiente).
+La proporción típica es de \textbf{$\approx$60\% teoría / 40\% código demostrativo}, aunque puede inclinarse hacia la teoría en semanas más conceptualmente densas.
+
+\textbf{Tareas.} El curso \textit{no} contempla tareas semanales fuera de clase. El trabajo evaluable se concentra en los ejercicios resueltos en la segunda sesión semanal y en el \orange{proyecto integrador} que los estudiantes construyen a lo largo del semestre (ver sección correspondiente).
 
 % ==============================================================================
 \section{Evaluación}
 % ==============================================================================
 
-\porDesarrollar{} \emph{(porcentajes propuestos, por confirmar:)}
+La estructura de la evaluación propuesta para el curso atiende a los siguientes porcentajes:
 
 \begin{center}
 \begin{tabular}{lr}
 \toprule
 \textbf{Componente} & \textbf{Peso} \\
 \midrule
-Checkpoints del proyecto integrador       & 40\% \\
-Proyecto final                            & 30\% \\
-Ejercicios en clase (sesión 2 semanal)    & 25\% \\
-Asistencia                                & 5\%  \\
+Checkpoints del proyecto integrador       & 50\% \\
+Proyecto final                            & 20\% \\
+Ejercicios en clase (segunda sesión semanal)    & 20\% \\
+Asistencia                                & 10\%  \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -163,15 +165,48 @@ Asistencia                                & 5\%  \\
 \section{Estructura del curso}
 % ==============================================================================
 
-El curso se organiza en cinco partes:
+El curso se organiza en cinco partes a lo largo de 16 semanas:
 
-\begin{description}[leftmargin=2em, style=nextline]
-    \item[\textcolor{main}{Parte I --- Fundamentos (semanas 1--4).}] Introducción a R, estructuras de datos, importación, exploración inicial y estructura reproducible de proyectos.
-    \item[\textcolor{main}{Parte II --- Manipulación (semanas 5--7).}] Manejo de datos con \texttt{dplyr} y manipulación de texto.
-    \item[\textcolor{main}{Parte III --- Programación (semanas 8--10).}] Control de flujo, funciones y programación funcional.
-    \item[\textcolor{main}{Parte IV --- Análisis (semanas 11--12).}] Modelado estadístico (incluyendo series de tiempo a nivel programático) y datos a escala con SQL.
-    \item[\textcolor{main}{Parte V --- Productos (semanas 13--16).}] Visualización con \texttt{ggplot2}, automatización de documentos, aplicaciones \texttt{Shiny} e interfaces de modelos de lenguaje.
-\end{description}
+\smallskip
+\noindent\textbf{\textcolor{main}{Parte I --- Fundamentos}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Semana 1.} ¿Por qué R? Setup y primeros pasos.
+    \item \textbf{Semana 2.} Estructuras de datos: listas, DataFrames, tibbles, indexación, \texttt{NA} y coerción.
+    \item \textbf{Semana 3.} Importación de datos y EDA con base R.
+    \item \textbf{Semana 4.} Estructura de proyectos, Git y reproducibilidad.
+\end{itemize}
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Parte II --- Manipulación}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Semana 5.} \texttt{dplyr} I: \textit{pipe}, verbos básicos y sistema tidyverse.
+    \item \textbf{Semana 6.} \texttt{dplyr} II: \textit{joins}, \textit{pivots} y manejo de \texttt{NA}.
+    \item \textbf{Semana 7.} Strings, expresiones regulares y \texttt{stringr}.
+\end{itemize}
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Parte III --- Programación}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Semana 8.} Control de flujo y vectorización.
+    \item \textbf{Semana 9.} Funciones: diseño, \textit{scoping} y \textit{debugging}.
+    \item \textbf{Semana 10.} Programación funcional: \texttt{purrr} y la familia \texttt{apply}.
+\end{itemize}
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Parte IV --- Análisis}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Semana 11.} Modelado estadístico programático (\texttt{lm}, \texttt{plm}, \texttt{broom}, \texttt{modelsummary}).
+    \item \textbf{Semana 12.} Datos a escala: SQL, \texttt{DBI} y \texttt{dbplyr}.
+\end{itemize}
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Parte V --- Productos Finales}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Semana 13.} Visualización con \texttt{ggplot2}.
+    \item \textbf{Semana 14.} Automatización con \texttt{officer}, \texttt{googledrive} y \texttt{gmailr}.
+    \item \textbf{Semana 15.} Aplicaciones interactivas con \texttt{Shiny}.
+    \item \textbf{Semana 16.} Interfaces de modelos de lenguaje.
+\end{itemize}
 
 % ==============================================================================
 \section{Temario detallado}
@@ -183,7 +218,7 @@ El curso se organiza en cinco partes:
 
 \semana{1}{¿Por qué R? Setup y primeros pasos}
 
-Esta semana es la entrada al curso. Cubre la motivación detrás de elegir R, la instalación y configuración del entorno de trabajo, los primeros conceptos del lenguaje (asignación, vectores, tipos), y la posición del curso sobre el uso de modelos de lenguaje.
+Esta semana corresponde a la intruducción al curso. Cubre la motivación inicial detrás de elegir R, la instalación y configuración del entorno de trabajo, los primeros conceptos del lenguaje (asignación, vectores, tipos), y las políticas del curso sobre el uso de modelos de lenguaje y/o chatbots.
 
 \textbf{Subtemas:}
 
@@ -191,15 +226,16 @@ Esta semana es la entrada al curso. Cubre la motivación detrás de elegir R, la
     \item \textbf{Bienvenida y motivación del curso.} Estructura del curso y esquema de evaluación.
     \item \textbf{¿Por qué R?} R en el contexto de la investigación económica académica; contraste con Python; razones para descartar Stata. Ecosistema CRAN, tidyverse y Posit.
     \item \textbf{Setup: Positron + R.} Instalación; layout del IDE (consola, source, environment, plots, packages); configuración mínima.
-    \item \textbf{Uso responsable de modelos de lenguaje en el curso.} Diferencia operativa entre usar un LLM como \blue{chatbot} (pegar pregunta, copiar respuesta) y como \orange{agente integrado en el proyecto} (lee archivos, propone cambios, ejecuta comandos con el humano en el \textit{loop} ---por ejemplo, Claude Code o el modo agente de Cursor). Depender mal de un LLM \textbf{atrofia la capacidad individual} de razonar sobre código; usado como agente puede acelerar el trabajo de quien ya domina los fundamentos. \textbf{Política del curso:} agentes permitidos en el proyecto integrador; \textit{no} permitidos en los ejercicios de clase. El estudiante debe ser capaz de leer y modificar cualquier línea que entregue.
+    \item \textbf{Uso responsable de modelos de lenguaje en el curso.} Se expone la diferencia operativa entre usar un LLM como \blue{chatbot} (pegar pregunta, copiar respuesta) y como \orange{agente integrado en el proyecto} (lee archivos, propone cambios, ejecuta comandos con el humano en el \textit{loop} ---por ejemplo, Claude Code de Anthropic o Codex de OpenAI). Depender mal de un LLM \textbf{atrofia la capacidad individual} de razonar sobre código; usado como agente puede acelerar el trabajo de quien ya domina los fundamentos. \textbf{Política del curso:} agentes permitidos en el proyecto integrador; \textit{no} permitidos en los ejercicios de clase. El estudiante debe ser capaz de leer y modificar cualquier línea que entregue.
     \item \textbf{Características del lenguaje.} Interpretado, vectorizado, multiparadigma. Cómo se ejecuta R: REPL, script con \texttt{source()}, ejecutable con \texttt{Rscript}.
     \item \textbf{Primeros objetos en R.} Asignación (\texttt{<-} vs \texttt{=}); tipos atómicos (\texttt{numeric}, \texttt{integer}, \texttt{logical}, \texttt{character}); vectores con \texttt{c()}, vectorización, operaciones aritméticas; funciones de inspección (\texttt{class}, \texttt{typeof}, \texttt{length}, \texttt{str}).
+    \item \textbf{Evaluación de condiciones lógicas.} Operadores de comparación (\texttt{==}, \texttt{!=}, \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}) y operadores lógicos (\texttt{\&}, \texttt{|}, \texttt{!}; sus contrapartes escalares \texttt{\&\&}, \texttt{||}). Resultado como vector \texttt{logical}; \textit{recycling} en comparaciones entre vectores. Coerción de \texttt{logical} a numérico (\texttt{TRUE} $\to$ \texttt{1}, \texttt{FALSE} $\to$ \texttt{0}) y su utilidad: \texttt{sum()} sobre un vector lógico cuenta los \texttt{TRUE}, \texttt{mean()} calcula la proporción. Funciones auxiliares (\texttt{any}, \texttt{all}, \texttt{xor}, \texttt{isTRUE}, \texttt{isFALSE}) y manejo de \texttt{NA} en condiciones (la propagación silenciosa es una fuente recurrente de errores).
 \end{itemize}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
-    \item Justificar la elección de R sobre alternativas en el contexto de un proyecto académico de investigación económica.
+    \item Justificar la elección de R sobre alternativas programáticas en el contexto de un proyecto académico de investigación económica.
     \item Tener Positron + R instalados y configurados, capaces de ejecutar un \textit{script} básico desde el IDE y desde la terminal.
     \item Crear, asignar y operar con vectores atómicos en R, identificando su tipo y tamaño.
     \item Distinguir el uso de un LLM como chatbot frente a su uso como agente integrado al proyecto, y la política del curso al respecto.
@@ -219,7 +255,7 @@ Esta semana extiende el vocabulario del lenguaje más allá de los vectores ató
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item \textbf{Listas.} Contenedores heterogéneos; construcción con \texttt{list()}; nombres; acceso con \texttt{\$} y con \texttt{[[]]}; diferencia operativa con vectores atómicos; aplicación típica: agrupar resultados heterogéneos de un análisis.
+    \item \textbf{Listas.} Contenedores heterogéneos (listas); nombres; acceso con \texttt{\$} y con \texttt{[[]]}; diferencia operativa con vectores atómicos; aplicación típica: agrupar resultados de distintos tipos de un análisis.
     \item \textbf{DataFrames y tibbles.} Estructura por debajo (lista de vectores de igual longitud con clase \texttt{data.frame}); constructores \texttt{data.frame()} y \texttt{tibble()}; inspección (\texttt{names}, \texttt{nrow}, \texttt{ncol}, \texttt{dim}, \texttt{head}, \texttt{str}, \texttt{glimpse}). Diferencias prácticas \texttt{tibble} vs.\ \texttt{data.frame}: impresión, ausencia de \textit{partial matching}, no conversión automática de \textit{strings}, \textit{subsetting} que no simplifica. Recomendación de usar \texttt{tibble} por defecto en el curso.
     \item \textbf{Indexación.} Operadores \texttt{[}, \texttt{[[} y \texttt{\$}, y cuándo usar cada uno (preservar clase vs.\ extraer elemento). Indexación posicional, por nombre, lógica y negativa. La función \texttt{which()}. Asignación por \textit{subsetting}.
     \item \textbf{Coerción de tipos.} Coerción implícita al construir vectores y en operaciones aritméticas; jerarquía \texttt{logical} $\to$ \texttt{integer} $\to$ \texttt{double} $\to$ \texttt{character}. Funciones \texttt{as.numeric()}, \texttt{as.character()}, \texttt{as.logical()} para coerción explícita. Casos comunes en datos de encuesta (variables numéricas guardadas como \textit{string}).
@@ -247,7 +283,7 @@ Esta semana extiende el vocabulario del lenguaje más allá de los vectores ató
 
 \semana{3}{Importación de datos y EDA con base R}
 
-Esta semana es la primera vez que el curso toca datos reales. Cubre el flujo inicial de cualquier proyecto: traer los datos a R ---ya sea desde archivos o desde APIs HTTP---, inspeccionar lo que llegó para detectar errores tempranos, calcular estadísticas descriptivas y producir visualizaciones exploratorias. Introduce además el lenguaje del \blue{Análisis Exploratorio de Datos} (EDA) como disciplina.
+Esta semana constituye la primera aproximación al trabajo con datos reales. Cubre el flujo inicial de cualquier proyecto: traer los datos a R ---ya sea desde archivos o desde APIs HTTP---, inspeccionar lo que llegó para detectar errores tempranos, calcular estadísticas descriptivas y producir visualizaciones exploratorias. Introduce además el lenguaje del \blue{Análisis Exploratorio de Datos} (EDA) como disciplina.
 
 Hacemos énfasis deliberado en el uso de \orange{funciones base de R} para la exploración: descriptivas y gráficas se hacen con lo que viene incluido en el lenguaje, sin paquetes adicionales. La decisión es pedagógica: el estudiante debe entender qué ofrece R por sí mismo antes de subir al nivel del tidyverse (Semanas 5--7) y de \texttt{ggplot2} (Semana 13).
 
@@ -255,7 +291,7 @@ Hacemos énfasis deliberado en el uso de \orange{funciones base de R} para la ex
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Importación desde archivos.} \texttt{readr} para CSVs (\texttt{read\_csv}, diferencia con \texttt{read.csv} de base; \texttt{problems()}, \texttt{col\_types}) y \texttt{readxl} para Excel (\texttt{read\_excel}, \texttt{sheets}, \texttt{range}). Argumentos clave: \textit{encoding} (UTF-8 vs.\ Latin-1, frecuente en datos mexicanos), representaciones de \texttt{NA}, \texttt{locale}.
-    \item \textbf{Consumo de APIs.} Más allá de archivos, los datos también se obtienen de servicios web. Introducción a \texttt{httr2} como cliente HTTP moderno: construir \textit{requests} con \texttt{request()}, ejecutar con \texttt{req\_perform()}, parsear respuestas JSON con \texttt{resp\_body\_json()}, autenticación por \textit{token} en \textit{headers}. Caso de uso central: la \blue{API SIE de Banxico} para series macroeconómicas (tipo de cambio, INPC, tasas de interés). Aplicación al proyecto integrador: complementar microdatos del INEGI con contexto macro de Banxico, habilitando preguntas que cruzan ambas fuentes.
+    \item \textbf{Consumo de APIs.} Datos como producto de consumir servicios web. Introducción a \texttt{httr2} como cliente HTTP moderno: construir \textit{requests} con \texttt{request()}, ejecutar con \texttt{req\_perform()}, parsear respuestas JSON con \texttt{resp\_body\_json()}, autenticación por \textit{token} en \textit{headers}. Caso de uso central: la \blue{API SIE de Banco de México} para series macroeconómicas (tipo de cambio, INPC, tasas de interés). Aplicación al proyecto integrador: complementar microdatos del INEGI con contexto macro de BANXICO, habilitando preguntas que cruzan ambas fuentes.
     \item \textbf{Inspección post-importación.} Verificar que la importación funcionó: \texttt{str}, \texttt{glimpse}, \texttt{summary}, \texttt{head}/\texttt{tail}, \texttt{dim}. Errores comunes a detectar: tipos mal inferidos, \texttt{NA}s no reconocidos, \textit{encoding} roto.
     \item \textbf{Estadística descriptiva con base R.} Univariadas: \texttt{mean}, \texttt{median}, \texttt{var}, \texttt{sd}, \texttt{quantile}, \texttt{range}, \texttt{summary}. Frecuencias: \texttt{table}, \texttt{prop.table}. Bivariadas: \texttt{cor}, \texttt{cov}, tablas cruzadas con \texttt{table()}. Manejo de \texttt{NA} en agregaciones (\texttt{na.rm = TRUE}).
     \item \textbf{Visualización exploratoria con base graphics.} \texttt{plot}, \texttt{hist}, \texttt{boxplot}, \texttt{barplot}, \texttt{pairs}. Argumentos básicos (\texttt{main}, \texttt{xlab}, \texttt{ylab}, \texttt{col}, \texttt{pch}). Anotaciones (\texttt{abline}, \texttt{lines}, \texttt{points}, \texttt{text}). Criterios para elegir tipo de gráfica según la pregunta.
@@ -265,7 +301,7 @@ Hacemos énfasis deliberado en el uso de \orange{funciones base de R} para la ex
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
-    \item Importar microdatos desde archivos (CSV, Excel) verificando \textit{encoding}, tipos y representación de \texttt{NA}.
+    \item Importar datos desde archivos (CSV, Excel) verificando \textit{encoding}, tipos y representación de \texttt{NA}.
     \item Consumir APIs HTTP con \texttt{httr2} y parsear respuestas JSON, usando la API SIE de Banxico como caso de estudio.
     \item Realizar una inspección sistemática post-importación que detecte errores tempranos (tipos mal inferidos, \texttt{NA}s no reconocidos).
     \item Calcular estadísticas descriptivas univariadas y bivariadas con funciones de base R, manejando correctamente los \texttt{NA}.
@@ -285,7 +321,7 @@ Hacemos énfasis deliberado en el uso de \orange{funciones base de R} para la ex
 
 \semana{4}{Estructura de proyectos, Git y reproducibilidad}
 
-Esta semana cierra la Parte I del curso. Cubre las herramientas que convierten un \textit{script} suelto en un proyecto reproducible: estructura de directorios, control de versiones con Git y captura de dependencias con \texttt{renv}. La estructura propuesta se basa en la \blue{convención utilizada en proyectos profesionales reales del profesor}, simplificada para el contexto académico. La meta práctica al cierre: que cualquier persona pueda clonar el repositorio del proyecto integrador, instalar las dependencias, correr el \textit{master script} y obtener exactamente los mismos outputs.
+Semana que cierra la Parte I del curso. Cubre las herramientas que convierten un \textit{script} suelto en un proyecto reproducible: estructura de directorios, control de versiones con Git y captura de dependencias con \texttt{renv}. La estructura propuesta se basa en la \blue{convención utilizada en proyectos profesionales reales}, simplificada para el contexto académico. La meta práctica al cierre: construir un proyecto versionado en un repositorio, que cualquiera pueda clonar, instalar las dependencias, correr el \textit{script} y obtener exactamente los mismos outputs.
 
 \textbf{Subtemas:}
 
@@ -326,19 +362,19 @@ Esta es la \orange{semana bisagra} del curso. Todo lo que viene a continuación 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item \textbf{Sistema tidyverse y filosofía.} Qué es el tidyverse y qué paquetes lo componen (\texttt{dplyr}, \texttt{tidyr}, \texttt{ggplot2}, \texttt{readr}, \texttt{tibble}, \texttt{purrr}, \texttt{forcats}, \texttt{stringr}, \texttt{lubridate}). La idea de un \textbf{sistema coherente} ---API consistente, gramática compartida--- frente a la alternativa de paquetes sueltos. Convención del curso: cargar con \texttt{pacman::p\_load(tidyverse)}.
+    \item \textbf{Sistema tidyverse y filosofía.} Qué es el tidyverse y qué paquetes lo componen (\texttt{dplyr}, \texttt{tidyr}, \texttt{ggplot2}, \texttt{readr}, \texttt{tibble}, \texttt{purrr}, \texttt{forcats}, \texttt{stringr}, \texttt{lubridate}). La idea de un \textbf{sistema coherente} ---gramática compartida--- frente a la alternativa de paquetes sueltos. Convención del curso: cargar con \texttt{pacman::p\_load(tidyverse)}.
     \item \textbf{Tidy data.} Las tres reglas (cada variable una columna, cada observación una fila, cada valor una celda) y por qué la mayoría de las herramientas del tidyverse las asumen como precondición. Diagnóstico de formatos no-\textit{tidy} típicos en encuestas (variables-columna con sufijos por año o módulo). El \textit{reshape} hacia \textit{tidy} se introduce conceptualmente; el detalle operativo con \texttt{pivot\_longer()} y \texttt{pivot\_wider()} llega en la Semana 6.
     \item \textbf{El \textit{pipe}.} \textit{Pipe} nativo \texttt{|>} (R 4.1+) y \textit{pipe} del tidyverse \texttt{\%>\%} (\texttt{magrittr}). Semántica: el resultado de la izquierda se inserta como primer argumento de la derecha. Por qué convierte código anidado en código legible. \textbf{Convención del curso:} \textit{pipe} nativo \texttt{|>} por defecto; \texttt{\%>\%} solo cuando se requieren sus capacidades específicas.
     \item \textbf{Los seis verbos de \texttt{dplyr}.} \texttt{filter()} (filas por condición), \texttt{arrange()} (ordenamiento), \texttt{select()} (columnas, con \textit{helpers} \texttt{starts\_with}, \texttt{ends\_with}, \texttt{contains}, \texttt{where}), \texttt{mutate()} (creación/modificación), \texttt{summarize()} (colapso a resumen), y \texttt{group\_by()}/\texttt{ungroup()} (contexto de grupo). \textit{Helpers} frecuentes: \texttt{slice\_*()}, \texttt{count()}, \texttt{distinct()}, \texttt{if\_else()}, \texttt{between()}, \texttt{n()}, \texttt{n\_distinct()}. La idea de los verbos como \textbf{bloques componibles}: cualquier transformación es una secuencia de verbos conectados por el \textit{pipe}.
-    \item \textbf{\textit{Non-Standard Evaluation} (mención).} Por qué \texttt{filter(df, x > 5)} funciona sin escribir \texttt{df\$x} ni cotizar \texttt{"x"}. Introducción brevísima al concepto, suficiente para anticipar las limitaciones que aparecen al escribir funciones que reciben nombres de columnas como argumentos. El tratamiento operativo (\texttt{\{\{~\}\}}, \textit{tunneling}) se difiere a la Semana 9.
+    \item \textbf{\textit{Non-Standard Evaluation} (mención).} Por qué \texttt{filter(df, x > 5)} funciona sin escribir \texttt{df\$x} ni cotizar \texttt{"x"}. Introducción breve al concepto, suficiente para anticipar las limitaciones que aparecen al escribir funciones que reciben nombres de columnas como argumentos. El tratamiento operativo (\texttt{\{\{~\}\}}, \textit{tunneling}) se difiere a la Semana 9.
 \end{itemize}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
     \item Cargar el ecosistema tidyverse y reconocer qué paquete provee qué funcionalidad.
-    \item Identificar si un dataset está en formato \textit{tidy} y, en caso contrario, dimensionar el \textit{reshape} requerido.
-    \item Componer secuencias de verbos \texttt{dplyr} conectados por el \textit{pipe} para resolver preguntas de manipulación de datos sobre microdatos de encuesta.
+    \item Identificar si un dataset está en formato \textit{tidy} y, en caso contrario, conceptualizar el \textit{reshape} requerido.
+    \item Componer secuencias de verbos \texttt{dplyr} conectados por el \textit{pipe} para resolver preguntas de manipulación de datos.
     \item Leer código tidyverse escrito por terceros sin necesidad de ejecutarlo línea por línea.
 \end{enumerate}
 
@@ -354,15 +390,15 @@ Esta es la \orange{semana bisagra} del curso. Todo lo que viene a continuación 
 
 \semana{6}{dplyr II: joins, pivots y manejo de NA}
 
-Esta semana completa el conjunto de operaciones que el estudiante necesita para transformar microdatos crudos en un dataset \textit{tidy} listo para análisis: cierra el tema de \textit{tidy data} iniciado en la Semana 5 con los \textit{pivots}, introduce los \textit{joins} entre tablas, formaliza el manejo avanzado de \texttt{NA}, y cubre la construcción de variables categóricas derivadas. Al cierre de la semana, el estudiante tiene casi todo lo necesario para armar el pipeline E$\to$T del proyecto integrador (la Semana 7 añade \textit{strings} y \textit{regex}, también frecuentes en la limpieza).
+Esta semana completa el conjunto de herramientas que el estudiante necesita para transformar datos crudos en un dataset \textit{tidy} listo para análisis: cierra el tema de \textit{tidy data} iniciado en la Semana 5 con los \textit{pivots}, introduce los \textit{joins} entre tablas, formaliza el manejo avanzado de \texttt{NA}, y cubre la construcción de variables categóricas derivadas. Al cierre de la semana, el estudiante tiene casi todo lo necesario para armar el pipeline E$\to$T del flujo planteado al inicio del curso (la Semana 7 añade \textit{strings} y \textit{regex}, también frecuentes en la limpieza).
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item \textbf{Pivots.} \texttt{pivot\_longer()} y \texttt{pivot\_wider()} para \textit{reshape} entre formato ancho y largo. Argumentos clave: \texttt{cols}, \texttt{names\_to}, \texttt{values\_to} (\textit{longer}); \texttt{names\_from}, \texttt{values\_from} (\textit{wider}). Casos típicos en encuestas: variables-columna con sufijos por año o módulo (ENSU, ENIGH). Round-trip \textit{long} $\leftrightarrow$ \textit{wide} como prueba de identidad.
-    \item \textbf{Joins entre tablas.} \textit{Mutating joins} (\texttt{left\_join}, \texttt{right\_join}, \texttt{inner\_join}, \texttt{full\_join}) frente a \textit{filtering joins} (\texttt{semi\_join}, \texttt{anti\_join}). Concepto de \textit{key} y sintaxis preferida con \texttt{join\_by()}. Errores comunes: cardinalidad inesperada (\textit{many-to-many}), \textit{keys} duplicadas, \textit{joins} silenciosos sobre columnas mal pareadas. Como mitigación introducimos \blue{\texttt{tidylog}}, que intercepta operaciones de \texttt{dplyr} y \texttt{tidyr} y reporta en consola cuántas filas se afectaron, cuántas no encontraron \textit{match} y cuándo aparecen \texttt{NA} nuevos ---convierte fallas silenciosas en mensajes explícitos. Aunque se introduce con los \textit{joins}, aplica a todos los verbos vistos esta semana y la anterior.
+    \item \textbf{Pivots.} \texttt{pivot\_longer()} y \texttt{pivot\_wider()} para \textit{reshape} entre formato ancho y largo. Argumentos clave: \texttt{cols}, \texttt{names\_to}, \texttt{values\_to} (\textit{longer}); \texttt{names\_from}, \texttt{values\_from} (\textit{wider}). Casos típicos en encuestas: variables/columnas con sufijos por año o módulo (ENSU, ENIGH). 
+    \item \textbf{Joins entre tablas.} \textit{Mutating joins} (\texttt{left\_join}, \texttt{right\_join}, \texttt{inner\_join}, \texttt{full\_join}) frente a \textit{filtering joins} (\texttt{semi\_join}, \texttt{anti\_join}). Concepto de \textit{key} y sintaxis preferida con \texttt{join\_by()}. Errores comunes: cardinalidad inesperada (\textit{many-to-many}), \textit{keys} duplicadas, \textit{joins} silenciosos sobre columnas mal pareadas. Como mitigación introducimos \blue{\texttt{tidylog}}, que intercepta operaciones de \texttt{dplyr} y \texttt{tidyr} y reporta en consola cuántas filas se afectaron, cuántas no encontraron \textit{match} y cuándo aparecen \texttt{NA} nuevos ---es decir, convierte fallas silenciosas en mensajes explícitos. Aunque se introduce con los \textit{joins}, aplica a todos los verbos vistos esta semana y la anterior.
     \item \textbf{Manejo avanzado de \texttt{NA}.} \texttt{replace\_na()} para rellenar valores específicos; \texttt{coalesce()} para tomar el primer no-\texttt{NA} entre varias columnas; \texttt{drop\_na()} para descartar filas con \texttt{NA} en columnas indicadas. \blue{Decisión deliberada}: cuándo conviene propagar el \texttt{NA} y cuándo intervenir, y por qué la elección debe ser explícita y documentada.
-    \item \textbf{Construcción de variables categóricas.} \texttt{if\_else()} vectorizado para condiciones binarias y \texttt{case\_when()} para reglas múltiples mutuamente excluyentes. Mención a \texttt{forcats} para reordenar y recodificar factores (sin profundizar; aparece según necesidad en el proyecto integrador).
+    \item \textbf{Construcción de variables categóricas.} \texttt{if\_else()} vectorizado para condiciones binarias y \texttt{case\_when()} para reglas múltiples mutuamente excluyentes. Mención a \texttt{forcats} para reordenar y recodificar factores (sin profundizar; aparece según necesidad en el proyecto en el que se trabaje).
 \end{itemize}
 
 \medskip
@@ -387,25 +423,26 @@ Esta semana completa el conjunto de operaciones que el estudiante necesita para 
 
 \semana{7}{Strings, expresiones regulares y \texttt{stringr}}
 
-Esta semana cierra la Parte II del curso. La manipulación de texto es omnipresente en la limpieza de microdatos: catálogos con códigos pegados a etiquetas, espacios extra, capitalización inconsistente, \textit{paths} de archivos que cambian por trimestre o año. Cubrimos \texttt{stringr} como sistema unificado para operaciones sobre \textit{strings}, las expresiones regulares como lenguaje para describir patrones, y \texttt{glue} para construir \textit{strings} dinámicamente. Al cierre de la semana corresponde la entrega del \orange{Checkpoint 2} del proyecto integrador: pipeline E$\to$T completo (\textit{extract} + \textit{transform} + \textit{load} a \texttt{.rds}), con datos \textit{tidy} y validados.
+Esta semana cierra la Parte II del curso. La manipulación de texto es omnipresente en la limpieza de datos: catálogos con códigos pegados a etiquetas, espacios extra, capitalización inconsistente, \textit{paths} de archivos que cambian por trimestre o año. Cubrimos \texttt{stringr} como sistema unificado para operaciones sobre \textit{strings}, las expresiones regulares como lenguaje para describir patrones, y \texttt{glue} para construir \textit{strings} dinámicamente. 
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Strings en \textit{base R}: lo mínimo.} \texttt{paste()}/\texttt{paste0()}, \texttt{nchar()}, \texttt{tolower()}/\texttt{toupper()}, \texttt{substr()}. Suficiente para tareas triviales; insuficiente para limpieza sistemática de microdatos.
-    \item \textbf{\texttt{stringr}: API consistente.} El patrón \texttt{str\_*()} ofrece un sistema coherente análogo al de \texttt{dplyr}. Funciones \textit{core}: detección (\texttt{str\_detect}), extracción (\texttt{str\_extract}, \texttt{str\_match}), reemplazo (\texttt{str\_replace}, \texttt{str\_replace\_all}), división (\texttt{str\_split}), \textit{trimado} (\texttt{str\_trim}, \texttt{str\_squish}), \textit{padding} (\texttt{str\_pad}), conversión de capitalización (\texttt{str\_to\_lower}, \texttt{str\_to\_upper}, \texttt{str\_to\_title}), longitud (\texttt{str\_length}). Argumentos vectorizados por construcción.
+    \item \textbf{\texttt{stringr}: Flujo y vocabulario consistente.} El patrón \texttt{str\_*()} ofrece un sistema coherente análogo al de \texttt{dplyr}. Funciones \textit{core}: detección (\texttt{str\_detect}), extracción (\texttt{str\_extract}, \texttt{str\_match}), reemplazo (\texttt{str\_replace}, \texttt{str\_replace\_all}), división (\texttt{str\_split}), \textit{recortado} (\texttt{str\_trim}, \texttt{str\_squish}), \textit{padding} (\texttt{str\_pad}), capitalización (\texttt{str\_to\_lower}, \texttt{str\_to\_upper}, \texttt{str\_to\_title}), longitud (\texttt{str\_length}).
     \item \textbf{Expresiones regulares.} Caracteres literales y metacaracteres. Clases de caracteres (\texttt{[abc]}, \texttt{[a-z]}, \texttt{\textbackslash d}, \texttt{\textbackslash s}, \texttt{\textbackslash w}). Cuantificadores (\texttt{*}, \texttt{+}, \texttt{?}, \texttt{\{n,m\}}). \textit{Anchors} (\texttt{\textasciicircum}, \texttt{\$}). Grupos de captura (\texttt{()}) y referencias hacia atrás (\texttt{\textbackslash 1}). Casos típicos: validación de formato (CURP, RFC) y extracción de \textit{tokens}.
     \item \textbf{\texttt{glue} para construcción dinámica de \textit{strings}.} Interpolación de variables (\texttt{glue("Hola \{nombre\}")}), iteración natural sobre vectores, formateo \textit{inline}. Comparación con \texttt{paste0()} y \texttt{sprintf()}; cuándo conviene cada uno. Aplicación a generación de \textit{paths}, mensajes de \textit{log} y plantillas de reporte.
+    \item \textbf{Documentar el flujo con \texttt{log()}.} Más allá del \texttt{print()} ocasional, conviene incorporar al pipeline mensajes estructurados que cuenten qué está pasando: cuántas filas se leyeron, cuántas se descartaron, cuánto tardó cada paso. \blue{Funciones de \textit{base R}} para emitir mensajes: \texttt{message()} (canal \textit{stderr}, suprimible), \texttt{warning()} y \texttt{stop()} (señalización jerarquizada de problemas). El paquete \texttt{logger} ofrece un sistema con niveles (\texttt{log\_info}, \texttt{log\_warn}, \texttt{log\_error}, \texttt{log\_debug}), \textit{timestamps} automáticos y \textit{appenders} configurables (consola, archivo, ambos). \blue{Patrón típico}: cada función del pipeline emite un \texttt{log\_info()} con \texttt{glue} al inicio y al cierre, dejando un rastro auditable de la corrida en \texttt{output/log.txt}; cuando algo falla días después, el \textit{log} dice exactamente dónde se rompió y con qué insumos.
     \item \textbf{Texto como dato: distancias y vectorización.} Más allá de tratar \textit{strings} como secuencias de caracteres, existe un terreno donde el texto se manipula como objeto matemático. Introducción al paquete \texttt{stringdist} para distancias entre cadenas (Levenshtein, Jaro-Winkler, Hamming) ---herramienta fundamental para \textit{fuzzy matching} y deduplicación, p.\ ej.\ al cruzar nombres de municipios entre dos fuentes con variaciones ortográficas. Mención somera a \texttt{tidytext} para tokenización y análisis de frecuencias, y a la idea de \textit{word embeddings} como representación vectorial densa (sin profundizar: el tratamiento serio pertenece a un curso de NLP).
 \end{itemize}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
-    \item Manipular vectores de \textit{strings} con la API de \texttt{stringr}, distinguiendo cuándo basta una operación de \textit{base R} y cuándo se requiere el sistema.
+    \item Manipular vectores de \textit{strings} con \texttt{stringr}, distinguiendo cuándo basta una operación de \textit{base R} y cuándo se requiere el sistema.
     \item Leer y escribir expresiones regulares para detectar, extraer y reemplazar patrones en datos textuales.
     \item Construir \textit{strings} dinámicos con \texttt{glue}, distinguiéndolos de las alternativas de \textit{base R}.
-    \item Limpiar inconsistencias textuales típicas en microdatos de encuesta (capitalización, espacios extra, formatos heterogéneos) combinando \texttt{stringr} con \textit{regex}.
+    \item Limpiar inconsistencias textuales típicas en datos crudos (capitalización, espacios extra, formatos heterogéneos) combinando \texttt{stringr} con \textit{regex}.
     \item Reconocer cuándo el texto debe tratarse como secuencia de caracteres frente a cuándo conviene tratarlo como objeto matemático (\texttt{stringdist} y técnicas relacionadas), y aplicar \textit{fuzzy matching} a problemas de deduplicación.
 \end{enumerate}
 
@@ -426,13 +463,13 @@ Esta semana cierra la Parte II del curso. La manipulación de texto es omniprese
 
 \semana{8}{Control de flujo y vectorización}
 
-Esta semana abre la Parte III del curso (Programación). Cubre la sintaxis de control de flujo en R ---condicionales y \textit{loops}--- y, sobre todo, la \blue{vectorización} como alternativa idiomática que el lenguaje ofrece por defecto. La meta pedagógica es que el estudiante reconozca cuándo un \textit{loop} es genuinamente necesario y cuándo es un parche por no haber pensado en términos de vectores. Es preparación directa para las dos semanas siguientes: funciones (S9) y programación funcional con \texttt{purrr} (S10).
+Esta semana abre la Parte III del curso (Programación). Cubre la sintaxis de control de flujo en R ---condicionales y \textit{loops}--- y, sobre todo, la \blue{vectorización} como alternativa que el lenguaje ofrece por defecto. La meta pedagógica es que el estudiante reconozca cuándo un \textit{loop} es genuinamente necesario y cuándo es un parche por no haber pensado en términos de vectores. Es preparación directa para las dos semanas siguientes: funciones (S9) y programación funcional con \texttt{purrr} (S10).
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Condicionales: \texttt{if}, \texttt{else}, \texttt{switch}.} Sintaxis básica. \texttt{if} opera sobre escalares; con un vector lanza \textit{warning} o solo evalúa el primer elemento. Uso de \texttt{switch()} para múltiples ramas mutuamente excluyentes. Distinción importante: \texttt{if} es para flujo de programa; \texttt{if\_else()} y \texttt{case\_when()} (vistos en S6) son para construir variables vectorizadas dentro de \texttt{mutate()}.
-    \item \textbf{\textit{Loops}: \texttt{for} y \texttt{while}.} Sintaxis e iteración. Iteración segura sobre secuencias con \texttt{seq\_along()} y \texttt{seq\_len()} (evitar \texttt{1:length(x)}, que se rompe con vectores vacíos). Iteración sobre listas. \blue{Pre-asignación} de la salida como buena práctica; el anti-patrón de crecer un vector dentro del \textit{loop}. Control fino con \texttt{break} y \texttt{next}. Casos donde el \textit{loop} es genuinamente necesario: operaciones dependientes del estado previo, \textit{side effects} (lectura/escritura de archivos), ETL secuencial sobre años o trimestres.
+    \item \textbf{\textit{Loops}: \texttt{for} y \texttt{while}.} Sintaxis e iteración. Iteración segura sobre secuencias con \texttt{seq\_along()} y \texttt{seq\_len()}. Iteración sobre listas. \blue{Pre-asignación} de la salida como buena práctica; el anti-patrón de crecer un vector dentro del \textit{loop}. Control fino con \texttt{break} y \texttt{next}. Casos donde el \textit{loop} es genuinamente necesario: operaciones dependientes del estado previo, \textit{side effects} (lectura/escritura de archivos), ETL secuencial sobre años o trimestres.
     \item \textbf{Vectorización como \textit{default}.} R es un lenguaje vectorizado: la mayoría de operaciones aritméticas, lógicas y funciones aplican elemento a elemento sobre vectores. Comparación lado a lado de código con \textit{loop} frente a código vectorizado, en claridad y en rendimiento. Reglas de \textit{recycling}. Funciones acumuladoras (\texttt{cumsum}, \texttt{cummax}, \texttt{cumprod}, \texttt{cumany}, \texttt{cumall}).
     \item \textbf{Patrones y anti-patrones.} \textit{Vector growing} (\texttt{x <- c(x, ...)} dentro de \textit{loop}) frente a pre-asignación. Iteración por valores frente a iteración por índices y la trampa del \textit{off-by-one}. Mutación involuntaria de objetos dentro de funciones (\textit{preview} a S9, donde se formaliza el \textit{scoping}). El criterio práctico del curso: \orange{si se puede vectorizar, se vectoriza; si no se puede, se escribe un \textit{loop} limpio}.
 \end{itemize}
@@ -454,7 +491,7 @@ Esta semana abre la Parte III del curso (Programación). Cubre la sintaxis de co
 
 \semana{9}{Funciones: diseño, scoping y debugging}
 
-Esta semana es la transición del estudiante de \textit{usuario} a \textit{autor} de código. Las funciones son la unidad fundamental de reuso y la pieza que permite refactorizar el ETL del proyecto integrador (\orange{Checkpoint 3}, al cierre de la semana siguiente). Cubrimos la anatomía de una función, el modelo de \textit{scoping} con el que R resuelve nombres, las herramientas para producir y capturar errores, las técnicas para diagnosticarlos cuando ocurren, y el operador \textit{embrace} \texttt{\{\{~\}\}} ---que cierra la inquietud sembrada en la Semana 5 sobre cómo escribir funciones que interactúan con \texttt{dplyr}.
+Esta semana es la transición del estudiante de \textit{usuario} a \textit{autor} de código. Las funciones son la unidad fundamental de reuso y la pieza que permite consolidar el proceso ETL. Cubrimos la anatomía de una función, el modelo de \textit{scoping} con el que R resuelve nombres, las herramientas para producir y capturar errores, las técnicas para diagnosticarlos cuando ocurren, y el operador \textit{embrace} \texttt{\{\{~\}\}} ---que cierra la inquietud sembrada en la Semana 5 sobre cómo escribir funciones que interactúan con \texttt{dplyr}.
 
 \textbf{Subtemas:}
 
@@ -487,17 +524,18 @@ Esta semana es la transición del estudiante de \textit{usuario} a \textit{autor
 
 \semana{10}{Programación funcional: \texttt{purrr} y \texttt{apply}}
 
-Esta semana cierra la Parte III del curso. Cubre la \blue{programación funcional} como paradigma: tratar funciones como datos para iterar sobre colecciones sin escribir \textit{loops}. La semana es la natural continuación de S8 (vectorización) y S9 (funciones): donde S8 enseña a evitar \textit{loops} sobre operaciones \textit{built-in}, S10 enseña a evitar \textit{loops} sobre funciones propias. Coincide con la entrega del \orange{Checkpoint 3} del proyecto integrador: refactor del ETL en funciones reutilizables, orquestadas por un \textit{master script}.
+Esta semana cierra la Parte III del curso. Cubre la \blue{programación funcional} como paradigma: tratar funciones como objetos de datos para iterar sobre colecciones sin escribir \textit{loops}. Esta semana es continuación natural de S8 (vectorización) y S9 (funciones): donde S8 enseña a evitar \textit{loops} sobre operaciones \textit{built-in}, S10 enseña a evitar \textit{loops} sobre funciones propias.
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Paradigma funcional.} Funciones como objetos de primera clase (asignables, pasables como argumentos, retornables). Por qué iterar con \textit{functionals} es preferible a un \textit{for}: predictibilidad, composición y código declarativo. Conexión con S8: si la operación es \textit{built-in}, vectoriza; si es una función propia, usa un \textit{functional}.
     \item \textbf{La familia \texttt{apply} de \textit{base R}.} \texttt{apply()} (sobre filas o columnas de una matriz), \texttt{lapply()} (lista $\to$ lista), \texttt{sapply()} (simplifica si puede ---atención: tipo de retorno impredecible), \texttt{vapply()} (con tipo declarado), \texttt{mapply()} (varios argumentos), \texttt{tapply()} (\textit{split-apply}). Limitaciones: API inconsistente y tipo de retorno no garantizado.
-    \item \textbf{\texttt{purrr}: sistema unificado.} El patrón \texttt{map\_*()} con sufijo de tipo: \texttt{map()} (lista), \texttt{map\_dbl()}, \texttt{map\_chr()}, \texttt{map\_lgl()}, \texttt{map\_dfr()}/\texttt{map\_dfc()} (\textit{data frame}). Tipo de retorno predecible por construcción. Variantes para varias entradas: \texttt{map2()}, \texttt{pmap()}. Variantes para \textit{side effects}: \texttt{walk()}, \texttt{walk2()}. Funciones anónimas con \texttt{\textbackslash(x)} (R 4.1+) o \texttt{\textasciitilde{} .x} (estilo \textit{purrr}).
+    \item \textbf{\texttt{purrr}: sistema unificado más moderno.} El patrón \texttt{map\_*()} con sufijo de tipo: \texttt{map()} (lista), \texttt{map\_dbl()}, \texttt{map\_chr()}, \texttt{map\_lgl()}, \texttt{map\_dfr()}/\texttt{map\_dfc()} (\textit{data frame}). Tipo de retorno predecible por construcción. Variantes para varias entradas: \texttt{map2()}, \texttt{pmap()}. Variantes para \textit{side effects}: \texttt{walk()}, \texttt{walk2()}. Funciones anónimas con \texttt{\textbackslash(x)} (R 4.1+) o \texttt{\textasciitilde{} .x} (estilo \textit{purrr}).
     \item \textbf{Reducción y predicados.} \texttt{reduce()} para colapsar una lista a un valor (acumular). \texttt{accumulate()} para mantener pasos intermedios. Predicados sobre colecciones: \texttt{keep()}, \texttt{discard()}, \texttt{every()}, \texttt{some()}, \texttt{none()}, \texttt{detect()}.
     \item \textbf{\texttt{across()}: iteración dentro de \texttt{dplyr}.} Aplicar la misma función a varias columnas dentro de \texttt{mutate()} o \texttt{summarize()}. \texttt{if\_any()} y \texttt{if\_all()} para condiciones agregadas dentro de \texttt{filter()}. Patrones aplicados al ETL: leer todos los CSVs de una carpeta, ajustar el mismo modelo a múltiples grupos, guardar N gráficas.
-    \item \textbf{Paralelización con \texttt{furrr} y \texttt{future}.} Una de las virtudes operativas de los \textit{functionals}: paralelizar la iteración es \blue{un cambio de prefijo}. \texttt{furrr::future\_map\_*()} reemplaza a \texttt{purrr::map\_*()} con firmas idénticas; basta declarar \texttt{future::plan(multisession, workers = N)} al inicio para distribuir las iteraciones entre N procesos. \orange{Limitación natural de R:} el lenguaje es \textit{single-threaded}; la paralelización ocurre vía procesos separados, no hilos ---no hay memoria compartida. Los objetos globales se serializan y copian a cada \textit{worker}, de modo que con N \textit{workers} y un dataset de M GB se requieren aproximadamente N $\times$ M GB de RAM. La paralelización paga cuando la tarea es \textit{CPU-bound} y suficientemente grande para amortizar el costo de \textit{spawn} y serialización; iteraciones triviales resultan más lentas en paralelo. \textit{Backends}: \texttt{multisession} (portable, recomendado en el curso) y \texttt{multicore} (solo Unix, más eficiente vía \textit{forking}, pero conflictivo en sesiones interactivas).
+    \item \textbf{Filtros dinámicos en \texttt{dplyr}: \texttt{expr()} y \texttt{!!}.} Continuación natural del operador \textit{embrace} \texttt{\{\{~\}\}} introducido en S9. Cuando lo que varía no es un nombre de columna sino la \blue{expresión completa} de filtrado (e.g.\ un \texttt{shiny::input\$filtro} construido como cadena, o una lista de condiciones generadas en \texttt{map}), el camino es construir la expresión con \texttt{rlang::expr()} y \texttt{rlang::parse\_expr()}, y luego inyectarla con el operador \textit{unquote} \texttt{!!}. Sintaxis básica: \texttt{e <- expr(edad > 30 \& sexo == "M")}; \texttt{filter(datos, !!e)}. Para listas de condiciones: \texttt{filter(datos, !!!lista\_de\_exprs)} con el operador \textit{splice} \texttt{!!!}. Casos típicos: filtros parametrizados que vienen de la UI de un Shiny (preview a S15), reglas de validación que viven en un archivo de configuración, generación programática de subconjuntos para iterar con \texttt{map}.
+    \item \textbf{Paralelización con \texttt{furrr} y \texttt{future}.} Una de las virtudes operativas de los \textit{functionals}: paralelizar la iteración es \blue{un cambio de prefijo}. \texttt{furrr::future\_map\_*()} reemplaza a \texttt{purrr::map\_*()} con firmas idénticas; basta declarar \texttt{future::plan(multisession, workers = N)} al inicio para distribuir las iteraciones entre N procesos. \orange{Limitación natural de R:} el lenguaje es \textit{single-threaded}; la paralelización ocurre vía procesos separados, no hilos ---no hay memoria compartida. Los objetos globales se serializan y copian a cada \textit{worker}, de modo que con N \textit{workers} y un dataset de M GB se requieren aproximadamente N $\times$ M GB de RAM. La paralelización paga cuando la tarea es \textit{CPU-bound} y suficientemente grande para amortizar el costo de \textit{spawn} y serialización; iteraciones triviales resultan más lentas en paralelo.
 \end{itemize}
 
 \medskip
@@ -508,7 +546,7 @@ Esta semana cierra la Parte III del curso. Cubre la \blue{programación funciona
     \item Sustituir \textit{loops} explícitos sobre archivos, columnas o grupos por \textit{functionals}, distinguiendo cuándo el \textit{loop} sigue siendo la mejor opción.
     \item Aplicar \texttt{across()} para vectorizar transformaciones sobre múltiples columnas dentro de \texttt{dplyr}.
     \item Reconocer las diferencias computacionales entre un \textit{loop} \texttt{for} y los \textit{functionals} de \texttt{purrr} (estabilidad de tipo, manejo de memoria, ámbito de variables, vía a paralelización), y usar este criterio para elegir entre uno u otro.
-    \item Paralelizar una iteración con \texttt{furrr}/\texttt{future} cuando se justifica, anticipando las limitaciones de memoria que impone el modelo multi-proceso de R y eligiendo el \textit{backend} apropiado.
+    \item Paralelizar una iteración con \texttt{furrr}/\texttt{future} cuando se justifica, anticipando las limitaciones de memoria que impone el modelo multi-proceso de R.
 \end{enumerate}
 
 \medskip
@@ -535,7 +573,7 @@ Esta semana abre la Parte IV del curso. El enfoque es \blue{estrictamente progra
     \item \textbf{Fórmulas y \texttt{lm()}.} Sintaxis de fórmulas: operadores (\texttt{+}, \texttt{:}, \texttt{*}, \texttt{\textasciicircum}, \texttt{I()}), control del intercepto (\texttt{-1}/\texttt{+0}). Anatomía del objeto \texttt{lm}: \texttt{summary()}, \texttt{coef()}, \texttt{confint()}, \texttt{predict()}, \texttt{residuals()}, \texttt{fitted()}. Construcción incremental con \texttt{update()}. Diagnósticos básicos: \texttt{plot.lm()} (los cuatro paneles canónicos) y \texttt{vif()} para multicolinealidad.
     \item \textbf{Categóricos en modelos.} \textbf{Como predictores:} \textit{factors} convertidos automáticamente a \textit{dummies}, manejo del \textit{reference level} con \texttt{relevel()} o reordenando el \textit{factor}, interpretación de coeficientes. \textbf{Como variable dependiente:} \texttt{glm(family = binomial)} para modelos logit/probit, \texttt{glm(family = poisson)} para conteos. Interpretación operativa de coeficientes (\textit{odds-ratio}, exponenciación) sin entrar a teoría estadística.
     \item \textbf{Datos panel y errores estándar robustos.} \texttt{pdata.frame()} con identificador y dimensión temporal. Estimadores: \texttt{model = 'within'} (FE), \texttt{'random'} (RE), \texttt{'between'}, \texttt{'pooling'}. Tests de Hausman y Breusch-Pagan vía \texttt{phtest()} y \texttt{plmtest()} (uso programático, sin demostraciones). Errores estándar robustos a heteroscedasticidad con \texttt{sandwich::vcovHC()} y reporte vía \texttt{lmtest::coeftest()}, aplicables tanto a \texttt{lm} como a \texttt{plm}.
-    \item \textbf{Fechas y series de tiempo (nivel mínimo).} Fechas con \texttt{lubridate}: \textit{parsers} (\texttt{ymd()}, \texttt{dmy()}, \texttt{mdy()}), extractores (\texttt{year}, \texttt{month}, \texttt{quarter}, \texttt{wday}), aritmética (\texttt{days()}, \texttt{months()}, \texttt{years()}) y secuencias temporales. Clases básicas: \texttt{ts} (regular), \texttt{zoo} (irregular), \texttt{xts} (heredera moderna); conversión entre \texttt{tibble} y series. Operaciones de diagnóstico: \texttt{lag()}, \texttt{diff()}, ACF y PACF visuales. \textit{Out of scope:} modelado ARIMA y similares ---los paquetes \texttt{forecast} (Hyndman, clásico) y \texttt{fable} (sucesor en estilo \textit{tidyverse}) quedan como puntos de aterrizaje para quien quiera profundizar.
+    \item \textbf{Fechas y series de tiempo (nivel mínimo).} Fechas con \texttt{lubridate}: \textit{parsers} (\texttt{ymd()}, \texttt{dmy()}, \texttt{mdy()}), extractores (\texttt{year}, \texttt{month}, \texttt{quarter}, \texttt{wday}), aritmética (\texttt{days()}, \texttt{months()}, \texttt{years()}) y secuencias temporales. Clases básicas: \texttt{ts} (regular), \texttt{zoo} (irregular), \texttt{xts} (heredera moderna); conversión entre \texttt{tibble} y series. Operaciones de diagnóstico: \texttt{lag()}, \texttt{diff()}, ACF y PACF visuales. 
     \item \textbf{Reportes con \texttt{broom} y \texttt{modelsummary}.} \texttt{broom}: \texttt{tidy()} para coeficientes en \textit{tibble}, \texttt{glance()} para \textit{fit statistics} en una fila, \texttt{augment()} para residuales y \textit{fitted} añadidos al \textit{data}. La misma API funciona para \texttt{lm}, \texttt{glm}, \texttt{plm} y muchos otros. \texttt{modelsummary}: comparación de varios modelos lado a lado en una tabla, customización (etiquetas, estrellas, decimales), \textit{output} a Word, HTML, Markdown y LaTeX. Comparación con \texttt{stargazer}, herramienta tradicional en economía académica.
 \end{itemize}
 
@@ -562,26 +600,25 @@ Esta semana abre la Parte IV del curso. El enfoque es \blue{estrictamente progra
 
 \semana{12}{Datos a escala: SQL, \texttt{DBI} y \texttt{dbplyr}}
 
-Esta semana cierra la Parte IV del curso. Cubre las herramientas para conectar R con bases de datos relacionales: SQL como lenguaje, \texttt{DBI} como API de conexión y \texttt{dbplyr} como puente con la sintaxis de \texttt{dplyr}. Coincide con el \orange{Checkpoint 4} del proyecto integrador: conectar el \textit{Load} del ETL a una base local y aplicar análisis estadísticos sobre esos datos. La meta práctica al cierre: que el estudiante pueda mover datos entre archivos, memoria y BD, y elegir con criterio cuál es la mejor representación para cada momento del proyecto.
+Esta semana cierra la Parte IV del curso. Cubre las herramientas para conectar R con bases de datos relacionales: SQL como lenguaje, \texttt{DBI} como API de conexión y \texttt{dbplyr} como puente con la sintaxis de \texttt{dplyr}. El objetivo es conectar el \textit{Load} del ETL a una base local y aplicar análisis estadísticos sobre esos datos, de modo que el estudiante pueda mover datos entre archivos, memoria y BD, y elegir con criterio cuál es la mejor representación para cada momento del proyecto.
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Motivación y tipos de bases de datos.} Por qué una BD: datos que no caben en memoria, persistencia entre ejecuciones, varios procesos accediendo a los mismos datos, fuentes externas que se exponen vía SQL (CONEVAL, catálogos del INEGI, Banxico). Comparación práctica: \blue{SQLite} (archivo, \textit{zero-config}, el \textit{default} del curso); \texttt{PostgreSQL} y \texttt{MySQL} (servidores, lo común en producción real); \blue{duckdb} como alternativa moderna ---\textit{zero-config} como SQLite pero columnar y optimizada para \textit{analytics}, con \textit{drivers} excelentes en R; particularmente atractiva para encuestas con varios millones de filas. Mención a \texttt{arrow}/\textit{parquet} como alternativa \textit{file-based} para \textit{analytics} a escala (no es BD pero compite en el nicho).
-    \item \textbf{SQL básico-intermedio.} \texttt{SELECT}, \texttt{FROM}, \texttt{WHERE}, \texttt{ORDER BY}, \texttt{LIMIT}. \texttt{JOIN} (\texttt{INNER}, \texttt{LEFT}, \texttt{RIGHT}, \texttt{FULL}). \texttt{GROUP BY} con funciones agregadoras (\texttt{COUNT}, \texttt{SUM}, \texttt{AVG}, \texttt{MIN}, \texttt{MAX}). Operadores: \texttt{LIKE}, \texttt{IN}, \texttt{BETWEEN}, \texttt{IS NULL}. \textit{Common Table Expressions} con \texttt{WITH} para queries legibles que se construyen en pasos. Mención a \textit{subqueries}. Statements de creación: \texttt{CREATE TABLE} e \texttt{INSERT} ---solo lo necesario para el \textit{Load} del proyecto.
-    \item \textbf{\texttt{DBI}: la API de conexión.} \texttt{dbConnect()}/\texttt{dbDisconnect()} para abrir y cerrar conexiones; conveniencia de envolver en \texttt{tryCatch()} para garantizar el cierre. Operaciones de tabla: \texttt{dbWriteTable()}, \texttt{dbReadTable()}, \texttt{dbListTables()}, \texttt{dbListFields()}. Ejecución de queries: \texttt{dbGetQuery()} cuando se espera resultado tabular; \texttt{dbExecute()} cuando no (creación, inserción, actualización). Parametrización segura: \texttt{glue\_sql()} para interpolar valores en queries sin riesgo de \textit{SQL injection}. Para los alcances del curso, una conexión directa por sesión es suficiente; \textit{connection pooling} con el paquete \texttt{pool} solo se menciona como herramienta de producción para Shiny.
+    \item \textbf{SQL básico.} \texttt{SELECT}, \texttt{FROM}, \texttt{WHERE}, \texttt{ORDER BY}, \texttt{LIMIT}. \texttt{JOIN} (\texttt{INNER}, \texttt{LEFT}, \texttt{RIGHT}, \texttt{FULL}). \texttt{GROUP BY} con funciones agregadoras (\texttt{COUNT}, \texttt{SUM}, \texttt{AVG}, \texttt{MIN}, \texttt{MAX}). Operadores: \texttt{LIKE}, \texttt{IN}, \texttt{BETWEEN}, \texttt{IS NULL}. \textit{Common Table Expressions} con \texttt{WITH} para queries legibles que se construyen en pasos. Mención a \textit{subqueries}. Statements de creación: \texttt{CREATE TABLE} e \texttt{INSERT} ---solo lo necesario para el \textit{Load} del proyecto.
+    \item \textbf{\texttt{DBI}: la API de conexión.} \texttt{dbConnect()}/\texttt{dbDisconnect()} para abrir y cerrar conexiones; conveniencia de envolver en \texttt{tryCatch()} para garantizar el cierre. Operaciones de tabla: \texttt{dbWriteTable()}, \texttt{dbReadTable()}, \texttt{dbListTables()}, \texttt{dbListFields()}. Ejecución de queries: \texttt{dbGetQuery()} cuando se espera resultado tabular; \texttt{dbExecute()} cuando no (creación, inserción, actualización). Parametrización segura: \texttt{glue\_sql()} para interpolar valores en queries sin riesgo de \textit{SQL injection}.
     \item \textbf{\texttt{dbplyr}: \texttt{dplyr} sobre SQL.} El concepto: \texttt{tbl(con, 'tabla')} crea un \textit{remote tibble} sobre el cual los verbos de \texttt{dplyr} se traducen automáticamente a SQL y se ejecutan en el \textit{server}. \texttt{show\_query()} para inspeccionar el SQL generado ---herramienta de aprendizaje invaluable. \texttt{collect()} para materializar el resultado en memoria como \textit{tibble} ordinario. \blue{Patrón clave}: hacer \texttt{filter}/\texttt{group\_by}/\texttt{summarize} en el \textit{server} (que es bueno y rápido en eso) y solo \texttt{collect()} al final, cuando el resultado ya es chico. Limitación honesta: no todas las funciones de R se traducen ---funciones \textit{custom} no van.
-    \item \textbf{Aplicación al proyecto integrador.} Conectar el paso \textit{Load} del ETL a una base SQLite local en \texttt{output/proyecto.sqlite}. Diseño básico de \textit{schema}: tabla principal de la encuesta, tablas de catálogos (entidades, municipios, recodificaciones), tabla de series macro de Banxico (si aplica). Criterio de decisión: ¿\texttt{.rds} o SQLite? \texttt{.rds} basta si los datos son chicos y se cargan completos cada vez; SQLite gana cuando hay queries repetidas, múltiples consumidores (Shiny, reporte) o crecimiento previsible. \textit{Preview} de S15: el Shiny consumirá esta misma BD como fuente.
+     \textit{Preview} de S15: el Shiny consumirá esta misma BD como fuente.
 \end{itemize}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
-    \item Reconocer cuándo un proyecto de datos justifica una BD y elegir entre las opciones disponibles (SQLite, duckdb, PostgreSQL, MySQL) con criterio.
-    \item Escribir queries SQL básico-intermedias que cubran el grueso de las necesidades de análisis (\texttt{SELECT}/\texttt{JOIN}/\texttt{GROUP BY}/agregadoras/\texttt{WITH}).
+    \item Reconocer cuándo un proyecto de datos justifica una BD relacional y elegir entre las opciones disponibles (SQLite, duckdb, PostgreSQL, MySQL) con criterio.
+    \item Escribir queries SQL básico que cubran el grueso de las necesidades de análisis (\texttt{SELECT}/\texttt{JOIN}/\texttt{GROUP BY}/agregadoras/\texttt{WITH}).
     \item Conectar R a una BD vía \texttt{DBI}, escribir y leer tablas, y ejecutar queries parametrizadas de forma segura.
     \item Usar \texttt{dbplyr} para combinar la sintaxis de \texttt{dplyr} con la ejecución en el \textit{server} de BD, e inspeccionar el SQL generado.
-    \item Integrar el \textit{Load} del ETL a una base SQLite local como parte del proyecto integrador, justificando la decisión frente a la alternativa de archivos serializados.
 \end{enumerate}
 
 \medskip
@@ -597,7 +634,7 @@ Esta semana cierra la Parte IV del curso. Cubre las herramientas para conectar R
 
 \semana{13}{Visualización con \texttt{ggplot2}}
 
-Esta semana abre la Parte V (Productos). Cubre \texttt{ggplot2} no como un catálogo de funciones para hacer gráficas, sino como la \blue{gramática de gráficas} ---la idea de que una visualización es la composición de capas independientes, cada una con responsabilidades acotadas. La meta pedagógica es que el estudiante pueda razonar por capa: si una gráfica no se ve como quiere, identifica qué capa controla qué y modifica solo esa. Esta forma de pensar es lo que distingue al usuario que copia plantillas del que produce visualizaciones a medida.
+Esta semana abre la Parte V (Productos). Cubre el detalle de \texttt{ggplot2} no como un catálogo de funciones para hacer gráficas, sino como la \blue{gramática de gráficas} ---la idea de que una visualización es la composición de capas independientes, cada una con responsabilidades acotadas. La meta pedagógica es que el estudiante pueda razonar por capa: si una gráfica no se ve como quiere, identifica qué capa controla qué y modifica solo esa. Esta forma de pensar es lo que distingue al usuario que copia plantillas del que produce visualizaciones a medida.
 
 \textbf{Subtemas:}
 
@@ -617,7 +654,7 @@ Esta semana abre la Parte V (Productos). Cubre \texttt{ggplot2} no como un catá
     \item \textbf{Geometrías, estéticos y la distinción \textit{setting/mapping}.} \textit{Geoms} de uso frecuente: \texttt{geom\_point}, \texttt{geom\_line}, \texttt{geom\_bar}/\texttt{geom\_col} (la distinción importa: \texttt{bar} cuenta, \texttt{col} grafica el valor), \texttt{geom\_histogram}, \texttt{geom\_boxplot}, \texttt{geom\_density}, \texttt{geom\_smooth}, \texttt{geom\_text}/\texttt{geom\_label}, \texttt{geom\_ribbon}, \texttt{geom\_area}, \texttt{geom\_jitter}. \blue{Distinción crítica}: \texttt{color = grupo} dentro de \texttt{aes()} es un \textit{mapping} (la variable controla el color); \texttt{color = 'red'} fuera de \texttt{aes()} es un \textit{setting} (color fijo). Confundirlos es la fuente \#1 de bugs en \texttt{ggplot2}.
     \item \textbf{Scales: el control fino sobre cómo se ve cada estético.} \texttt{scale\_x\_continuous}, \texttt{scale\_x\_discrete}, \texttt{scale\_x\_log10}, \texttt{scale\_x\_date}; análogos para \texttt{y}, \texttt{color}, \texttt{fill}, \texttt{size}. Control de \texttt{limits}, \texttt{breaks}, \texttt{labels}, transformaciones. \texttt{scale\_*\_manual()} con vectores nombrados para control total. \blue{El paquete \texttt{scales}} como complemento esencial: formatters como \texttt{label\_dollar()}, \texttt{label\_percent()}, \texttt{label\_comma()}, \texttt{label\_number\_si()} convierten ejes amateur en ejes profesionales. Diferencia importante entre \texttt{coord\_cartesian(ylim = ...)} (zoom) y \texttt{scale\_y\_continuous(limits = ...)} (descarta datos).
     \item \textbf{Facets, coordenadas y themes.} \texttt{facet\_wrap} vs.\ \texttt{facet\_grid}; cuándo usar \texttt{scales = 'free'} y cuándo no. \texttt{coord\_flip()} para barras horizontales, \texttt{coord\_polar()} para circulares, \texttt{coord\_cartesian()} para zoom sin reajuste. \textbf{Themes:} predefinidos (\texttt{theme\_minimal}, \texttt{theme\_bw}, \texttt{theme\_classic}, \texttt{theme\_void}) y customización fina con \texttt{theme()} ---ajuste de \texttt{axis.text}, \texttt{panel.grid}, \texttt{legend.position}, \texttt{plot.title}, etc. \texttt{theme\_set()} para fijar tema global del proyecto.
-    \item \textbf{Ecosistema complementario y exportación.} \textbf{Composición y anotación:} \texttt{patchwork} (combinar varias gráficas con \texttt{+}, \texttt{/} y \texttt{|}), \texttt{ggrepel} (\texttt{geom\_text\_repel} para labels que no se sobreponen), \texttt{ggtext} (\textit{markdown}/HTML en títulos y labels), \texttt{gghighlight} (destacar grupos en gráficas multi-grupo). \textbf{Color:} \texttt{ggthemes} (\textit{themes} estilo \textit{Economist}, \textit{FiveThirtyEight}, \textit{WSJ}), \texttt{paletteer} (acceso unificado a cientos de paletas). \textit{Mención somera}: \texttt{plotly} para gráficas interactivas, \texttt{gganimate} para animaciones. \textbf{Exportación con \texttt{ggsave()}:} formatos PNG (\textit{raster}, ideal para web y Word), JPG (\textit{raster}, calidad inferior, evitar salvo necesidad) y SVG (vector, escalable sin pérdida). Argumentos clave: \texttt{width}, \texttt{height}, \texttt{units} (cm/in/mm/px), \texttt{dpi}, \texttt{bg = 'white'} para forzar fondo blanco. Anti-patrón clásico: no planear el tamaño de export desde el inicio y descubrir el texto cortado al insertar la gráfica en el documento final.
+    \item \textbf{Ecosistema complementario y exportación.} \textbf{Composición y anotación:} \texttt{patchwork} (combinar varias gráficas con \texttt{+}, \texttt{/} y \texttt{|}), \texttt{ggrepel} (\texttt{geom\_text\_repel} para labels que no se sobreponen), \texttt{ggtext} (\textit{markdown}/HTML en títulos y labels), \texttt{gghighlight} (destacar grupos en gráficas multi-grupo). \textbf{Color:} \texttt{ggthemes} (\textit{themes} estilo \textit{Economist}, \textit{FiveThirtyEight}, \textit{WSJ}), \texttt{paletteer} (acceso unificado a cientos de paletas). \textit{Mención somera}: \texttt{plotly} para gráficas interactivas, \texttt{gganimate} para animaciones. \textbf{Exportación con \texttt{ggsave()}:} formatos PNG (\textit{raster}, ideal para web y Word), JPG (\textit{raster}, calidad inferior, evitar salvo necesidad) y SVG (vector, escalable sin pérdida). Argumentos clave: \texttt{width}, \texttt{height}, \texttt{units} (cm/in/mm/px), \texttt{dpi}, \texttt{bg = 'white'} para forzar fondo blanco.
 \end{itemize}
 
 \medskip
@@ -649,11 +686,10 @@ Esta semana se enfoca en convertir los outputs del análisis (gráficas, tablas,
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Motivación y arquitectura del flujo automatizado.} El problema: tras cada actualización de datos, alguien rehace la presentación. Costo en tiempo, fragilidad, dificultad para auditar. La automatización resuelve esto con la fórmula \texttt{template + datos + código = presentación}. Patrón general: el pipeline ETL produce outputs en \texttt{output/}; un \textit{script} de presentación lee un \texttt{.pptx} \textit{template} pre-estilizado e inyecta los valores actualizados; el resultado se publica vía Drive.
-    \item \textbf{\texttt{officer} para PowerPoint.} \texttt{read\_pptx()} para cargar un \textit{template} (recomendado siempre sobre construir desde cero). Agregar diapositivas con \texttt{add\_slide()} eligiendo \textit{layouts} del \textit{master} (Título, Contenido, Sección, etc.). Insertar contenido en \textit{placeholders} con nombre vía \texttt{ph\_with()}: texto, tablas, gráficas \texttt{ggplot2}, imágenes. Iteración sobre múltiples diapositivas para presentaciones con N secciones (un cuadro por estado, por trimestre, etc.). Exportación final con \texttt{print(doc, target = ...)}. Mención: \texttt{officer} también genera Word, fuera del énfasis del curso.
+    \item \textbf{\texttt{officer} para PowerPoint.} \texttt{read\_pptx()} para cargar un \textit{template} (recomendado siempre sobre construir desde cero). Agregar diapositivas con \texttt{add\_slide()} eligiendo \textit{layouts} del \textit{master} (Título, Contenido, Sección, etc.). Insertar contenido en \textit{placeholders} con nombre vía \texttt{ph\_with()}: texto, tablas, gráficas \texttt{ggplot2}, imágenes. Iteración sobre múltiples diapositivas para presentaciones con N secciones (un cuadro por estado, por trimestre, etc.). Exportación final con \texttt{print(doc, target = ...)}. Mención: \texttt{officer} también genera Word, aunque está fuera del énfasis del curso.
     \item \textbf{Estilización de componentes.} Donde la presentación pasa de funcional a profesional. Texto enriquecido: \texttt{fp\_text()} (color, tamaño, negrita, cursiva), \texttt{fp\_par()} (alineación, espaciado), \texttt{fpar()} y \texttt{block\_list()} para composiciones inline (mezclar negrita + color + tamaño en el mismo párrafo). Tablas con \texttt{flextable}: themes (\texttt{theme\_vanilla}, \texttt{theme\_box}, custom), formato numérico por columna (\texttt{colformat\_double}, \texttt{colformat\_pct}), \textit{merging} de celdas, \textit{headers} compuestos, colores por celda. Inserción de gráficas con dimensiones controladas (\texttt{ph\_with(value = gg, location = ph\_location(width, height))}). La consigna pedagógica: \blue{todo el estilo vive en el template y en código de \texttt{officer}, no se ``arregla'' en PowerPoint a mano} (eso destruye la reproducibilidad).
     \item \textbf{\texttt{googledrive}: autenticación y gestión de archivos.} \textbf{Autenticación:} OAuth interactivo para desarrollo (\texttt{drive\_auth()}); \textit{Service Account} con JSON para automatización (\texttt{drive\_auth(path = "credenciales.json")}). \textbf{Gestión de archivos como solución \textit{low-code} de automatización:} \texttt{drive\_upload()} para publicar reportes generados; \texttt{drive\_download()} para descargar insumos compartidos; \texttt{drive\_ls()} para navegar carpetas; \texttt{drive\_get()} para localizar archivos por nombre o ID; \texttt{drive\_share()} para gestionar permisos; \texttt{drive\_mv()} y \texttt{drive\_trash()} para mover y archivar. \blue{Patrón típico}: una carpeta de Drive funciona como \textit{buzón} ---el equipo deposita insumos ahí, el \textit{script} los descarga automáticamente; el reporte generado se sube a otra carpeta donde el equipo lo consume sin contacto con el código. Esto reemplaza muchos flujos manuales con muy poca complejidad técnica.
     \item \textbf{\texttt{gmailr}: correo como canal de automatización.} Autenticación análoga a \texttt{googledrive} (OAuth interactivo en desarrollo; \textit{Service Account} para automatización) sobre la API de Gmail. \textbf{Envío programático:} \texttt{gm\_mime()} para componer un correo (asunto, cuerpo en HTML, destinatarios, adjuntos), \texttt{gm\_send\_message()} para enviarlo; útil para distribuir el reporte generado a una lista de \textit{stakeholders} cada vez que corre el pipeline. \textbf{Lectura como buzón de entrada:} \texttt{gm\_messages()} para listar correos según filtros tipo Gmail (\texttt{from:}, \texttt{subject:}, \texttt{has:attachment}), \texttt{gm\_message()} para obtener uno, \texttt{gm\_attachments()} y \texttt{gm\_save\_attachments()} para extraer adjuntos al disco. \blue{Patrón \textit{low-code}}: el \textit{script} lee la bandeja con un filtro específico (e.g.\ \texttt{from:proveedor@empresa.com subject:'datos mensuales'}), descarga los adjuntos, los procesa y manda el reporte por correo al equipo. Reemplaza intercambios manuales de archivos por algo que solo requiere que el equipo siga usando su correo electrónico habitual.
-    \item \textbf{Integración al pipeline y manejo de secretos.} El \textit{script} de presentación como paso final del \texttt{master.R} del proyecto: tras correr el ETL y los análisis, se llama \texttt{source('pre/04-presentacion.R')}. Credenciales (\textit{Service Account} JSON, tokens) viven fuera del repositorio: \texttt{.gitignore} entrada para \texttt{credenciales.json} y \texttt{.env}, en línea con la convención introducida en S4. Conexión con el \orange{Checkpoint 5} del proyecto integrador: el reporte automatizado vía \texttt{officer} es uno de los dos entregables finales (el otro es el tablero Shiny, S15).
 \end{itemize}
 
 \medskip
@@ -664,7 +700,7 @@ Esta semana se enfoca en convertir los outputs del análisis (gráficas, tablas,
     \item Estilizar componentes de una presentación (texto enriquecido, tablas con \texttt{flextable}, imágenes dimensionadas) sin recurrir a edición manual en PowerPoint.
     \item Operar Google Drive desde R para descarga, carga y gestión de archivos, distinguiendo OAuth interactivo de \textit{Service Account}.
     \item Usar \texttt{gmailr} para enviar reportes generados y consumir una bandeja de Gmail como fuente de adjuntos.
-    \item Diseñar canales de automatización \textit{low-code} en los que carpetas de Drive y bandejas de Gmail funcionan como buzones de insumos/outputs entre el código y el equipo.
+    \item Diseñar canales de automatización \textit{low-code} en los que carpetas de Drive y bandejas de Gmail funcionan como buzones de insumos/outputs entre el código y los estudiantes.
 \end{enumerate}
 
 \medskip
@@ -713,7 +749,7 @@ Esta semana es introducción, no dominio. Shiny es una tecnología vasta y profe
 
 \semana{16}{Interfaces de modelos de lenguaje}
 
-Esta es la última semana del curso. Cierra la Parte V y coincide con la entrega final del proyecto integrador (\orange{Checkpoint 5}: tablero Shiny + reporte automatizado). El tema: cómo incorporar modelos de lenguaje (LLMs) al pipeline de datos como una herramienta más, en lugar de tratarlos como un servicio externo que rompe el flujo. La meta práctica es que el estudiante pueda mover tareas que habitualmente se delegan manualmente a un \textit{chatbot} ---extraer información estructurada de un párrafo, clasificar texto, generar un resumen, normalizar nombres--- al interior del pipeline, donde son \blue{auditables, reproducibles y se ejecutan sin intervención humana}.
+Esta es la última semana del curso y está concentrada en el límite de las capacidades programáticas. El tema: cómo incorporar modelos de lenguaje (LLMs) al pipeline de datos como una herramienta más, en lugar de tratarlos como un servicio externo que rompe el flujo. La meta práctica es que el estudiante pueda mover tareas que habitualmente se delegan manualmente a un \textit{chatbot} ---extraer información estructurada de un párrafo, clasificar texto, generar un resumen, normalizar nombres--- al interior del pipeline, donde son \blue{auditables, reproducibles y se ejecutan sin intervención humana}.
 
 \textbf{Subtemas:}
 
