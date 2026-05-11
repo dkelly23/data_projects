@@ -31,6 +31,8 @@ Curso comprensivo de programación orientado a la construcción de **proyectos c
 | Duración | 16 semanas |
 | Sesiones | 2 sesiones de 1:30 hr por semana (32 sesiones totales) |
 
+**Título del documento principal:** *Temario del Curso* (NO "Syllabus" — el usuario prefiere el término en español).
+
 ---
 
 ## Estructura semanal (default)
@@ -43,45 +45,39 @@ Cada semana tiene dos sesiones con roles diferenciados:
 
 ## Esquema de evaluación
 
-> **Pendiente:** confirmar porcentajes finales.
-
-Propuesta:
-- Checkpoints del proyecto integrador — **40%**
-- Proyecto final — **30%**
-- Ejercicios en clase (sesión 2 semanal) — **25%**
-- Asistencia — **5%**
+| Componente | Peso |
+|---|---:|
+| Checkpoints del proyecto integrador | 50% |
+| Proyecto final | 20% |
+| Ejercicios en clase (segunda sesión semanal) | 20% |
+| Asistencia | 10% |
 
 ---
 
-## Estructura del curso (16 semanas, 5 partes)
+## Estructura del curso (16 semanas)
 
-Cada semana tiene 2 sesiones de 1:30 hr. La granularidad fina (qué se ve en la sesión A vs. B de cada semana) se desarrolla iterativamente como parte del temario detallado.
+El curso se articula en cinco partes; la lista plana de las 16 semanas es la siguiente:
 
-### Parte I — Fundamentos (Semanas 1–4)
-- **Semana 1** ¿Por qué R? + setup Positron + primer script + objetos, asignación, vectores, tipos
-- **Semana 2** Estructuras de datos: listas, DataFrames, tibbles, indexación, NA, coerción
-- **Semana 3** Importación de datos (`readr`, `readxl`, `haven`) + EDA con base R + estadística descriptiva + base graphics
-- **Semana 4** Estructura de proyectos + Git + `here` + `renv`
+| # | Semana | Parte |
+|---|---|---|
+| 1 | ¿Por qué R? Setup y primeros pasos | I — Fundamentos |
+| 2 | Estructuras de datos (listas, DataFrames, tibbles, indexación, NA, coerción) | I — Fundamentos |
+| 3 | Importación de datos y EDA con base R | I — Fundamentos |
+| 4 | Estructura de proyectos, Git y reproducibilidad | I — Fundamentos |
+| 5 | dplyr I: pipe, verbos básicos y sistema tidyverse | II — Manipulación |
+| 6 | dplyr II: joins, pivots y manejo de NA | II — Manipulación |
+| 7 | Strings, expresiones regulares y `stringr` | II — Manipulación |
+| 8 | Control de flujo y vectorización | III — Programación |
+| 9 | Funciones: diseño, scoping y debugging | III — Programación |
+| 10 | Programación funcional: `purrr` y `apply` | III — Programación |
+| 11 | Modelado estadístico programático (`lm`, `plm`, `broom`, `modelsummary`) | IV — Análisis |
+| 12 | Datos a escala: SQL, `DBI` y `dbplyr` | IV — Análisis |
+| 13 | Visualización con `ggplot2` | V — Productos Finales |
+| 14 | Automatización con `officer`, `googledrive` y `gmailr` | V — Productos Finales |
+| 15 | Shiny | V — Productos Finales |
+| 16 | Interfaces de modelos de lenguaje (`ellmer`, `httr2`) | V — Productos Finales |
 
-### Parte II — Manipulación (Semanas 5–7)
-- **Semana 5** dplyr I: pipe + verbos básicos + sistema tidyverse
-- **Semana 6** dplyr II: joins + pivots + NA + `case_when` / `coalesce`
-- **Semana 7** Strings + regex + `stringr` + `glue`
-
-### Parte III — Programación (Semanas 8–10)
-- **Semana 8** Control flow + vectorización
-- **Semana 9** Funciones: diseño, scoping, errores, debugging (`browser`, `traceback`)
-- **Semana 10** Programación funcional: `purrr` + familia `apply`
-
-### Parte IV — Análisis (Semanas 11–12)
-- **Semana 11** Modelado: `lm` + `plm` (panel) + categóricos + manejo de fechas y series con `zoo`/`ts` + `broom` + `modelsummary`
-- **Semana 12** Datos a escala: SQL + `DBI` + `dbplyr` (con SQLite local para el proyecto integrador; PostgreSQL/MySQL como referencia, `duckdb` como alternativa moderna)
-
-### Parte V — Productos (Semanas 13–16)
-- **Semana 13** ggplot2: gramática completa, themes, faceting, export
-- **Semana 14** `officer` + `googledrive` (automatización de PPT/reportes)
-- **Semana 15** Shiny
-- **Semana 16** Interfaces de LLMs: `ellmer` + Gemini API + `telegram_bot`
+**Nota:** la Parte V se nombra *Productos Finales* (no solo "Productos").
 
 ---
 
@@ -92,6 +88,7 @@ El curso se articula alrededor de un proyecto integrador que los estudiantes con
 - **Anuncio:** S1.
 - **Pipeline:** input → limpieza → modelado → producto.
 - **Checkpoints** alineados con las cinco partes del curso (al cierre de cada parte hay una entrega parcial).
+- **Separación del contenido semanal:** el contenido de cada semana NO se ata explícitamente al proyecto integrador dentro de los subtemas u objetivos. El proyecto integrador vive en su propia sección; las semanas mencionan flujos generales ("el proyecto en el que se trabaje"), no checkpoints específicos.
 
 > **Pendiente:**
 > - Definir el dataset (o set de datasets) recurrente del proyecto integrador.
@@ -105,10 +102,36 @@ Estas decisiones se tomaron y deben respetarse:
 
 - **NO** incluir Quarto ni RMarkdown.
 - **NO** incluir `data.table` como tema dedicado (mención en passing máximo en S6).
-- **Series de tiempo** solo a nivel programático, NO comprensivo (en S11 junto con modelado).
-- **officeR+googledrive**, **Shiny**, y **LLMs** cada uno como sesión individual.
+- **Series de tiempo** solo a nivel programático, NO comprensivo (en S11 junto con modelado). Sin mención a `forecast` ni `fable`.
+- **officer+googledrive+gmailr**, **Shiny**, y **LLMs** cada uno como sesión individual.
 - **Modelado de inferencia**: enfoque estrictamente programático — cómo se especifican fórmulas, cómo se extraen coeficientes, cómo se reportan resultados. La teoría estadística la ven en Econometría.
-- **Política sobre LLMs:** se introduce explícitamente en S1.1. La visión es que **depender mal de un LLM atrofia la capacidad individual**, pero usado **como agente integrado al proyecto** (Claude Code, modo agente de Cursor) puede acelerar el trabajo. **Permitido** en el proyecto integrador; **no permitido** en ejercicios de clase. El estudiante debe poder leer y modificar cualquier línea que entregue.
+- **Política sobre LLMs:** se introduce explícitamente en S1.1. La visión es que **depender mal de un LLM atrofia la capacidad individual**, pero usado **como agente integrado al proyecto** (Claude Code de Anthropic, Codex de OpenAI) puede acelerar el trabajo. **Permitido** en el proyecto integrador; **no permitido** en ejercicios de clase. El estudiante debe poder leer y modificar cualquier línea que entregue.
+
+---
+
+## Convenciones de lenguaje y tono
+
+Estas convenciones surgen de las correcciones del usuario al primer borrador del `.tex` y aplican a TODO contenido posterior (semanas, slides, materiales):
+
+**Tono.**
+- Académico formal. Evitar fórmulas casuales del tipo "Esta semana es la entrada al curso", "Esta semana es la primera vez que…". Preferir construcciones como "Esta semana corresponde a…", "Semana que cierra…", "Esta semana constituye…".
+- Atribución impersonal: NO referirse a "el profesor" en el texto. La estructura propuesta es "de proyectos profesionales reales", no "del profesor".
+
+**Terminología.**
+- *"datos"* como término genérico, NO *"microdatos"* salvo cuando el contexto sea específicamente de encuesta (ENSU, ENIGH). El curso no debe leerse como centrado en encuestas.
+- **Banco de México** (forma extendida) o **BANXICO** (versalitas), NO "Banxico" como nombre propio coloquial.
+- *"regresión lineal univariable"* cuando se mencione el prerrequisito.
+- *"los estudiantes"* (no "el equipo") en contextos pedagógicos donde el referente es la clase.
+- *"sistema/vocabulario consistente"* en vez de "API consistente" cuando se hable de paquetes tidyverse al estudiante.
+- Nombrar el lugar como **El Colegio de México** explícitamente cuando se pueda.
+
+**Vínculo con el proyecto integrador.**
+- Las semanas NO referencian "Checkpoint N" en su narrativa, subtemas u objetivos de aprendizaje. Esa vinculación vive solo en la sección dedicada al proyecto integrador.
+- Cuando se necesite ejemplificar un flujo aplicado, usar formulaciones genéricas ("el proyecto en el que se trabaje", "un pipeline ETL", "un flujo de análisis") en lugar de "el proyecto integrador".
+
+**Recortes preferidos.**
+- Evitar adjetivos calificadores fuertes redundantes ("invaluable", "fundamental" en exceso). Si un punto es central, ya se nota por su posición.
+- Evitar enumeraciones internas que se sienten checklist ("anti-patrón clásico…", "fuente #1 de bugs"). Mantener los que aportan al diagnóstico; recortar los que solo dramatizan.
 
 ---
 
@@ -147,13 +170,12 @@ Ubicación: `muestra_ppt/` (referencia — no tocar la plantilla original).
 - Objetivos de aprendizaje (2–4)
 - Lecturas específicas (capítulo + sección de R4DS / Advanced R / otras)
 - Ejercicio sugerido
-- Conexión con el proyecto integrador (cuando aplique)
 
 **Workflow de iteración:**
 1. El agente propone desglose completo de la sesión.
 2. El usuario comenta y ajusta.
 3. Se consolida la sesión antes de pasar a la siguiente.
-4. Una vez todas las sesiones acordadas, se transcribe al `syllabus.tex`.
+4. Una vez todas las sesiones acordadas, se transcribe al `syllabus.tex` (titulado *Temario del Curso*).
 
 **Estructura de directorios propuesta:**
 ```
@@ -173,8 +195,6 @@ Programming for Data Projects/
 
 ## Pendientes generales
 
-- [ ] Confirmar porcentajes exactos de evaluación (asistencia + ejercicios en clase).
 - [ ] Definir dataset recurrente del proyecto integrador.
 - [ ] Definir entregables específicos de cada checkpoint.
-- [ ] Desarrollar temario detallado sesión por sesión.
-- [ ] Crear estructura de directorios y `syllabus.tex`.
+- [ ] Desarrollar slides sesión por sesión.
