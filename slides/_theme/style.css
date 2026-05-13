@@ -1,0 +1,285 @@
+/* =============================================================================
+   Paleta Colmex / Programación para Proyectos de Datos
+   Replica de swjtu.sty (Beamer) adaptada a Slidev.
+   ============================================================================= */
+
+:root {
+  --colmex-main: #5e002b;
+  --colmex-subtitle: #4b4b4b;
+  --colmex-text: #404040;
+  --colmex-bg: #ffffff;
+
+  --colmex-alert: #c21f30;
+  --colmex-example: #1543ae;
+  --colmex-block: #378518;
+
+  --colmex-code-comment: #248067;
+  --colmex-code-keyword: #ee3f4d;
+  --colmex-code-string: #134857;
+
+  --colmex-blue: #007ba7;
+  --colmex-orange: #d24d31;
+  --colmex-green: #248067;
+  --colmex-href: #6ba4b8;
+}
+
+/* ----------------------------------------------------------------------------
+   Tipografía base
+   ---------------------------------------------------------------------------- */
+
+.slidev-layout {
+  background-color: var(--colmex-bg);
+  color: var(--colmex-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.slidev-layout h1 {
+  color: var(--colmex-main);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0.65rem;
+}
+
+.slidev-layout h2 {
+  color: var(--colmex-subtitle);
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+.slidev-layout h3 {
+  color: var(--colmex-subtitle);
+  font-weight: 600;
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+}
+
+/* Bullets en color institucional */
+.slidev-layout ul > li::marker {
+  color: var(--colmex-main);
+}
+.slidev-layout ol > li::marker {
+  color: var(--colmex-main);
+  font-weight: 600;
+}
+
+.slidev-layout a {
+  color: var(--colmex-href);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--colmex-href);
+}
+
+/* ----------------------------------------------------------------------------
+   Bloques de código (matchea estilo listings del Beamer)
+   ---------------------------------------------------------------------------- */
+
+.slidev-layout pre,
+.slidev-layout code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+}
+
+.slidev-layout pre,
+.slidev-layout pre code,
+.slidev-layout pre span {
+  font-size: 1em !important;
+  line-height: 1.5 !important;
+}
+
+.slidev-layout :not(pre) > code {
+  color: var(--colmex-code-keyword);
+  background-color: #f7f1f3;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.slidev-layout pre {
+  background: #fafafa !important;
+  border-left: 3px solid var(--colmex-main);
+  border-radius: 10px;
+  padding: 0.85rem 1rem !important;
+  line-height: 1.45;
+}
+
+/* ----------------------------------------------------------------------------
+   Footer (replica del footline Beamer)
+   ---------------------------------------------------------------------------- */
+
+.colmex-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.1rem;
+  background-color: var(--colmex-main);
+  color: #ffffff;
+  font-size: 0.8rem;
+  display: grid;
+  grid-template-columns: 22% 56% 22%;
+  align-items: center;
+  padding: 0 0.75rem;
+  font-weight: 600;
+}
+.colmex-footer > div {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.colmex-logo-corner {
+  position: absolute;
+  bottom: 4rem;
+  right: 3rem;
+  height: 3.5rem;
+  opacity: 0.85;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(80%) saturate(3800%) hue-rotate(320deg);
+}
+
+.colmex-cover .colmex-logo-cover {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  height: 4.5rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+/* ----------------------------------------------------------------------------
+   Layouts custom
+   ---------------------------------------------------------------------------- */
+
+.colmex-cover {
+  background: url('/section-bg.png') no-repeat center/cover, var(--colmex-main);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 3rem;
+}
+.colmex-cover h1 {
+  color: #ffffff;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.colmex-cover .subtitle {
+  color: #f5e1eb;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+}
+.colmex-cover .author {
+  color: #ffffff;
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+.colmex-cover .institute,
+.colmex-cover .date {
+  color: #f5e1eb;
+  font-size: 1.2rem;
+}
+
+.colmex-section {
+  background: url('/section-bg.png') no-repeat center/cover, var(--colmex-main);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+.colmex-section h1 {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 700;
+  border-bottom: 4px solid #ffffff;
+  padding-bottom: 0.4rem;
+  width: fit-content;
+}
+.colmex-section .eyebrow {
+  color: #f5e1eb;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+/* ----------------------------------------------------------------------------
+   Bloques (Fragmento / Ejemplo / Ejercicio)
+   ---------------------------------------------------------------------------- */
+
+.colmex-block {
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0.9rem 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.colmex-block-header {
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.95em;
+}
+.colmex-block-body {
+  padding: 0.7rem 0.85rem;
+  font-size: 0.92em;
+  line-height: 1.45;
+}
+.colmex-block-cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.72em;
+  color: var(--colmex-subtitle);
+  font-style: italic;
+}
+
+.colmex-block.fragmento .colmex-block-header { background: var(--colmex-example); }
+.colmex-block.fragmento .colmex-block-body   { background: #ecf0fa; color: #0e2e6f; }
+
+.colmex-block.ejemplo .colmex-block-header   { background: var(--colmex-alert); }
+.colmex-block.ejemplo .colmex-block-body     { background: #fbeaec; color: #5e0a13; }
+
+.colmex-block.ejercicio .colmex-block-header { background: var(--colmex-block); }
+.colmex-block.ejercicio .colmex-block-body   { background: #e9f3e3; color: #1f4a0e; }
+
+/* ----------------------------------------------------------------------------
+   Inline color helpers
+   ---------------------------------------------------------------------------- */
+
+.colmex-blue   { color: var(--colmex-blue);   font-weight: 600; }
+.colmex-orange { color: var(--colmex-orange); font-weight: 600; }
+.colmex-green  { color: var(--colmex-green);  font-weight: 600; }
+
+/* ----------------------------------------------------------------------------
+   Banner visible solo en slides instructor-only
+   ---------------------------------------------------------------------------- */
+
+.colmex-instructor-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fff4d6,
+    #fff4d6 10px,
+    #ffe9a8 10px,
+    #ffe9a8 20px
+  );
+  color: #6b4e00;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #d4ae33;
+}

@@ -135,7 +135,35 @@ Estas convenciones surgen de las correcciones del usuario al primer borrador del
 
 ---
 
-## Plantilla de presentaciones
+## Materiales por semana
+
+Decisiones tomadas sobre los artefactos que se producen para cada semana:
+
+- **Presentación Slidev** (`slides/semana_NN/`) — usada en clase, distribuida a estudiantes como sitio estático en GitHub Pages.
+- **Lecture notes para estudiantes** — documento detallado en Markdown, render a PDF con Quarto. **Pendiente; se aborda al final del curso una vez consolidadas las presentaciones.**
+
+**No hay documento separado de notas del instructor.** El deck Slidev es la única referencia del instructor; no se mantiene un `doc-instructor.md` ni similar paralelo a las slides. Si en algún momento se requiere contenido visible solo para el instructor, se usa el mecanismo nativo de Slidev (`instructor: true` en el frontmatter de un slide, o bloques `<!-- instructor-only -->`), no un archivo aparte.
+
+---
+
+## Slides (Slidev)
+
+Stack: [Slidev](https://sli.dev) con tema custom Colmex en `slides/_theme/`.
+
+**Ubicación:**
+- `slides/_theme/` — layouts, components, style.css, public assets (compartido entre semanas).
+- `slides/template/` — plantilla maestra que se copia para arrancar cada semana.
+- `slides/semana_NN/` — una carpeta por semana, con symlinks a `_theme`.
+
+**Stack interno:** Slidev usa Vite + Vue por debajo. `vite.config.mjs` en cada semana amplía `server.fs.allow` al directorio padre para que los symlinks a `../_theme/` resuelvan. Builds usan `--base ./` para que las rutas a assets sean relativas y funcionen tanto en GitHub Pages como vía servidor local.
+
+**Para arrancar:** ver `slides/README.md`.
+
+---
+
+## Plantilla de presentaciones (Beamer)
+
+Plantilla LaTeX/Beamer original, **referencia de estilo** para `syllabus.tex` y para el tema Slidev. Ya **no se usa para slides** (eso se hace ahora con Slidev).
 
 Ubicación: `muestra_ppt/` (referencia — no tocar la plantilla original).
 
