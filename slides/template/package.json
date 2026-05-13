@@ -1,0 +1,15 @@
+{
+  "name": "slides-template",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "dev:student": "node ../_theme/scripts/build-student.mjs && slidev slides.student.md --open",
+    "build": "slidev build --base ./",
+    "build:student": "node ../_theme/scripts/build-student.mjs && slidev build slides.student.md --base ./ --out dist-student",
+    "preview": "lsof -ti:4173 2>/dev/null | xargs kill -9 2>/dev/null; python3 -m http.server 4173 --directory dist",
+    "preview:student": "lsof -ti:4174 2>/dev/null | xargs kill -9 2>/dev/null; python3 -m http.server 4174 --directory dist-student",
+    "export": "slidev export --output presentacion-instructor.pdf",
+    "export:student": "node ../_theme/scripts/build-student.mjs && slidev export slides.student.md --output presentacion-estudiantes.pdf"
+  }
+}
