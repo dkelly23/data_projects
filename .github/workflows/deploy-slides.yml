@@ -1,0 +1,64 @@
+name: Deploy slides to Pages
+
+on:
+  push:
+    branches: [master]
+    paths: ['slides/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Slidev
+        run: npm install -g @slidev/cli
+
+      - name: Build cada semana
+        run: |
+          mkdir -p public
+          for dir in slides/semana_*/; do
+            week=$(basename "$dir")
+            echo "Building $week..."
+            (cd "$dir" && slidev build --base "/data_projects/$week/" --out "../../public/$week")
+          done
+
+      - name: Generar index
+        run: |
+          cat > public/index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head><meta charset="utf-8"><title>Programación para Proyectos de Datos</title></head>
+          <body>
+            <h1>Programación para Proyectos de Datos</h1>
+            <ul>
+          HTML
+          for dir in public/semana_*/; do
+            week=$(basename "$dir")
+            echo "  <li><a href=\"$week/\">$week</a></li>" >> public/index.html
+          done
+          echo "</ul></body></html>" >> public/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
