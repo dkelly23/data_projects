@@ -213,10 +213,10 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Bloques (Fragmento / Ejemplo / Ejercicio)
+   Bloques (Azul / Rojo / Verde)
    ---------------------------------------------------------------------------- */
 
-.colmex-block {
+/* .colmex-block {
   border-radius: 6px;
   overflow: hidden;
   margin: 0.9rem 0;
@@ -249,6 +249,60 @@
 
 .colmex-block.ejercicio .colmex-block-header { background: var(--colmex-block); }
 .colmex-block.ejercicio .colmex-block-body   { background: #e9f3e3; color: #1f4a0e; }
+ */
+
+ /* ----------------------------------------------------------------------------
+   Bloques (Azul / Rojo / Verde)
+   ---------------------------------------------------------------------------- */
+
+.colmex-block {
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0.9rem 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.colmex-block-header {
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.5rem 1rem;
+  font-size: 1.05em;
+}
+.colmex-block-body {
+  padding: 0.8rem 1rem;
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+.colmex-block-label {
+  font-weight: 700;
+  margin-right: 0.35rem;
+}
+.colmex-block-content {
+  font-style: italic;
+}
+.colmex-block-footnote {
+  display: block;
+  margin-top: 0.7rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  width: 35%;
+  font-size: 0.72em;
+  font-style: normal;
+}
+.colmex-block-footnote-marker {
+  font-style: italic;
+  vertical-align: super;
+  font-size: 0.85em;
+  margin-right: 0.15rem;
+}
+
+.colmex-block.azul .colmex-block-header { background: var(--colmex-example); }
+.colmex-block.azul .colmex-block-body   { background: #ecf0fa; color: #0e2e6f; }
+
+.colmex-block.rojo .colmex-block-header { background: var(--colmex-alert); }
+.colmex-block.rojo .colmex-block-body   { background: #fbeaec; color: #5e0a13; }
+
+.colmex-block.verde .colmex-block-header { background: var(--colmex-block); }
+.colmex-block.verde .colmex-block-body   { background: #e9f3e3; color: #1f4a0e; }
 
 /* ----------------------------------------------------------------------------
    Inline color helpers

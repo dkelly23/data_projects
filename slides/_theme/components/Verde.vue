@@ -1,6 +1,6 @@
 <template>
-  <div class="colmex-block ejercicio">
-    <div class="colmex-block-header">Ejercicio {{ n }}</div>
+  <div class="colmex-block verde">
+    <div class="colmex-block-header">{{ t }}</div>
     <div class="colmex-block-body">
       <slot />
     </div>
@@ -9,6 +9,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  n: string | number
+  t: string
 }>()
 </script>

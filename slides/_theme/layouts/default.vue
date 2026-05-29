@@ -9,7 +9,7 @@
       <div>{{ $frontmatter.author || $slidev.configs.author || 'Daniel Kelly' }}</div>
       <div>
         <span v-if="$frontmatter.section">{{ $frontmatter.section }}</span>
-        <span v-if="$frontmatter.subsection"> &middot; {{ $frontmatter.subsection }}</span>
+        <span v-if="$frontmatter.subsection"> &mdash; {{ $frontmatter.subsection }}</span>
       </div>
       <div>{{ $slidev.nav.currentPage }} / {{ $slidev.nav.total }}</div>
     </div>

@@ -28,20 +28,20 @@ eyebrow: Sesión 1 — Teoría
 ---
 layout: default
 section: Semana 1
-subsection: Introducción
+subsection: Introducción al Curso
 ---
 
 # Programación para Proyectos de Datos
 Curso comprensivo orientado a la construcción de **proyectos completos de datos**.  
 
-- **Diagnóstico:** La mayoría del contenido disponible en otros cursos (dentro y fuera del programa) se concentran en *habilidades aisladas* y *herramientas específicas*, no al flujo completo del proyecto.
+- **Diagnóstico:** Gran parte del contenido disponible, dentro y fuera del programa, se concentra en *habilidades aisladas* y *herramientas específicas*, no en el flujo completo de un proyecto.
 
-- **Objetivo:** Brindar a los estudiantes las herramientas programáticas y conceptuales necesarias para construir flujos de datos completos, reproducibles y automatizables, en otras palabras, construir un flujo ETL (`Extract`, `Transform` y `Load`).
+- **Objetivo:** Brindar a los estudiantes las herramientas programáticas y conceptuales necesarias para construir flujos de datos completos, reproducibles y automatizables: desde la extracción y limpieza hasta el análisis y el producto final.
 
 - **Filosofía:** [zero-to-hero]{.colmex-blue} (no es necesario tener experiencia previa en programación).
-- **Duración:** 16 semanas, dos sesiones semanales de 1:30h. La 
+- **Duración:** 16 semanas, con dos sesiones semanales de 1:30 h.
 - **Lenguaje:** R como único lenguaje del curso (la decisión se justifica más adelante).
-- **IDE:** [Positron]{.colmex-orange}, la alternativa superior a [RStudio]{.colmex-orange}.
+- **IDE:** [Positron]{.colmex-orange}, entorno de trabajo recomendado para el curso.
 
 
 ---
@@ -66,7 +66,7 @@ subsection: Estructura del Curso
 
 ### Parte 3: Programación
 - **Semana 8:** Control de Flujo y Vectorización.
-- **Semana 9:** Funciones: diseño, *scoping* y *debbuging*.
+- **Semana 9:** Funciones: diseño, *scoping* y *debugging*.
 - **Semana 10:** Programación Funcional: `purrr` y la familia `apply`.
 
 
@@ -80,7 +80,7 @@ subsection: Estructura del Curso
 Índice temático por semana y sesión.
 
 ### Parte 4: Análisis
-- **Semana 11:** Modelado estadíostico programático.
+- **Semana 11:** Modelado estadístico programático.
 - **Semana 12:** Datos a escala: `SQL`, `DBI` y `dbplyr`.
 
 ### Parte 5: Productos Finales
@@ -109,7 +109,7 @@ Los cursos previos del programa equipan al estudiante con [habilidades específi
 ### ¿Por qué programar?
 - Ofrece una forma de pensar y enfrentar problemas, con énfasis en la capacidad de articular soluciones reproducibles y auditables.  
 - Salidas laborales amplias.
-- Es una herramienta clave para economistas, pues cierra la brecha `teoria` $\to$ `práctica`.
+- Es una herramienta clave para economistas, pues cierra la brecha `teoría` $\to$ `práctica`.
 
 ### ¿Por qué este curso?
 Énfasis en cómo las habilidades programáticas específicas [se articulan dentro de un mismo proyecto]{.colmex-orange}:  
@@ -122,7 +122,7 @@ Los cursos previos del programa equipan al estudiante con [habilidades específi
 ---
 layout: default
 section: Semana 1
-subsection: Criterios de Evaluación
+subsection: Evaluación
 ---
 
 # Esquema de evaluación
@@ -138,9 +138,8 @@ Desglose de la evaluación para el curso.
 [Sin tareas semanales fuera de clase.]{.colmex-orange} El trabajo evaluable se concentra en los ejercicios resueltos en la segunda sesión de la semana y en el proyecto integrador.
 
 ### Proyecto Integrador
-- Desarrollo de un flujo completo en forma de un repositorio, que permita la [extracción]{.colmex-blue}, [limpieza]{.colmex-blue} y [análisis]{.colmex-blue} de datos.
-- Tratamiento de los microdatos de una encuesta de INEGI.
-El resto de los detalles se darán más adelante en el curso...
+- Desarrollo de un flujo completo en forma de repositorio, que permita la [extracción]{.colmex-blue}, [limpieza]{.colmex-blue}, [análisis]{.colmex-blue} y [producción]{.colmex-blue} de un entregable.
+- Los detalles específicos del dataset y de las entregas parciales se presentarán más adelante.
 
 ---
 layout: section
@@ -151,7 +150,7 @@ eyebrow: Sesión 1 — Teoría
 
 ---
 layout: default
-section: Sesión 1
+section: Semana 1
 subsection: ¿Por qué R?
 ---
 
@@ -176,16 +175,16 @@ Diferencias entre los lenguajes de programación más usados para manejo de dato
 
 [**Stata**]{.colmex-orange} — históricamente común en economía aplicada.
 
-- Requiere una licencia súmamente cara.
-- Poco adaptable a flujos reproducibles.
-- Sin herramientas de programación general.
-- No puedes abrir más de una tabla a la vez!!! (Sin `environment`).
+- Requiere una licencia costosa.
+- Es menos flexible para estructurar flujos reproducibles de punta a punta.
+- Tiene un alcance más acotado como lenguaje de programación general.
+- Su manejo interactivo de objetos es más limitado que en un IDE moderno para R.
 - [Descartado de origen para este curso.]{.colmex-orange}
 
 ---
 layout: default
-section: ¿Por qué R?
-subsection: Ecosistema
+section: Semana 1
+subsection: Ecosistema de R
 ---
 
 # Tres piezas que vamos a usar todo el curso
@@ -211,13 +210,14 @@ Manipulación (`dplyr`), visualización (`ggplot2`), strings (`stringr`), iterac
 
 ---
 layout: section
+eyebrow: Sesión 1 — Teoría
 ---
 
 # Setup: Positron + R
 
 ---
 layout: default
-section: Setup
+section: Semana 1
 subsection: Instalación
 ---
 
@@ -226,68 +226,98 @@ Las dos piezas que requerimos para empezar.
 
 [**1. R**]{.colmex-blue} — el intérprete del lenguaje.
 
-Descarga desde [CRAN](https://cran.itam.mx/). Última versión: 4.6.0.
+Descarga desde [CRAN](https://cran.itam.mx/).
 
 [**2. Positron**]{.colmex-orange} — el IDE.
 
-Descarga desde [positron.posit.co](https://positron.posit.co/). Sucesor de RStudio (el antecesor espiritual, desarrollado específicamente para R), desarrollado por la misma organización. Port de VSCode.
+Descarga desde [positron.posit.co](https://positron.posit.co/). Es un entorno moderno de trabajo para datos, desarrollado por Posit.
 
 <br>
 
-<Fragmento t="Instrucciones de Instalación">
+<Azul t="Instrucciones de Instalación">
 
 1. Descarga [R]{.colmex-blue} desde [CRAN](https://cran.itam.mx/) y [Positron]{.colmex-orange} desde la web de [Posit](https://positron.posit.co/).
 2. Verifica la instalación abriendo `Terminal` (Mac) o `Shell` (Windows) y ejecutando:
 ```bash
 R --version
 ```
-3. Dirígete a la consola de R y ejecuta:
+3. Dirígete a la consola de [Positron]{.colmex-orange} y ejecuta:
 ```r
 print("Mi primera línea de código")
 ```
 
-</Fragmento>
+</Azul>
 
 ---
 layout: default
-section: Setup
+section: Semana 1
 subsection: El IDE
 ---
 
 # Anatomía de Positron
 
-Cuatro paneles principales que se quedan contigo el resto del semestre:
+- [**Editor de Texto**]{.colmex-blue} — los scripts `.R` que editas.
+- [**Consola**]{.colmex-blue} — donde se ejecuta R en vivo.
+- [**Sesión**]{.colmex-orange} — los objetos creados en la sesión actual (environment).
+- [**Gráficas**]{.colmex-orange} — previsualización de outputs visuales.
+- [**Explorador de Archivos**]{.colmex-orange} — navegación en los archivos del proyecto.
 
-- [**Source**]{.colmex-blue} — los scripts `.R` que editas.
-- [**Consola**]{.colmex-blue} — el REPL donde se ejecuta R en vivo.
-- [**Environment**]{.colmex-orange} — los objetos creados en la sesión actual.
-- [**Plots / Help / Files**]{.colmex-orange} — outputs visuales, documentación, navegación del proyecto.
+<br>
 
-Atajo fundamental: `Cmd-Enter` envía la línea actual del script a la consola.
+<div style="display: flex; justify-content: center;">
+  <img src="./images/positron.png" style="width: 60%;">
+</div>
+---
+layout: default
+section: Semana 1
+subsection: Flujo de Trabajo
+---
 
-(Demo en vivo.)
+# Flujo mínimo dentro del IDE
+Secuencia básica de trabajo en una sesión normal.
+
+1. Abrir o una carpeta de trabajo `Open Folder` o `Open File`.
+2. Crear un script `.R` en [Source]{.colmex-blue}.
+3. Escribir una instrucción pequeña y correrla con `Cmd/Ctrl-Enter`.
+4. Revisar el resultado en [Consola]{.colmex-blue}.
+5. Inspeccionar los objetos creados en [Environment]{.colmex-orange}.
+6. Guardar el script antes de cerrar la sesión.
+7. **Evita rutas absolútas en el código!!!!!!!**
+
+<br>
+
+<Rojo t="! Prácticas a Evitar">
+
+Se recomienda evitar trabajar escribiendo todo directamente en la consola. La consola sirve para [probar]{.colmex-blue}; el script sirve para construir flujos que se puedan [conservar]{.colmex-orange} y [reproducir]{.colmex-blue}.
+
+</Rojo>
+
 
 ---
 layout: section
+eyebrow: Sesión 1 — Teoría
 ---
 
 # Modelos de lenguaje en el curso
 
 ---
 layout: default
-section: LLMs
-subsection: Dos usos distintos
+section: Semana 1
+subsection: Modelos de Lenguaje
 ---
 
-# Chatbot vs. agente integrado
+# Chatbot vs. Agente Integrado
+Paradigmas de uso de las herramientas de Inteligencia Artificial.
 
-[**LLM como chatbot**]{.colmex-blue} — pegas la pregunta, copias la respuesta.
+Los modelos de lenguaje son herramientas extremadamente útiles que están revolucionando el campo de la programación, pero **el 99% de los usuarios explota el 10% de su potencial y carga con el 100% de los perjuicios**. Se pueden incorporar al flujo de trabajo, pero su capacidad se aprovecha mejor al darles contexto amplio y utilizarlos para tareas específicas que no dependen de tu capacidad de copiar/pegar código.
+
+[**LLM como chatbot**]{.colmex-orange} — pegas la pregunta, copias la respuesta.
 
 - ChatGPT, Claude, Gemini en su interfaz web.
 - Cero contexto del proyecto; depende de lo que tú copies.
 - [Riesgo:]{.colmex-orange} atrofia la capacidad individual de razonar sobre código.
 
-[**LLM como agente integrado**]{.colmex-orange} — lee archivos, propone cambios, ejecuta comandos con el humano en el [loop]{.colmex-blue}.
+[**LLM como agente integrado**]{.colmex-blue} — lee archivos, propone cambios, ejecuta comandos con el humano en el [proceso]{.colmex-blue}.
 
 - [Claude Code de Anthropic]{.colmex-blue}, [Codex de OpenAI]{.colmex-blue}.
 - Conoce tu repositorio, tus convenciones, tus errores recientes.
@@ -295,11 +325,12 @@ subsection: Dos usos distintos
 
 ---
 layout: default
-section: LLMs
-subsection: Política del curso
+section: Semana 1
+subsection: Política del Curso
 ---
 
 # Política del curso
+¿Cómo usar los LLM's como herramienta en el flujo?
 
 [**Permitido**]{.colmex-blue} en el proyecto integrador, [como agente]{.colmex-blue}. Documenta qué le pediste y verifica cada línea que entregues.
 
@@ -307,48 +338,69 @@ subsection: Política del curso
 
 [**Regla práctica**]{.colmex-blue}: debes ser capaz de leer y modificar cualquier línea que entregues como tuya.
 
-<Ejemplo n="1">
+<br>
 
-La idea no es prohibir herramientas reales. La idea es que termines el curso pudiendo programar [sin depender de ellas]{.colmex-orange}.
+<Rojo t="Advertencia">
 
-</Ejemplo>
+La idea no es prohibir herramientas reales. La idea es que termines el curso pudiendo programar [sin depender de ellas]{.colmex-orange}, pero aprovechando estas herramientas para incrementar tu flujo de trabajo.
+
+</Rojo>
 
 ---
 layout: section
+eyebrow: Sesión 1 — Teoría
 ---
 
 # El lenguaje R
 
 ---
 layout: default
-section: El lenguaje R
-subsection: Características
+section: Semana 1
+subsection: El Lenguaje R
 ---
 
 # Tres características clave
+Características técnicas del lenguaje.
 
-[**Interpretado**]{.colmex-blue} — cada línea se ejecuta sin paso de compilación.
+[R]{.colmex-blue} tiene 3 características clave que lo vuelven un lenguaje especialmente bueno para tratamiento de datos:
 
-Trade-off: iteración rápida y exploratoria; más lento que C/Rust para operaciones masivas.
+1. [**Interpretado**]{.colmex-blue} — cada línea se ejecuta de manera independiente sin un paso de compilación previo. Esto permite:
+  - Probar código muy rápidamente.
+  - Explorar datos paso a paso.
+  - "Modulizar" el código de forma muy sencilla.
 
-[**Vectorizado**]{.colmex-orange} — las operaciones aplican elemento a elemento sobre vectores sin necesidad de `for`.
+<br>
 
-```r
-x <- c(1, 2, 3, 4)
-x * 2          # 2 4 6 8 — sin loop explícito
-```
+2. [**Vectorizado**]{.colmex-blue} — la mayoría de las operaciones base del lenguaje operan sobre *todo un vector* no un elemento a la vez. Esto permite:
+  - Aprovecha estas operaciones para construir funciones vectorizadas.
+  - Acorta el código y lo acerca a la notación matemática.
+  - Reduce la necesidad de `for-loops` innecesarios.
 
-[**Multiparadigma**]{.colmex-blue} — admite estilos funcional, imperativo y orientado a objetos, sin imponer uno.
+<br>
+
+3. [**Multiparadigma**]{.colmex-blue} — (aspectos más técnicos) admite estilos funcional, imperativo y orientado a objetos, sin imponer uno. Permite entonces:
+  - **Funcional:** Construir/utilizar funciones para simplificar operaciones.
+  - **Imperativo:** Permite realizar operaciones paso a paso en código "sencillo".
+  - **Orientado a Objetos:** Cada objeto tiene una clase, lo que permite construir comportamientos específicos de acuerdo al tipo de objeto.
+
+<br>
+
+### En pocas palabras: [R]{.colmex-blue} es una máquina!
 
 ---
 layout: default
-section: El lenguaje R
-subsection: Cómo se corre código
+section: Semana 1
+subsection: Ejecución de Código
 ---
 
-# Tres formas de ejecutar R
+# Tres formas de ejecutar código
+¿Cómo transformar nuestro código en instrucciones para la computadora?
+
+<br>
 
 [**1. REPL**]{.colmex-blue} (Read-Eval-Print Loop) — la consola interactiva. Útil para exploración rápida.
+
+<br>
 
 [**2. Script con `source()`**]{.colmex-blue} — ejecuta un archivo `.R` completo desde la consola.
 
@@ -356,329 +408,441 @@ subsection: Cómo se corre código
 source("pre/01-extract.R")
 ```
 
+<br>
+
 [**3. Ejecutable con `Rscript`**]{.colmex-blue} — corre un script desde la terminal del sistema, sin abrir R interactivo.
 
 ```bash
 Rscript pre/01-extract.R
 ```
+<br>
 
-[Convención del curso:]{.colmex-orange} durante autoría usamos REPL para inspeccionar, pero el ETL final se diseña para correrse con `Rscript` o `source()` desde un master script.
+[Convención del curso:]{.colmex-orange} durante autoría usamos REPL para inspeccionar, pero el ETL final se diseña para correrse con `Rscript` o `source()` desde un master script.  
+
+
+---
+layout: default
+section: Semana 1
+subsection: Ejecución de Código
+---
+
+# ¿Cómo utilizar el editor?
+Convenciones y atajos que serán útiles más adelante.
+
+<Azul t="Instrucciones para ejecutar nuestro código">
+
+1. Crear un directorio para el curso, con una carpeta dentro que llamaremos `sesion_01`.   
+2. Descargar el código `script_de_prueba.R` adjunto al correo electrónico, y coloquemoslo dentro.  
+3. Abramos [Positron]{.colmex-orange} y hagamos `Open` $\to$ `Open Folder` y búsquemos el directorio del proyecto.  
+4. En el `Explorador de Archivos` abrimos la carpeta `sesion_01` y presionamos `Open`.  
+
+</Azul>
+
+### Atajos de Teclado
+- `cmd/ctrl + Enter` $\to$ Ejecutar la línea de código sobre la que estemos colocados.
+- `cmd/ctrl + Shift + Enter` $\to$ Ejecutar todo el script.
+- `cmd/ctrl + Shift + B` $\to$ Insertar un pipe (|>).
+- `optn + cmd + B` / `alt + ctrl + B` $\to$ Correr desde el inicio del script hasta la línea actual.
+- `optn + cmd + E` / `alt + ctrl + E` $\to$ Correr desde la línea actual hasta el final del script.
+- `cmd/ctrl + Shift + C` $\to$ Comentar una línea.
+
+<br>
+
+Mayor detalle se puede encontrar en [R-Studio Keybindings on Positron](https://positron.posit.co/migrate-rstudio-keybindings.html) o [Keyboard Shortcuts](https://positron.posit.co/keyboard-shortcuts.html).  
+
+[Experimenten!]{.colmex-orange}
+
+
+
 
 ---
 layout: section
+eyebrow: Sesión 1 — Teoría
 ---
 
-# Primeros objetos en R
-
----
-layout: default
-section: Primeros objetos
-subsection: Asignación
----
-
-# Asignación: `<-` vs. `=`
-
-R acepta dos operadores de asignación:
-
-```r
-x <- 5      # idiomático, recomendado
-x = 5       # válido, menos común en R
-```
-
-[Convención del curso:]{.colmex-blue} usar `<-` consistentemente.
-
-Razones:
-
-- Es la convención dominante en la literatura R.
-- Diferencia visualmente la asignación del paso de argumentos en funciones (`f(x = 5)`).
-
-> Atajo en Positron: `Option--` inserta `<- ` automáticamente.
+# Objetos en R
 
 ---
 layout: default
-section: Primeros objetos
-subsection: Tipos atómicos
+section: Semana 1
+subsection: Objetos en R
 ---
 
-# Los cuatro tipos atómicos
+# Objetos en R
+¿Cómo funcionan los objetos y las asignaciones en [R]{.colmex-blue}?
+
+[R]{.colmex-blue} es un *Lenguaje de Programación Orientado a Objetos*:
+- Todo el flujo de trabajo gira en torno al uso de `objetos` y `asignaciones de nombres`.
+- Un `objeto` es cualquier cosa que exista dentro de [R]{.colmex-blue}.
+- Al crear una asignación entre un `objeto` y un `nombre`, lo podemos utilizar después para manipularlo.  
+
+<br>
 
 ```r
-n <- 3.14          # numeric (double por default)
-i <- 42L           # integer (sufijo L)
-b <- TRUE          # logical (también FALSE; NA es válido)
-s <- "datos"       # character (string)
+a = "prueba"    # Creamos el objeto "prueba" asociado al nombre `a`.
 ```
 
-Inspección:
+Aunque aludamos al `objeto` por su `nombre`, en realidad nos referimos a su **contenido**.
 
-```r
-class(n)           # "numeric"
-typeof(i)          # "integer"
-length(s)          # 1
-```
+<br>
 
-> Todo en R es un vector. Un "escalar" en realidad es un vector de longitud 1.
+<Verde t="Tras bambalinas...">
+
+Al ejecutar el código de antes, [R]{.colmex-blue} hace dos cosas:  
+1. Crea un objeto (`"prueba"`) sin nombre, pero con una dirección asignada en memoria (podemos verificar esta dirección con `lobstr::obj_addr()`).
+2. Crea un `binding` entre el objeto y el nombre `a`.
+
+</Verde>
 
 ---
 layout: default
-section: Primeros objetos
-subsection: Vectores
+section: Semana 1
+subsection: Objetos en R
 ---
 
-# Construir vectores con `c()`
+# Bindings
+¿Cómo vincular un objeto a un nombre?
+
+Para experimentar con los `bindings`, creemos un nuevo objeto `b` que sea **igual** a `a`:
 
 ```r
-edades   <- c(23, 45, 31, 28, 52)
-ciudades <- c("CDMX", "MTY", "GDL")
-activos  <- c(TRUE, TRUE, FALSE, TRUE)
+b = a         # Nuevo objeto, replicando el valor de `a`.   
 ```
 
-[Vectorización en acción]{.colmex-orange}:
+Y ahora inspeccionamos su dirección usando la función `lobstr::obj_addr()`:
 
 ```r
-edades + 5
-# [1] 28 50 36 33 57
-
-edades > 30
-# [1] FALSE  TRUE  TRUE FALSE  TRUE
-
-mean(edades)
-# [1] 35.8
+obj_addr(a)
+[1] "0xadbdd1888"
+obj_addr(b)
+[1] "0xadbdd1888"
 ```
 
-[Recycling]{.colmex-blue} — cuando operas vectores de distinta longitud, R recicla el corto:
+Noten como ambos `bindings` tienen la misma dirección, porque de fondo **son el mismo objeto**, asociado a dos `nombres` distintos.
 
-```r
-c(1, 2, 3, 4) + c(10, 20)
-# [1] 11 22 13 24
-```
+<br>
+
+> Los operadores `<-` y `=` son equivalente para asignar nombres a objetos. **Yo** prefiero el uso de `=` porque homologa la notación con la que se usa en funciones y otros operadores numéricos. Sujeto a preferencia personal siempre y cuando [se use consistentemente]{.colmex-orange}.
+
 
 ---
 layout: default
-section: Primeros objetos
-subsection: Inspección
+section: Semana 1
+subsection: Funciones
 ---
 
-# Funciones esenciales de inspección
+# Funciones
+Bloques de código que reciben objetos y regresan valores.
 
+Llamamos a las funciones usando su nombre, seguido de `()`. Los objetos que toman como input ([argumentos]{.colmex-blue}) van dentro de estos paréntesis:
 ```r
-class(edades)     # "numeric"  — la clase del objeto
-typeof(edades)    # "double"   — el tipo subyacente
-length(edades)    # 5          — número de elementos
-str(edades)       # estructura compacta (un resumen)
+# Llamamos a la función por su nombre, toma argumentos y retorna un valor:
+valor_de_retorno = nombre_de_la_funcion(argumentos)
 ```
 
-`str()` es particularmente útil cuando un objeto es complejo:
+### ¿De dónde vienen?
 
+- [**Base R**]{.colmex-blue} — disponibles sin cargar nada: `mean()`, `sum()`, `c()`, `length()`, `str()`.
+- [**Paquetes**]{.colmex-orange} — requieren instalación y carga previa. `read_csv()` pertenece a `readr`; `filter()`, a `dplyr`.
+
+Usaremos la sintaxis `paquete::nombre_de_la_funcion()` para indicar que una función proviene de un paquete específico.
+
+### Argumentos
 ```r
-str(list(nombre = "ENSU", n = 1500L, pais = "México"))
-# List of 3
-#  $ nombre: chr "ENSU"
-#  $ n     : int 1500
-#  $ pais  : chr "México"
-```
-
-<Fragmento n="1">
-
-Reflejo del curso: cuando algo no se comporta como esperas, `str()` es la primera pregunta —"¿qué es lo que tengo realmente entre manos?".
-
-</Fragmento>
-
----
-layout: section
----
-
-# Evaluación de condiciones lógicas
-
----
-layout: default
-section: Condiciones lógicas
-subsection: Operadores
----
-
-# Comparación y operadores lógicos
-
-[**Comparación**]{.colmex-blue} (vectorizados, devuelven `logical`):
-
-```r
-x <- c(10, 25, 47, 30)
-x > 20            # FALSE  TRUE  TRUE  TRUE
-x == 30           # FALSE FALSE FALSE  TRUE
-x != 47           #  TRUE  TRUE FALSE  TRUE
-```
-
-[**Lógicos entre vectores**]{.colmex-orange}:
-
-```r
-(x > 20) & (x < 40)    # FALSE  TRUE FALSE  TRUE
-(x < 15) | (x > 40)    #  TRUE FALSE  TRUE FALSE
-!(x > 20)              #  TRUE FALSE FALSE FALSE
-```
-
-[Versiones escalares]{.colmex-blue}: `&&` y `||` operan solo en el primer elemento, útiles dentro de `if` (semana 8).
-
----
-layout: default
-section: Condiciones lógicas
-subsection: Coerción
----
-
-# `logical` → numérico: contar y promediar
-
-Un vector lógico se coerce automáticamente a numérico (`TRUE → 1`, `FALSE → 0`):
-
-```r
-TRUE + TRUE             # 2
-sum(c(T, F, T, T))      # 3
-```
-
-De ahí, dos idiomas frecuentes:
-
-```r
-x <- c(15, 25, 35, 45, 55)
-
-# Cuántos cumplen la condición:
-sum(x > 30)             # 3
-
-# Qué proporción cumplen:
-mean(x > 30)            # 0.6
-```
-
-<Fragmento n="2">
-
-`sum(condición)` y `mean(condición)` son la forma idiomática de [contar y obtener proporciones]{.colmex-blue} en R, sin necesidad de `if` ni de `for`.
-
-</Fragmento>
-
----
-layout: default
-section: Condiciones lógicas
-subsection: NA en condiciones
----
-
-# `NA` se propaga silenciosamente
-
-`NA` (Not Available) representa valor faltante. Cuando aparece en una condición, [se propaga]{.colmex-orange}:
-
-```r
-NA == 5             # NA  (¡no FALSE!)
-NA > 3              # NA
-TRUE & NA           # NA
-FALSE & NA          # FALSE   (ya es falsa, no requiere el NA)
-```
-
-Implicación práctica:
-
-```r
-x <- c(10, NA, 30)
-sum(x > 20)                  # NA  ← sorpresa
-sum(x > 20, na.rm = TRUE)    # 1   ← lo que probablemente quieres
-```
-
-[Funciones útiles]{.colmex-blue}: `any()`, `all()`, `is.na()`, `isTRUE()`, `isFALSE()`.
-
-> Sospechen de cualquier resultado `NA` inesperado: casi siempre indica que un valor faltante invadió un cálculo donde no debía.
-
----
-layout: section
-eyebrow: Sesión 2 — Práctica
----
-
-# Ejercicios en clase
-
----
-layout: default
-section: Sesión 2
-subsection: Resumen de la Sesión 1
----
-
-# Lo que vimos la sesión pasada
-
-- Por qué R en este curso y dónde encaja en el ecosistema.
-- Cómo instalar Positron + R.
-- Política sobre LLMs: agentes sí, chatbots no en ejercicios.
-- Tres formas de ejecutar R: REPL, `source()`, `Rscript`.
-- Tipos atómicos: `numeric`, `integer`, `logical`, `character`.
-- Vectorización y `c()`.
-- Operadores de comparación y lógicos.
-- Coerción `logical → numeric` para contar y promediar.
-- Propagación silenciosa de `NA` en condiciones.
-
-Hoy lo bajamos a código en clase.
-
----
-layout: default
-section: Sesión 2
-subsection: Ejercicios
----
-
-# Ejercicio 1 — Temperaturas
-
-<Ejercicio n="1">
-
-Crea un vector llamado `temperaturas` con las temperaturas máximas registradas durante 7 días en la CDMX: `21, 24, 22, 26, 28, 25, 23`.
-
-Calcula:
-
-1. La temperatura promedio de la semana.
-2. Cuántos días superaron los 25°C.
-3. Qué proporción de días estuvo entre 22 y 26°C (inclusive).
-
-</Ejercicio>
-
----
-layout: default
-section: Sesión 2
-subsection: Ejercicios
----
-
-# Ejercicio 2 — Ingresos con NA
-
-<Ejercicio n="2">
-
-Tienes el siguiente vector, con algunos valores faltantes:
-
-```r
-ingreso <- c(15000, 22000, NA, 18000, 31000, NA, 12000)
-```
-
-Calcula:
-
-1. El ingreso promedio ignorando los `NA`.
-2. Cuántas observaciones tienen ingreso registrado (no `NA`).
-3. Qué proporción de las personas con ingreso registrado gana más de 20,000.
-
-</Ejercicio>
-
----
-layout: default
-section: Sesión 2
-subsection: Ejercicios
----
-
-# Ejercicio 3 — Inspección
-
-<Ejercicio n="3">
-
-Considera el objeto:
-
-```r
-encuesta <- list(
-  nombre   = "ENSU",
-  periodo  = "4T 2023",
-  n        = 1500L,
-  factores = c(1.2, 0.9, 1.1)
+rnorm(
+  10             # Por posición, sin nombre
+  mean = 0,       # Por nombre, en cualquier órden
+  sd = 1
 )
 ```
 
-1. ¿De qué clase es `encuesta`? ¿Qué tipo tiene cada uno de sus elementos?
-2. ¿Cuál es la longitud de `encuesta`? ¿Y la de `encuesta$factores`?
-3. Usa `str()` sobre `encuesta` y explica qué muestra cada línea.
+<br>
 
-</Ejercicio>
+> Podemos acceder a la documentación de una función usando: `?nombre_de_la_funcion()`
+
+
+---
+layout: default
+section: Semana 1
+subsection: Vectores
+---
+
+# Listas y Vectores
+Los objetos clave de [R]{.colmex-blue}.
+
+[R]{.colmex-blue} está construído alrededor de [vectores]{.colmex-blue} que subsecuentemente se dividen en dos tipos: `atomic-vectors` y `listas`. La diferencia es **el tipo** de objetos que pueden alojar.
+
+- **Atomic Vectors:** Estructuras de datos dónde se pueden almacenar objetos con **los mismos tipos**. (Concepto clave: `coertion`).
+```r
+vector = c("A", "B", "C")
+```
+- **Listas:** Estructuras de datos que pueden almacenar objetos de **diversos** tipos.
+```r
+lista = list(
+    "A",
+    c("elemento—1", "elemento-2", "elemento-3"),
+    TRUE
+)
+```
+
+<div style="display:flex; justify-content:center; margin-top:0.5rem; transform:scale(1.5); transform-origin:top center; margin-bottom:5rem;">
+
+```mermaid
+graph LR
+    V(["Vectores"]) --> AV(["Atomic Vectors"])
+    V --> L(["Listas"])
+    AV --> LG(["`logical`"])
+    AV --> N(["numeric"])
+    AV --> CH(["`character`"])
+    N --> I(["`integer`"])
+    N --> D(["`double`"])
+
+    classDef root fill:#5e002b,color:#ffffff,stroke:#5e002b,text-align:center
+    classDef numeric fill:#d24d31,color:#ffffff,stroke:#d24d31,text-align:center
+    classDef subnum fill:#fbeaec,color:#5e0a13,stroke:#d24d31,text-align:center
+    classDef atomic fill:#ecf0fa,color:#0e2e6f,stroke:#1543ae,text-align:center
+    classDef list fill:#e9f3e3,color:#1f4a0e,stroke:#378518,text-align:center
+
+    class V,AV root
+    class N numeric
+    class I,D subnum
+    class LG,CH atomic
+    class L list
+```
+
+</div>
+
+
+---
+layout: default
+section: Semana 1
+subsection: Vectores
+---
+
+# Vectores Atómicos
+¿Qué tipos de Vectores Atómicos existen?
+
+> **NOTA:** Los escalares (valores individuales) son también vectores, pero de longitud 1. Están sujetos a la misma lógica. Los siguientes ejemplos los veremos con escalares, y luego como construir vectores de mayor longitud.
+
+Existen 4 tipos de `atomic-vectors` en R:
+```r
+l = TRUE            # logical (TRUE o FALSE)
+i = 10L             # interger (número entero + sufijo `L`)
+d = 12.125          # double (valor numerico con decimales)
+c = "Texto"         # character (`strings` de texto)
+```
+
+<br>
+
+Todos los vectores tienen 3 propiedades: `tipo`, `longitud` y `atributos`:
+1. **Tipo:** Lo que veíamos ahora (logical, interger, ...). Se accede con `typeof()`.
+2. **Longitud:** Número de elementos que tiene el vector. Se accede con `lenght()`.
+3. **Atributos:** Metadata genérica del vector. Se accede con `attributes()`. El más importante es la [clase]{.colmex-blue}, que faculta comportamiento distinto para distintos inputs.
+
+---
+layout: default
+section: Semana 1
+subsection: Vectores
+---
+
+# Propiedades de los Vectores
+Tipo, longitud y clase.
+
+**Tipo:** Exploración con `typeof()`.
+```r
+typeof("A")
+[1] "character"
+```
+
+**Longitud:** Exploración con `length()`.
+```r
+a = 1:10
+length(a)
+[1] 10
+```
+
+**Atributos:** Exploración de todos con `attributes()` o de uno en particular con `attr(x, "nombre_del_atributo")`.
+```r
+x = c(rnorm(10, mean = 0, sd = 1))
+attributes(x) # Los vectores atómicos, por defecto, no poseen atributos
+
+attr(x, "autor") = "Daniel Kelly" # Pero podemos generarlos
+attributes(x)
+$autor
+[1] "Daniel Kelly"
+```
+
+---
+layout: default
+section: Semana 1
+subsection: Vectores
+---
+
+
+# Coerción y Concatenación
+Vectores con múltiples elementos y tipos distintos.
+
+### Concatenación
+
+Usando la función `c(...)` podemos unir varios elementos en un solo vector.
+```r
+y = c("A", "B", "C").     # c() quiere decir `concatenate`.
+```
+
+### Coerción
+
+Antes dijimos que todos los elementos de un vector atómico deben tener el mismo tipo. Entonces, ¿por qué la ejecución de `c("A", 1)` no arroja un error?
+
+```r
+c("A", 1)
+[1] "A" "1"
+```
+
+¿Qué pasó aquí? R coercionó el tipo de `1` a caracter, para poder unir los dos elementos. La coerción se da en un órden específico:
+
+```r
+logical -> interger -> double -> character
+as.TIPO(x)   # Coercionar el vector x a `TIPO`
+```
+
+---
+layout: default
+section: Semana 1
+subsection: Operadores
+---
+
+# Operadores y Funciones Matemáticas
+
+Por defecto, [R]{.colmex-blue} incluye **funciones** y **operadores aritméticos** que permiten ejecutar operaciones matemáticas.
+
+### Operadores Aritméticos
+
+```r
+1 + 1             # suma
+10 - 2            # resta
+5 * 3             # multiplicación
+12 / 4            # división
+16 %% 5           # modulo (restante de la división)
+```
+
+### Funciones
+
+```r
+x = 1:5
+mean(x)          # promedio (weighted_mean(x, w) calcula el promedio ponderado)
+sd(x)            # desviación estándar
+sum(x)           # suma de todos los elementos de `x`
+min(x) / max(x)  # mínimo/máximo del vector `x`
+```
+
+Existen también otras muchas funciones: `log()`, `abs()`, `sin()`, `cos()`, `median()`, `var()`, `range()`, etc.
+
+> ¿Qué se obtiene al ejecutar `sum()` y `mean()` sobre `c(TRUE, FALSE, FALSE, TRUE, TRUE)`?
+
+---
+layout: default
+section: Semana 1
+subsection: Condiciones Lógicas
+---
+
+# Evaluación de Condiciones Lógicas (1)
+¿Cómo verificar que un statement es cierto?
+
+Utilizando el operador `==` (doble signo de igual) es cómo si le preguntaramos a [R]{.colmex-blue} si el **lado derecho** de la expresión es igual al **lado izquierdo**. A cambio, recibimos un `TRUE` o `FALSE` dependiendo del resultado.
+
+```r
+"prueba" == "prueba"
+[1] TRUE
+
+5 >= 6
+[1] FALSE
+```
+
+<br>
+
+Podemos encadenar condiciones lógicas usando `&` (AND) o `|` (OR):
+
+```r
+("prueba" == "prueba") & (5 == 6)
+[1] FALSE
+
+("prueba" == "prueba") | (5 == 6)
+[1] TRUE
+```
+
+<br>
+
+Además de esto, existen operadores para mayor/menor (`<`, `>`, `<=`, `>=`) y no igualdad (`!=`).
+
+---
+layout: default
+section: Semana 1
+subsection: Vectorización
+---
+
+
+# Vectorización
+Detalle del sistema de operaciones vectorizadas de [R]{.colmex-blue} (clave para el resto del curso).
+
+Todas las operaciones que hemos visto hasta ahora sirven para transformar **un input** en **un output**. Pero, ¿qué pasa si hacemos la siguiente operación?
+```r
+a = c(10, 20, 20, 40) 
+a + 10        # Sumamos 10 a un vector???
+```
+<br>
+
+Este es un ejemplo de una operación `vectorizada`, es decir, que puede realizarse **elemento a elemento** sobre un vector:
+```r
+a + 10 
+[1] 20 30 30 50
+```
+
+<br>
+
+> Noten como la vectorización elimina la necesidad de **iterar** sobre cada elemento de un vector, y nos permite directamente realizar operaciones con ellos.
+
+<br>
+
+No siempre se puede usar una operación vectorizada, pero verán lo importantes que son cuándo empecemos a trabajar con tablas.
+
+
+---
+layout: default
+section: Semana 1
+subsection: Condiciones Lógicas
+---
+
+# Evaluación de Condiciones Lógicas (2)
+¿Cómo verificar que un statement es cierto?
+
+Antes mencionamos los operadores lógicos y de comparación, pero de fondo, todos ellos están **vectorizados**:
+
+```r
+a = c(10, 20, 30, 40) 
+a > 15
+[1] FALSE  TRUE  TRUE  TRUE         # Nos regresa un vector lógico de la misma longitud.
+```
+
+<br>
+
+Podemos sobreescribir este comportamiento predeterminado usando las funciones `any()` y `all()`:
+```r
+# any() -> Alguno de los elementos cumple la condición lógica:
+any(a > 15)
+[1] TRUE
+
+# all() -> Todos los elementos cumplen la condición lógica:
+all(a > 15)
+[1] FALSE
+```
+
+<br>
+
+> Todas las condiciones lógicas se pueden negar usando `!` antes de la expresión.
+
 
 ---
 layout: cover
-title: Hasta la próxima
-subtitle: Semana 2 — Estructuras de datos e indexación
+title: ¡Gracias!
+subtitle: Semana 1 — Programación para Proyectos de Datos
 ---
