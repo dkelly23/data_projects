@@ -16,7 +16,7 @@ layout: cover
 
 ---
 layout: default
-section: Introducción
+section: Semana NN
 ---
 
 # Estructura de esta plantilla
@@ -25,7 +25,7 @@ Esta plantilla replica los componentes del *template* Beamer del curso:
 
 - Paleta institucional Colmex (vino `#5e002b`).
 - Layouts [cover]{.colmex-blue}, [section]{.colmex-orange} y [default]{.colmex-green}.
-- Bloques [Fragmento]{.colmex-blue} / [Ejemplo]{.colmex-orange} / [Ejercicio]{.colmex-green}.
+- Bloques [Azul]{.colmex-blue} / [Rojo]{.colmex-orange} / [Verde]{.colmex-green}.
 - Helpers de color inline vía clases MDC.
 - Filtrado instructor / estudiante en una sola fuente.
 
@@ -40,49 +40,49 @@ eyebrow: Parte I
 
 ---
 layout: default
-section: Introducción
+section: Semana NN
 subsection: Bloques de contenido
 ---
 
-# Bloque Fragmento
+# Bloque Azul
 
-<Fragmento n="1" cita="Adaptado de Wickham (2023), R for Data Science, cap. 3.">
+<Azul t="Título del bloque" cita="Adaptado de Wickham (2023), R for Data Science, cap. 3.">
 
 Un [tibble]{.colmex-blue} es una lista de vectores de igual longitud con clase `data.frame`. La diferencia operativa con un `data.frame` clásico está en cómo se imprime y en la ausencia de *partial matching*.
 
-</Fragmento>
+</Azul>
 
 ---
 layout: default
-section: Introducción
+section: Semana NN
 subsection: Bloques de contenido
 ---
 
-# Bloque Ejemplo
+# Bloque Rojo
 
-<Ejemplo n="1" cita="Caso ENSU, 4T 2023.">
+<Rojo t="Título del bloque" cita="Caso ENSU, 4T 2023.">
 
 La distinción entre `geom_bar()` y `geom_col()` importa: `bar` cuenta filas, `col` grafica el valor que se le pasa.
 
-</Ejemplo>
+</Rojo>
 
 ---
 layout: default
-section: Práctica
+section: Semana NN
 subsection: Ejercicio guiado
 ---
 
-# Bloque Ejercicio
+# Bloque Verde
 
-<Ejercicio n="1">
+<Verde t="Título del bloque">
 
 Dado un `tibble` con las columnas `edad`, `sexo` e `ingreso`, calcula el ingreso promedio por grupo de sexo [únicamente]{.colmex-orange} para mayores de 30 años, en una sola cadena de `dplyr` conectada por `|>`.
 
-</Ejercicio>
+</Verde>
 
 ---
 layout: default
-section: Práctica
+section: Semana NN
 subsection: Código en vivo
 ---
 
@@ -105,7 +105,7 @@ datos |>
 
 ---
 layout: default
-section: Práctica
+section: Semana NN
 subsection: Código en vivo
 instructor: true
 ---
@@ -124,7 +124,7 @@ Tiempo estimado: 8 minutos.
 
 ---
 layout: default
-section: Práctica
+section: Semana NN
 subsection: Mezcla
 ---
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="colmex-block ejemplo">
-    <div class="colmex-block-header">Ejemplo {{ n }}</div>
+  <div class="colmex-block rojo">
+    <div class="colmex-block-header">{{ t }}<span v-if="n"> {{ n }}</span></div>
     <div class="colmex-block-body">
-      <strong>Ejemplo:</strong> <em><slot /></em>
+      <slot />
       <span v-if="cita" class="colmex-block-cite">{{ cita }}</span>
     </div>
   </div>
@@ -10,7 +10,8 @@
 
 <script setup lang="ts">
 defineProps<{
-  n: string | number
+  t: string
+  n?: string | number
   cita?: string
 }>()
 </script>

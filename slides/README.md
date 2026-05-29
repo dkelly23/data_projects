@@ -7,7 +7,7 @@ por semana. Distribución vía GitHub Pages.
 
 - **Slidev** — Markdown + Vue + Vite, syntax highlight con Shiki.
 - **Tema custom Colmex** en `_theme/` — paleta `#5e002b`, layouts `cover` /
-  `section` / `default`, componentes `<Fragmento>` / `<Ejemplo>` / `<Ejercicio>`.
+  `section` / `default`, componentes `<Azul>` / `<Rojo>` / `<Verde>`.
 - **Node.js** como runtime — solo para autoría y build. Los estudiantes
   consumen sitio estático, no necesitan Node.
 
@@ -17,7 +17,7 @@ por semana. Distribución vía GitHub Pages.
 slides/
 ├── _theme/                     ← compartido entre todas las semanas
 │   ├── layouts/                  cover.vue, section.vue, default.vue
-│   ├── components/               Fragmento, Ejemplo, Ejercicio, Blue/Orange/Green
+│   ├── components/               Azul, Rojo, Verde, Blue/Orange/Green, Block
 │   ├── public/                   colmex-logo, title-bg, section-bg, final-bg
 │   ├── style.css                 paleta, footer, bloques
 │   └── scripts/build-student.mjs filtra contenido instructor-only
@@ -105,23 +105,23 @@ npm run export
 **Componentes de bloque:**
 
 ```md
-<Fragmento n="1" cita="Wickham (2023), cap. 3">
+<Azul t="Título" cita="Wickham (2023), cap. 3">
 
 Contenido en **markdown**.
 
-</Fragmento>
+</Azul>
 
-<Ejemplo n="2" cita="ENSU 4T 2023">
+<Rojo t="Título" cita="ENSU 4T 2023">
 
 La moción aquí.
 
-</Ejemplo>
+</Rojo>
 
-<Ejercicio n="3">
+<Verde t="Título">
 
 Enunciado del ejercicio.
 
-</Ejercicio>
+</Verde>
 ```
 
 Siempre con **línea en blanco** entre la apertura del tag y el contenido (y
