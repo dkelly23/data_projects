@@ -24,8 +24,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Slidev
-        run: npm install -g @slidev/cli
+      - name: Install Slidev y dependencias
+        run: |
+          npm install -g @slidev/cli
+          npm install
 
       - name: Build cada semana
         run: |
