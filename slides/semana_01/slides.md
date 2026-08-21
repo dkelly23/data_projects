@@ -1,7 +1,7 @@
 ---
 theme: default
-title: ¿Por qué R? Setup y primeros pasos
-subtitle: Semana 1 — Programación para Proyectos de Datos
+title: "El lenguaje y el proyecto: R, Positron, Git y GitHub"
+subtitle: Sesión 1 — Programación para Proyectos de Datos I
 author: Daniel Kelly
 date: Otoño 2026
 canvasWidth: 1280
@@ -20,14 +20,14 @@ layout: cover
 
 ---
 layout: section
-eyebrow: Sesión 1 — Teoría
+eyebrow: Sesión 1 — Bloque de exposición
 ---
 
 # Introducción al Curso
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Introducción al Curso
 ---
 
@@ -39,64 +39,62 @@ Curso comprensivo orientado a la construcción de **proyectos completos de datos
 - **Objetivo:** Brindar a los estudiantes las herramientas programáticas y conceptuales necesarias para construir flujos de datos completos, reproducibles y automatizables: desde la extracción y limpieza hasta el análisis y el producto final.
 
 - **Filosofía:** [zero-to-hero]{.colmex-blue} (no es necesario tener experiencia previa en programación).
-- **Duración:** 16 semanas, con dos sesiones semanales de 1:30 h.
+- **Duración:** 6 semanas, con una sesión semanal de 3:00 h.
+- **Secuencia:** este es el [primero de dos cursos]{.colmex-orange}; el segundo retoma donde éste termina.
 - **Lenguaje:** R como único lenguaje del curso (la decisión se justifica más adelante).
 - **IDE:** [Positron]{.colmex-orange}, entorno de trabajo recomendado para el curso.
 
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Estructura del Curso
 ---
 
 # Estructura del Curso
-Índice temático por semana y sesión.
+Índice temático por sesión.
 
-### Parte 1: Fundamentos
-- **Semana 1:** Setup y Primeros Pasos.  
-- **Semana 2:** Estructuras de Datos.  
-- **Semana 3:** Importación de Datos y Análisis Exploratorio.  
-- **Semana 4:** Estructura de Proyectos, `git` y Reproducibilidad.  
+### Bloque 1: Fundamentos
+- **Sesión 1:** El lenguaje y el proyecto: R, Positron, `git` y GitHub.
+- **Sesión 2:** Estructuras de datos, importación y exploración.
 
-### Parte 2: Manipulación
-- **Semana 5:** `dplyr` 1; pipes, verbos y `tidyverse`.
-- **Semana 6:** `dplyr` 2; joins, pivots y manejo de `NA`'s.
-- **Semana 7:** Strings, expresiones regulares (`regex`) y `stringr`.
+### Bloque 2: Manipulación
+- **Sesión 3:** `dplyr` 1; pipes, verbos y `tidyverse`.
+- **Sesión 4:** `dplyr` 2; joins, pivots y manejo de texto con `stringr`.
 
-### Parte 3: Programación
-- **Semana 8:** Control de Flujo y Vectorización.
-- **Semana 9:** Funciones: diseño, *scoping* y *debugging*.
-- **Semana 10:** Programación Funcional: `purrr` y la familia `apply`.
+### Bloque 3: Programación y Visualización
+- **Sesión 5:** Control de flujo, vectorización y funciones.
+- **Sesión 6:** Programación funcional y visualización con `ggplot2`.
 
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Estructura del Curso
 ---
 
-# Estructura del Curso
-Índice temático por semana y sesión.
+# ¿Y después?
+Contenido del [segundo curso]{.colmex-orange} de la secuencia.
 
-### Parte 4: Análisis
-- **Semana 11:** Modelado estadístico programático.
-- **Semana 12:** Datos a escala: `SQL`, `DBI` y `dbplyr`.
+### Análisis
+- Reproducibilidad avanzada y consumo de APIs (`httr2`).
+- Modelado estadístico programático.
+- Datos a escala: `SQL`, `DBI` y `dbplyr`.
 
-### Parte 5: Productos Finales
-- **Semana 13:** Visualización con `ggplot2`.
-- **Semana 14:** Automatización con `officer`, `googledrive` y `gmailr`.
-- **Semana 15:** Aplicaciones interactivas con `Shiny`.
-- **Semana 16:** Interfaces de modelos de lenguaje.  
+### Productos Finales
+- Visualización avanzada y el ecosistema de `ggplot2`.
+- Automatización con `officer`, `googledrive` y `gmailr`.
+- Aplicaciones interactivas con `Shiny`.
+- Interfaces de modelos de lenguaje.
 
 <br>
-<br>
+
 No es un curso de habilidades aisladas, sino de construcción de proyectos completos de datos. Tampoco se busca que el estudiante se vuelva experto, sino que domine las herramientas básicas para posteriormente profundizar en los temas tratados.
 
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Motivación
 ---
 
@@ -121,7 +119,7 @@ Los cursos previos del programa equipan al estudiante con [habilidades específi
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Evaluación
 ---
 
@@ -130,27 +128,26 @@ Desglose de la evaluación para el curso.
 
 | Componente                                     | Peso |
 |------------------------------------------------|-----:|
-| Checkpoints del Proyecto Integrador            | 50%  |
-| Proyecto Integrador                            | 20%  |
-| Ejercicios en Clase (segunda sesión semanal)   | 20%  |
-| Asistencia                                     | 10%  |
+| Ejercicios del bloque de práctica (6)          | 70%  |
+| Asistencia y participación                     | 30%  |
 
-[Sin tareas semanales fuera de clase.]{.colmex-orange} El trabajo evaluable se concentra en los ejercicios resueltos en la segunda sesión de la semana y en el proyecto integrador.
+[Sin tareas fuera de clase.]{.colmex-orange} Cada sesión de 3:00 h se divide en un [bloque de exposición]{.colmex-blue} (≈1:45) y un [bloque de práctica]{.colmex-orange} (≈1:15). Lo evaluable se resuelve en clase.
 
-### Proyecto Integrador
-- Desarrollo de un flujo completo en forma de repositorio, que permita la [extracción]{.colmex-blue}, [limpieza]{.colmex-blue}, [análisis]{.colmex-blue} y [producción]{.colmex-blue} de un entregable.
-- Los detalles específicos del dataset y de las entregas parciales se presentarán más adelante.
+### Un solo conjunto de datos
+- Las seis sesiones trabajan sobre la [ENSU]{.colmex-blue} (Encuesta Nacional de Seguridad Pública Urbana, INEGI).
+- Cada práctica continúa la anterior: importar $\to$ transformar $\to$ automatizar $\to$ graficar.
+- No hay proyecto con entregas parciales; eso corresponde al segundo curso.
 
 ---
 layout: section
-eyebrow: Sesión 1 — Teoría
+eyebrow: Sesión 1 — Bloque de exposición
 ---
 
 # ¿Por qué R?
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: ¿Por qué R?
 ---
 
@@ -183,7 +180,7 @@ Diferencias entre los lenguajes de programación más usados para manejo de dato
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Ecosistema de R
 ---
 
@@ -210,14 +207,14 @@ Manipulación (`dplyr`), visualización (`ggplot2`), strings (`stringr`), iterac
 
 ---
 layout: section
-eyebrow: Sesión 1 — Teoría
+eyebrow: Sesión 1 — Bloque de exposición
 ---
 
 # Setup: Positron + R
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Instalación
 ---
 
@@ -250,7 +247,7 @@ print("Mi primera línea de código")
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: El IDE
 ---
 
@@ -269,7 +266,7 @@ subsection: El IDE
 </div>
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Flujo de Trabajo
 ---
 
@@ -295,14 +292,14 @@ Se recomienda evitar trabajar escribiendo todo directamente en la consola. La co
 
 ---
 layout: section
-eyebrow: Sesión 1 — Teoría
+eyebrow: Sesión 1 — Bloque de exposición
 ---
 
 # Modelos de lenguaje en el curso
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Modelos de Lenguaje
 ---
 
@@ -325,16 +322,16 @@ Los modelos de lenguaje son herramientas extremadamente útiles que están revol
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Política del Curso
 ---
 
 # Política del curso
 ¿Cómo usar los LLM's como herramienta en el flujo?
 
-[**Permitido**]{.colmex-blue} en el proyecto integrador, [como agente]{.colmex-blue}. Documenta qué le pediste y verifica cada línea que entregues.
+[**Permitido**]{.colmex-blue} en tu trabajo propio fuera de clase, [como agente]{.colmex-blue}. Documenta qué le pediste y verifica cada línea que entregues.
 
-[**No permitido**]{.colmex-orange} en los ejercicios de clase (segunda sesión semanal). Esos son el momento para que [tú]{.colmex-orange} construyas el músculo.
+[**No permitido**]{.colmex-orange} en el bloque de práctica de cada sesión. Ese es el momento para que [tú]{.colmex-orange} construyas el músculo.
 
 [**Regla práctica**]{.colmex-blue}: debes ser capaz de leer y modificar cualquier línea que entregues como tuya.
 
@@ -348,14 +345,14 @@ La idea no es prohibir herramientas reales. La idea es que termines el curso pud
 
 ---
 layout: section
-eyebrow: Sesión 1 — Teoría
+eyebrow: Sesión 1 — Bloque de exposición
 ---
 
 # El lenguaje R
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: El Lenguaje R
 ---
 
@@ -389,7 +386,7 @@ Características técnicas del lenguaje.
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Ejecución de Código
 ---
 
@@ -422,7 +419,7 @@ Rscript pre/01-extract.R
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Ejecución de Código
 ---
 
@@ -457,14 +454,14 @@ Mayor detalle se puede encontrar en [R-Studio Keybindings on Positron](https://p
 
 ---
 layout: section
-eyebrow: Sesión 1 — Teoría
+eyebrow: Sesión 1 — Bloque de exposición
 ---
 
 # Objetos en R
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Objetos en R
 ---
 
@@ -496,7 +493,7 @@ Al ejecutar el código de antes, [R]{.colmex-blue} hace dos cosas:
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Objetos en R
 ---
 
@@ -527,7 +524,7 @@ Noten como ambos `bindings` tienen la misma dirección, porque de fondo **son el
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Funciones
 ---
 
@@ -563,7 +560,7 @@ rnorm(
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Vectores
 ---
 
@@ -615,7 +612,7 @@ graph LR
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Vectores
 ---
 
@@ -641,7 +638,7 @@ Todos los vectores tienen 3 propiedades: `tipo`, `longitud` y `atributos`:
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Vectores
 ---
 
@@ -674,7 +671,7 @@ $autor
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Vectores
 ---
 
@@ -707,7 +704,7 @@ as.TIPO(x)   # Coercionar el vector x a `TIPO`
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Operadores
 ---
 
@@ -741,7 +738,7 @@ Existen también otras muchas funciones: `log()`, `abs()`, `sin()`, `cos()`, `me
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Condiciones Lógicas
 ---
 
@@ -776,7 +773,7 @@ Además de esto, existen operadores para mayor/menor (`<`, `>`, `<=`, `>=`) y no
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Vectorización
 ---
 
@@ -808,7 +805,7 @@ No siempre se puede usar una operación vectorizada, pero verán lo importantes 
 
 ---
 layout: default
-section: Semana 1
+section: Sesión 1
 subsection: Condiciones Lógicas
 ---
 
@@ -842,7 +839,204 @@ all(a > 15)
 
 
 ---
+layout: section
+eyebrow: Sesión 1 — Bloque de exposición
+---
+
+# El proyecto
+
+---
+layout: default
+section: Sesión 1
+subsection: Estructura del Proyecto
+---
+
+# De un script suelto a un proyecto
+Todo lo anterior se escribió en un archivo aislado. De aquí en adelante, el trabajo vive en una [estructura fija]{.colmex-blue}.
+
+```bash
+curso-ppd/
+├── curso-ppd.Rproj    # el archivo de proyecto
+├── files/             # datos crudos, tal como se descargan
+├── docs/              # descriptores técnicos, catálogos, documentación
+├── pre/               # los scripts. Aquí se trabaja
+└── output/            # todo lo que produce el código
+```
+
+<br>
+
+El criterio de la separación no es estético, sino de [ciclo de vida]{.colmex-orange}:
+
+- `files/` es [insumo]{.colmex-blue} y se trata como de solo lectura. No es nuestro y no se modifica.
+- `output/` es [desechable]{.colmex-orange}. Se debe poder borrar completo, porque el código lo regenera.
+
+<br>
+
+<Verde t="Criterio">
+
+Si borrar `output/` rompe el proyecto, entonces el proyecto [no es reproducible]{.colmex-orange}.
+
+</Verde>
+
+---
+layout: default
+section: Sesión 1
+subsection: Estructura del Proyecto
+---
+
+# Rutas relativas
+Por qué importa abrir el `.Rproj` antes de trabajar.
+
+Con el proyecto abierto, el [directorio de trabajo]{.colmex-blue} queda fijo en la raíz del proyecto:
+
+```r
+getwd()
+[1] "/Users/daniel/curso-ppd"
+```
+
+<br>
+
+Y entonces las rutas se escriben [relativas]{.colmex-blue} a esa raíz:
+
+```r
+read_csv("files/ensu_2024_t1.csv")           # funciona en cualquier computadora
+read_csv("/Users/daniel/Desktop/ensu.csv")   # funciona solo en la mía
+```
+
+<br>
+
+<Rojo t="! Prácticas a Evitar">
+
+`setwd("/Users/daniel/...")` al inicio del script. Es la razón número uno por la que el código de alguien más no corre en tu máquina.
+
+</Rojo>
+
+---
+layout: section
+eyebrow: Sesión 1 — Bloque de exposición
+---
+
+# Git y GitHub
+
+---
+layout: default
+section: Sesión 1
+subsection: Git
+---
+
+# ¿Qué problema resuelve?
+La alternativa a `tesis_final_v2_BUENA_esta_si.R`.
+
+[**Git**]{.colmex-blue} lleva el historial del proyecto: qué cambió, cuándo y por qué. [**GitHub**]{.colmex-orange} es el lugar donde ese historial vive en línea y se puede compartir.
+
+<br>
+
+- Puedes volver a cualquier estado anterior del proyecto.
+- Puedes ver exactamente qué línea cambió entre dos versiones.
+- Puedes trabajar desde varias computadoras sin perder el hilo.
+
+<br>
+
+<Azul t="Nota">
+
+Los comandos que siguen [no son de R]{.colmex-orange}. Van en la **Terminal** de Positron, no en la consola de R.
+
+</Azul>
+
+---
+layout: default
+section: Sesión 1
+subsection: Git
+---
+
+# El ciclo de trabajo
+Tres comandos, siempre en el mismo orden.
+
+Una sola vez por computadora:
+```bash
+git config --global user.name  "Nombre Apellido"
+git config --global user.email "correo@colmex.mx"
+```
+
+<br>
+
+Una sola vez por proyecto:
+```bash
+git init
+```
+
+<br>
+
+Y de ahí en adelante, el ciclo:
+```bash
+git status                                 # ¿qué cambió?
+git add pre/sesion_01.R                    # ¿qué entra en la foto?
+git commit -m "Agrega ejercicios lógicos"  # toma la foto
+git log --oneline                          # ver el historial
+```
+
+---
+layout: default
+section: Sesión 1
+subsection: GitHub
+---
+
+# Sincronizar con GitHub
+Del repositorio local al remoto.
+
+Tras crear el repositorio [vacío]{.colmex-blue} en GitHub, se conecta una sola vez:
+
+```bash
+git remote add origin https://github.com/usuario/repositorio.git
+git push -u origin main
+```
+
+<br>
+
+Y en adelante, solo dos comandos:
+
+```bash
+git push    # subir los commits locales
+git pull    # traer los que no tengo
+```
+
+<br>
+
+<Verde t="Sobre los mensajes de commit">
+
+Un commit corresponde a [un cambio con sentido propio]{.colmex-blue}, no a "lo que llevaba hoy". El mensaje explica el porqué, no el qué: el qué ya está en el diff.
+
+</Verde>
+
+---
+layout: default
+section: Sesión 1
+subsection: GitHub
+---
+
+# Qué NO se versiona
+El archivo `.gitignore` lista lo que Git debe ignorar.
+
+```bash
+files/          # datos crudos: pesados y no son nuestros
+output/         # se regenera con el código
+.Rhistory       # historial de la consola
+.RData          # imagen del entorno
+.Rproj.user/    # configuración local del IDE
+.DS_Store       # basura de macOS
+.env            # credenciales, tokens, contraseñas
+```
+
+<br>
+
+<Rojo t="Advertencia">
+
+Un token subido a un repositorio público [queda en el historial]{.colmex-orange} aunque lo borres después: el commit que lo introdujo sigue ahí. La forma de no tener ese problema es [no cometerlo]{.colmex-blue}.
+
+</Rojo>
+
+---
 layout: cover
 title: ¡Gracias!
-subtitle: Semana 1 — Programación para Proyectos de Datos
+subtitle: Sesión 1 — Programación para Proyectos de Datos I
 ---
