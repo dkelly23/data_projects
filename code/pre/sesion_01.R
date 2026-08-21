@@ -130,10 +130,6 @@ attributes(fecha_hoy)
 # Un lógico y un número conviven como número:
 c(TRUE, 1L)
 
-#| nota
-# Preguntar a la clase qué esperan que devuelva `c(TRUE, 1L)` ANTES de correrlo.
-# El error típico es esperar un error. Aquí se gana la intuición de la sesión.
-#| fin
 
 # Un número y un texto conviven como texto:
 c(1, "a")
@@ -155,9 +151,9 @@ as.logical("TRUE")
 as.numeric("cuarenta y dos")
 
 # ¿Qué tipo tiene el siguiente vector, y por qué?
-#| ejercicio
-c(TRUE, FALSE, 10L, 2.5)
-#| fin
+# (escribe el código aquí)
+
+
 
 
 ## Condiciones Lógicas -------------------------------------------------------=
@@ -211,9 +207,9 @@ mean(edad >= 18)
 
 # Con el vector `edad`, calcula qué proporción de las personas tiene entre 18 y
 # 64 años:
-#| ejercicio
-mean(edad >= 18 & edad < 65)
-#| fin
+# (escribe el código aquí)
+
+
 
 
 ### Funciones auxiliares y NA ----
@@ -236,10 +232,6 @@ mean(edad_na >= 18, na.rm = TRUE)
 # Ojo con lo que esto significa: `na.rm = TRUE` no rellena el dato, lo excluye
 # del denominador. La decisión de excluir debe ser consciente, no automática.
 
-#| nota
-# Si hay tiempo: mostrar que NA == NA devuelve NA, no TRUE. Es la razón por la
-# que existe is.na() y el motivo de que filtrar con `== NA` nunca funcione.
-#| fin
 
 # ¿Por qué esto devuelve NA y no TRUE?
 NA == NA
@@ -288,14 +280,9 @@ list.dirs(recursive = FALSE)
 file.exists("files")
 
 # Crea desde R las cuatro carpetas de la convención, si no existen todavía:
-#| ejercicio
-for (carpeta in c("files", "docs", "pre", "output")) {
-    if (!dir.exists(carpeta)) {
-        dir.create(carpeta)
-    }
-}
-list.dirs(recursive = FALSE)
-#| fin
+# (escribe el código aquí)
+
+
 
 
 # GIT Y GITHUB ________________________________________________________________
@@ -368,16 +355,7 @@ list.dirs(recursive = FALSE)
 # que lo introdujo sigue ahí. La forma de no tener ese problema es no cometerlo.
 
 # Desde R se puede escribir el .gitignore directamente:
-#| ejercicio
-writeLines(
-    c("files/", "output/", ".Rhistory", ".RData", ".Rproj.user/", ".DS_Store", ".env"),
-    ".gitignore"
-)
-readLines(".gitignore")
-#| fin
+# (escribe el código aquí)
 
-#| nota
-# Cierre de la sesión: verificar que TODOS tengan el repositorio creado, el
-# primer commit hecho y el push a GitHub funcionando. Sin esto, la Sesión 2
-# arranca en falso. Dejar 10 minutos para resolver casos individuales.
-#| fin
+
+
