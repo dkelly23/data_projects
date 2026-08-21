@@ -155,9 +155,7 @@ as.logical("TRUE")
 as.numeric("cuarenta y dos")
 
 # ¿Qué tipo tiene el siguiente vector, y por qué?
-#| ejercicio
 c(TRUE, FALSE, 10L, 2.5)
-#| fin
 
 
 ## Condiciones Lógicas -------------------------------------------------------=
@@ -211,9 +209,7 @@ mean(edad >= 18)
 
 # Con el vector `edad`, calcula qué proporción de las personas tiene entre 18 y
 # 64 años:
-#| ejercicio
 mean(edad >= 18 & edad < 65)
-#| fin
 
 
 ### Funciones auxiliares y NA ----
@@ -288,14 +284,12 @@ list.dirs(recursive = FALSE)
 file.exists("files")
 
 # Crea desde R las cuatro carpetas de la convención, si no existen todavía:
-#| ejercicio
 for (carpeta in c("files", "docs", "pre", "output")) {
     if (!dir.exists(carpeta)) {
         dir.create(carpeta)
     }
 }
 list.dirs(recursive = FALSE)
-#| fin
 
 
 # GIT Y GITHUB ________________________________________________________________
@@ -368,13 +362,11 @@ list.dirs(recursive = FALSE)
 # que lo introdujo sigue ahí. La forma de no tener ese problema es no cometerlo.
 
 # Desde R se puede escribir el .gitignore directamente:
-#| ejercicio
 writeLines(
     c("files/", "output/", ".Rhistory", ".RData", ".Rproj.user/", ".DS_Store", ".env"),
     ".gitignore"
 )
 readLines(".gitignore")
-#| fin
 
 #| nota
 # Cierre de la sesión: verificar que TODOS tengan el repositorio creado, el

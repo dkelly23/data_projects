@@ -165,63 +165,71 @@ Estas convenciones aplican a TODO el contenido generado: temario, slides, materi
 Artefactos que se producen para cada sesión:
 
 - **Presentación Slidev** (`slides/semana_NN/`) — usada en clase, distribuida a estudiantes como sitio estático en GitHub Pages. La numeración de directorios (`semana_NN`) se conserva por compatibilidad; `semana_01` corresponde a la Sesión 1.
-- **Script de la sesión** (`slides/semana_NN/code/sesion_NN.R`) — ver sección *Scripts de sesión*.
+- **Guion y ejercicios** (`slides/semana_NN/code/`) — dos `.R` por sesión; ver *Scripts de sesión*.
 - **Lecture notes para estudiantes** — documento detallado en Markdown, render a PDF con Quarto. **Pendiente; se aborda al final del curso una vez consolidadas las presentaciones.**
 
 ---
 
 ## Scripts de sesión
 
-Cada sesión tiene un `.R` narrado que sirve como guion de clase. **Una sola fuente, tres artefactos:**
+Cada sesión tiene **dos documentos**, uno por bloque de la sesión de 3:00 hr. No son dos versiones del mismo archivo: son contenidos distintos.
 
-| Ruta | Versión | Uso |
-|---|---|---|
-| `slides/semana_NN/code/sesion_NN.R` | Instructor — código + notas | Fuente. Se lee desde el iPad para guiar la clase. |
-| `code/pre/sesion_NN.R` | Ejercicios — huecos, sin notas | **Derivada.** Se reparte al inicio del curso. |
-| `build/soluciones/sesion_NN_solucion.R` | Solución — código, sin notas | **Derivada.** Se entrega al cierre de cada sesión. |
+### Bloque de exposición — el guion
 
-**Nunca editar las derivadas a mano.** Todo cambio va en el script del instructor.
+| Ruta | Qué es |
+|---|---|
+| `slides/semana_NN/code/sesion_NN.R` | **Fuente.** El código que el instructor reproduce en vivo, con sus notas de clase. Se lee desde el iPad. |
+| `build/sesiones/sesion_NN.R` | **Derivado.** El mismo guion sin las notas. Se entrega al **cierre** de cada sesión. |
 
-El sufijo `_solucion` es deliberado: el estudiante deja caer el archivo en su `pre/` sin sobrescribir lo que escribió en clase. La cabecera `# Script:` se reescribe sola en la derivación.
+Los estudiantes no reciben este archivo por adelantado: siguen la exposición y al final obtienen la referencia limpia.
+
+### Bloque de práctica — los ejercicios
+
+| Ruta | Qué es |
+|---|---|
+| `slides/semana_NN/code/ejercicios_NN.R` | **Fuente.** Las consignas más las respuestas del instructor. |
+| `code/pre/ejercicios_NN.R` | **Derivado.** Las mismas consignas con huecos. Va en el zip inicial. |
+
+**Nunca editar los derivados a mano.** Todo cambio va en la fuente de `slides/semana_NN/code/`.
 
 `code/` en la raíz es el proyecto R que reciben los estudiantes: `curso-ppd.Rproj`, `README.md` y la estructura `files/` `docs/` `pre/` `output/` que enseña la Sesión 1. Los datos de la ENSU van en `code/files/` y **los coloca el profesor** (no están versionados).
 
 ### Marcas de derivación
 
-Son comentarios válidos de R, así que el script del instructor corre tal cual:
+Son comentarios válidos de R, así que las fuentes corren tal cual.
 
-| Bloque | Instructor | Ejercicios | Solución |
-|---|---|---|---|
-| `#\| ejercicio` | código | hueco | código |
-| `#\| nota` | notas | — | — |
+| Marca | Efecto en lo que reciben los estudiantes |
+|---|---|
+| `#\| nota` … `#\| fin` | Se elimina. Apuntes de clase, tiempos, énfasis. Sirve en ambos archivos. |
+| `#\| solucion` … `#\| fin` | Se sustituye por un hueco. **Solo en `ejercicios_NN.R`.** |
 
 ```r
-#| ejercicio          En EJERCICIOS se sustituye por "# (escribe el código
-mean(edad >= 18)      aquí)" más un hueco; el comentario que antecede queda
-#| fin                como consigna. En SOLUCIÓN se conserva íntegro.
-
-#| nota               Desaparece en ambas versiones de estudiante. Para
-# Recordar preguntar  apuntes de clase, tiempos y énfasis.
+#| nota               Desaparece de todo lo que llega a los estudiantes.
+# Preguntar antes de correrlo: el error típico es esperar un error.
 #| fin
+
+#| solucion           Solo en ejercicios_NN.R. En la versión de estudiante
+mean(edad >= 18)      queda "# (escribe el código aquí)" más un hueco; la
+#| fin                consigna que antecede al bloque se conserva.
 ```
+
+El guion (`sesion_NN.R`) usa solo `#| nota`: todo su código es material que el instructor reproduce, no ejercicio.
 
 ### Build
 
 ```bash
-python3 scripts/build-code.py          # deriva ejercicios y soluciones
+python3 scripts/build-code.py          # deriva ejercicios y guiones limpios
 python3 scripts/build-code.py --zip    # además empaqueta los dos zips
 ```
 
 Salidas de `--zip`:
-- `build/curso-ppd.zip` — proyecto completo con los ejercicios. Se reparte al inicio del curso.
-- `build/curso-ppd-soluciones.zip` — las seis soluciones juntas, para el cierre del curso.
-- Para entregar una sola sesión, el archivo suelto de `build/soluciones/`.
+- `build/curso-ppd.zip` — el proyecto con los seis scripts de ejercicios. Se reparte al inicio del curso.
+- `build/curso-ppd-sesiones.zip` — los seis guiones limpios, para el cierre del curso.
+- Para entregar una sola sesión, el archivo suelto de `build/sesiones/`.
 
-`build/` está en `.gitignore`; las soluciones se regeneran cuando se necesitan. `code/pre/*.R` sí se versiona (es el distribuible base).
+`build/` está en `.gitignore`; se regenera cuando se necesita. `code/pre/*.R` sí se versiona (es el distribuible base).
 
-**Estilo de los scripts.** Seguir `sesion_01.R`: encabezado con bloque de guiones bajos, sección `# PREAMBULO`, sección `# CODIGO`, jerarquía `# NIVEL 1 ___`, `## Nivel 2 ---=`, `### Nivel 3 ----`. Asignación con `=` (no `<-`), indentación de 4 espacios. El comentario antecede al código y explica el porqué, no el qué.
-
-**No hay documento separado de notas del instructor.** El deck Slidev es la única referencia del instructor. Si se necesita contenido visible solo para el instructor, se usa el mecanismo nativo de Slidev (`instructor: true` en el frontmatter del slide, o bloques `<!-- instructor-only --> ... <!-- /instructor-only -->`). No se mantiene ningún `doc-instructor.md` ni archivo paralelo.
+**Estilo de los scripts.** Seguir `sesion_01.R`: encabezado con bloque de guiones bajos, sección `# PREAMBULO`, sección `# CODIGO` (o `# EJERCICIOS`), jerarquía `# NIVEL 1 ___`, `## Nivel 2 ---=`, `### Nivel 3 ----`. Asignación con `=` (no `<-`), indentación de 4 espacios. El comentario antecede al código y explica el porqué, no el qué.
 
 ---
 
@@ -416,7 +424,7 @@ Programming for Data Projects/
 │   ├── curso-ppd.Rproj
 │   ├── README.md
 │   ├── files/ docs/ output/
-│   └── pre/               (sesion_01.R … sesion_06.R, esqueletos)
+│   └── pre/               (ejercicios_01.R … ejercicios_06.R, con huecos)
 ├── slides/
 │   ├── README.md
 │   ├── _theme/            (assets compartidos — layouts, components, CSS, public)
@@ -436,10 +444,9 @@ Programming for Data Projects/
 **Curso 1 (arranca el 21 de agosto de 2026):**
 - [ ] Actualizar el deck `slides/semana_01/` para que cubra el contenido nuevo de la Sesión 1 (Git, GitHub y estructura de carpetas se agregaron desde la antigua S4).
 - [ ] Desarrollar slides de las Sesiones 2–6.
-- [ ] Desarrollar el contenido de `sesion_02.R` … `sesion_06.R` (hoy solo tienen el esqueleto de secciones con marcas `#| nota` de POR DESARROLLAR).
+- [ ] Desarrollar el contenido de `sesion_02.R` … `sesion_06.R` y de `ejercicios_02.R` … `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
 - [ ] Colocar los archivos de ENSU en `code/files/` antes de armar el zip.
 - [ ] Elegir los trimestres concretos de ENSU y descargar los archivos de trabajo.
-- [ ] Redactar los enunciados de los 6 ejercicios del bloque de práctica.
 
 **Curso 2:**
 - [ ] Definir duración, calendario y estructura de bloques.

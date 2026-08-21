@@ -19,21 +19,24 @@ Si borrar `output/` rompe algo, el pipeline no es reproducible.
 
 ## Scripts
 
-Un script por sesión, en `pre/`. Están comentados y con huecos marcados
-`# (escribe el código aquí)`: esos huecos se llenan durante la clase.
+Cada sesión de 3:00 h tiene dos bloques, y a cada bloque le corresponde un archivo.
 
-Al cierre de cada sesión se distribuye la versión resuelta, `sesion_NN_solucion.R`.
-Lleva otro nombre a propósito: se guarda junto al tuyo en `pre/` sin sobrescribir
-lo que escribiste. Compara, no reemplaces.
+**`pre/ejercicios_NN.R`** — el bloque de práctica. Vienen las consignas y los
+huecos marcados `# (escribe el código aquí)`. Es donde trabajas.
 
-| Script | Sesión |
+**`pre/sesion_NN.R`** — el guion del bloque de exposición: todo el código que se
+escribe en el pizarrón durante la clase. Se distribuye al **cierre** de cada
+sesión, no antes. La idea es que sigas la exposición mirando y escribiendo, y
+que después tengas la referencia correcta sin haber estado copiando a ciegas.
+
+| Sesión | Tema |
 |---|---|
-| `pre/sesion_01.R` | El lenguaje y el proyecto: R, Positron, Git y GitHub |
-| `pre/sesion_02.R` | Estructuras de datos, importación y exploración |
-| `pre/sesion_03.R` | dplyr I: pipe, verbos básicos y sistema tidyverse |
-| `pre/sesion_04.R` | dplyr II y manejo de texto: joins, pivots y stringr |
-| `pre/sesion_05.R` | Control de flujo, vectorización y funciones |
-| `pre/sesion_06.R` | Programación funcional y visualización con ggplot2 |
+| 1 | El lenguaje y el proyecto: R, Positron, Git y GitHub |
+| 2 | Estructuras de datos, importación y exploración |
+| 3 | dplyr I: pipe, verbos básicos y sistema tidyverse |
+| 4 | dplyr II y manejo de texto: joins, pivots y stringr |
+| 5 | Control de flujo, vectorización y funciones |
+| 6 | Programación funcional y visualización con ggplot2 |
 
 ## Requisitos
 
