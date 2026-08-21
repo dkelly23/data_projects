@@ -172,12 +172,17 @@ Artefactos que se producen para cada sesión:
 
 ## Scripts de sesión
 
-Cada sesión tiene un `.R` narrado que sirve como guion de clase. Existe en dos versiones y **una sola fuente**:
+Cada sesión tiene un `.R` narrado que sirve como guion de clase. **Una sola fuente, tres artefactos:**
 
 | Ruta | Versión | Uso |
 |---|---|---|
-| `slides/semana_NN/code/sesion_NN.R` | Instructor — completa | Fuente. Se lee desde el iPad para guiar la clase. |
-| `code/pre/sesion_NN.R` | Estudiante — esqueleto | **Derivada. Nunca editar a mano.** |
+| `slides/semana_NN/code/sesion_NN.R` | Instructor — código + notas | Fuente. Se lee desde el iPad para guiar la clase. |
+| `code/pre/sesion_NN.R` | Ejercicios — huecos, sin notas | **Derivada.** Se reparte al inicio del curso. |
+| `build/soluciones/sesion_NN_solucion.R` | Solución — código, sin notas | **Derivada.** Se entrega al cierre de cada sesión. |
+
+**Nunca editar las derivadas a mano.** Todo cambio va en el script del instructor.
+
+El sufijo `_solucion` es deliberado: el estudiante deja caer el archivo en su `pre/` sin sobrescribir lo que escribió en clase. La cabecera `# Script:` se reescribe sola en la derivación.
 
 `code/` en la raíz es el proyecto R que reciben los estudiantes: `curso-ppd.Rproj`, `README.md` y la estructura `files/` `docs/` `pre/` `output/` que enseña la Sesión 1. Los datos de la ENSU van en `code/files/` y **los coloca el profesor** (no están versionados).
 
@@ -185,24 +190,34 @@ Cada sesión tiene un `.R` narrado que sirve como guion de clase. Existe en dos 
 
 Son comentarios válidos de R, así que el script del instructor corre tal cual:
 
-```r
-#| ejercicio          El bloque se sustituye por "# (escribe el código aquí)"
-mean(edad >= 18)      más un hueco en blanco. El comentario que antecede al
-#| fin                bloque queda como consigna del ejercicio.
+| Bloque | Instructor | Ejercicios | Solución |
+|---|---|---|---|
+| `#\| ejercicio` | código | hueco | código |
+| `#\| nota` | notas | — | — |
 
-#| nota               El bloque desaparece por completo de la versión de
-# Recordar preguntar  estudiante. Para apuntes de clase, tiempos y énfasis.
+```r
+#| ejercicio          En EJERCICIOS se sustituye por "# (escribe el código
+mean(edad >= 18)      aquí)" más un hueco; el comentario que antecede queda
+#| fin                como consigna. En SOLUCIÓN se conserva íntegro.
+
+#| nota               Desaparece en ambas versiones de estudiante. Para
+# Recordar preguntar  apuntes de clase, tiempos y énfasis.
 #| fin
 ```
 
 ### Build
 
 ```bash
-python3 scripts/build-code.py          # deriva code/pre/*.R desde slides/semana_*/code/
-python3 scripts/build-code.py --zip    # además empaqueta build/curso-ppd.zip
+python3 scripts/build-code.py          # deriva ejercicios y soluciones
+python3 scripts/build-code.py --zip    # además empaqueta los dos zips
 ```
 
-`build/` está en `.gitignore`. `code/pre/*.R` sí se versiona (es el distribuible).
+Salidas de `--zip`:
+- `build/curso-ppd.zip` — proyecto completo con los ejercicios. Se reparte al inicio del curso.
+- `build/curso-ppd-soluciones.zip` — las seis soluciones juntas, para el cierre del curso.
+- Para entregar una sola sesión, el archivo suelto de `build/soluciones/`.
+
+`build/` está en `.gitignore`; las soluciones se regeneran cuando se necesitan. `code/pre/*.R` sí se versiona (es el distribuible base).
 
 **Estilo de los scripts.** Seguir `sesion_01.R`: encabezado con bloque de guiones bajos, sección `# PREAMBULO`, sección `# CODIGO`, jerarquía `# NIVEL 1 ___`, `## Nivel 2 ---=`, `### Nivel 3 ----`. Asignación con `=` (no `<-`), indentación de 4 espacios. El comentario antecede al código y explica el porqué, no el qué.
 

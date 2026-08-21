@@ -22,6 +22,10 @@ Si borrar `output/` rompe algo, el pipeline no es reproducible.
 Un script por sesión, en `pre/`. Están comentados y con huecos marcados
 `# (escribe el código aquí)`: esos huecos se llenan durante la clase.
 
+Al cierre de cada sesión se distribuye la versión resuelta, `sesion_NN_solucion.R`.
+Lleva otro nombre a propósito: se guarda junto al tuyo en `pre/` sin sobrescribir
+lo que escribiste. Compara, no reemplaces.
+
 | Script | Sesión |
 |---|---|
 | `pre/sesion_01.R` | El lenguaje y el proyecto: R, Positron, Git y GitHub |
