@@ -446,6 +446,8 @@ Programming for Data Projects/
 - [ ] Desarrollar slides de las Sesiones 2–6.
 - [ ] Desarrollar el contenido de `sesion_02.R` … `sesion_06.R` y de `ejercicios_02.R` … `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
 - [ ] Colocar los archivos de ENSU en `code/files/` antes de armar el zip.
+
+**Nota sobre la Sesión 1:** Git y GitHub son **solo teoría**. Los ejercicios no piden escribir `.gitignore` ni commitear: el bloque de práctica trabaja sobre una mini encuesta capturada a mano (12 personas: edad, sexo, percepción de seguridad codificada 1/2), que anticipa la estructura de la ENSU sin necesitar archivos.
 - [ ] Elegir los trimestres concretos de ENSU y descargar los archivos de trabajo.
 
 **Curso 2:**

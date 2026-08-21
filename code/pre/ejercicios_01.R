@@ -3,8 +3,8 @@
 # Proyecto:       Programación para Proyectos de Datos
 #
 # Script:         ejercicios_01.R
-# Objetivo:       Bloque de práctica de la Sesión 1. Montar el proyecto,
-#                 versionarlo y operar con vectores y condiciones lógicas.
+# Objetivo:       Bloque de práctica de la Sesión 1. Vectores, tipos, coerción,
+#                 condiciones lógicas y valores faltantes.
 #
 # Autor:          Daniel Kelly
 # Correo(s):      djsanchez@colmex.mx
@@ -16,6 +16,7 @@
 #
 # _____________________________________________________________________________
 
+
 # PREAMBULO ___________________________________________________________________
 
 # Limpiar entorno de trabajo
@@ -25,27 +26,35 @@ cat("\014") # Limpiar consola
 
 # EJERCICIOS __________________________________________________________________
 
-## 1. Verificar la instalación -----------------------------------------------=
+## 1. Verificación del entorno -----------------------------------------------=
 
-# Ejecuta las tres líneas siguientes y verifica que la versión de R sea 4.1 o
-# superior. Si no lo es, avisa antes de continuar: varias cosas del curso
-# dependen de ello.
+# Ejecuta las líneas siguientes. La versión de R debe ser 4.1 o superior; varias
+# cosas del curso dependen de ello. Si no lo es, avisa antes de continuar.
 
 R.version.string
 getRversion() >= "4.1.0"
-.libPaths()
+
+# ¿Qué tipo de objeto devolvió la segunda línea? Averígualo.
+
+# (escribe el código aquí)
 
 
-## 2. Montar la estructura del proyecto --------------------------------------=
 
-# Con el proyecto abierto, confirma dónde estás parado:
+
+## 2. Estructura del proyecto ------------------------------------------------=
+
+# Confirma en qué carpeta estás parado:
 
 getwd()
 
-# Crea las cuatro carpetas de la convención del curso, si no existen todavía.
-# Pista: dir.exists() pregunta, dir.create() crea.
+# Crea las cuatro carpetas de la convención del curso: files, docs, pre y output.
+# Hazlo de forma que volver a ejecutar la línea no produzca un error si la
+# carpeta ya existe.
+#
+# Pistas: dir.exists() pregunta, dir.create() crea, y `!` niega una condición.
 
 # (escribe el código aquí)
+
 
 
 
@@ -53,84 +62,154 @@ getwd()
 
 list.dirs(recursive = FALSE)
 
+# ¿Qué devuelve la línea siguiente, y qué tipo tiene?
 
-## 3. Escribir el .gitignore -------------------------------------------------=
+file.exists("files")
 
-# Escribe un archivo .gitignore que excluya, como mínimo: los datos crudos, los
-# outputs, el historial de R, la imagen del entorno y los archivos de sistema.
+
+## 3. La mini encuesta -------------------------------------------------------=
+
+# Doce personas respondieron tres preguntas. Construye un vector para cada una.
+# Los datos:
+#
+#   edad:      34, 19, 67, 45, 23, 58, 71, 29, 16, 40, 52, 38
+#   sexo:      M, H, M, M, H, H, M, H, M, H, M, H
+#   segura:    2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1
+#
+# La tercera es la pregunta "¿considera que vivir en su ciudad es seguro?",
+# codificada como en las encuestas reales: 1 = seguro, 2 = inseguro.
 
 # (escribe el código aquí)
 
 
 
-# Léelo de vuelta para confirmar que quedó bien:
-
-readLines(".gitignore")
-
-
-## 4. Versionar el proyecto --------------------------------------------------=
-
-# En la TERMINAL (no en la consola de R), deja el repositorio iniciado, con un
-# primer commit y sincronizado con GitHub. La secuencia:
-#
-#   git init
-#   git status
-#   git add .
-#   git commit -m "Estructura inicial del proyecto"
-#
-# Después crea el repositorio VACÍO en GitHub y conéctalo:
-#
-#   git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
-#   git push -u origin main
-#
-# Verifica en el navegador que los archivos llegaron.
-
-
-## 5. Vectores y tipos -------------------------------------------------------=
-
-# Construye un vector con las edades siguientes: 17, 22, 35, 15, 68, 41, 19.
+# Verifica que los tres tengan la misma longitud. Si no, hay un error de captura.
 
 # (escribe el código aquí)
 
 
 
-# Averigua su tipo y su longitud.
+
+
+## 4. Tipos y coerción -------------------------------------------------------=
+
+# a) Averigua el tipo de cada uno de los tres vectores.
 
 # (escribe el código aquí)
 
 
 
-# Ahora agrega el valor "no especificado" al vector. Antes de ejecutarlo,
-# predice qué tipo tendrá el resultado. ¿Coincidió con lo que esperabas?
+# b) `segura` guarda códigos, no cantidades. Calcular su promedio no significa
+#    nada, pero R lo hace de todos modos. Compruébalo.
 
 # (escribe el código aquí)
 
+
+
+
+# c) Agrega la respuesta "no especificado" al vector `edad`. Antes de ejecutarlo,
+#    predice qué tipo tendrá el resultado. ¿Coincidió?
+
+# (escribe el código aquí)
+
+
+
+# d) Intenta ahora sumar 1 a `edad_mixta`. ¿Qué ocurre?
+
+# (escribe el código aquí)
+
+
+
+# e) Recupera un vector numérico a partir de `edad_mixta`. ¿Qué pasó con el
+#    elemento de texto?
+
+# (escribe el código aquí)
+
+
+
+
+## 5. Vectorización ----------------------------------------------------------=
+
+# a) Todas las personas cumplieron años. Suma 1 a cada edad, sin escribir doce
+#    operaciones.
+
+# (escribe el código aquí)
+
+
+
+# b) Calcula la edad de cada persona en meses.
+
+# (escribe el código aquí)
+
+
+
+# c) Calcula cuántos años le faltan a cada persona para cumplir 65.
+
+# (escribe el código aquí)
+
+
+
+# d) ¿Qué observas en el resultado del inciso anterior para las personas que ya
+#    pasaron los 65? ¿Tiene sentido?
 
 
 
 ## 6. Condiciones lógicas ----------------------------------------------------=
 
-# Sobre el vector `edad` original, responde con una sola línea cada una:
 
-# a) ¿Cuántas personas son mayores de edad?
-
-# (escribe el código aquí)
-
-
-
-# b) ¿Qué proporción del total representan?
+# a) Construye un vector lógico que indique, para cada persona, si es mayor de
+#    edad.
 
 # (escribe el código aquí)
 
 
 
-# c) ¿Qué proporción está en edad de trabajar (18 a 64 años)?
+# b) ¿Cuántas personas son mayores de edad? Una sola línea.
 
 # (escribe el código aquí)
 
 
 
-# d) ¿Hay alguien mayor de 65?
+# c) ¿Qué proporción del total representan?
+
+# (escribe el código aquí)
+
+
+
+# d) Explica en una línea de comentario por qué funciona el inciso anterior.
+
+# (escribe el código aquí)
+
+
+
+# e) ¿Qué proporción de las personas está en edad de trabajar (18 a 64 años)?
+
+# (escribe el código aquí)
+
+
+
+# f) ¿Qué proporción percibe su ciudad como insegura? Recuerda que 2 = inseguro.
+
+# (escribe el código aquí)
+
+
+
+# g) ¿Qué proporción son mujeres que perciben inseguridad? Ojo: esto NO es lo
+#    mismo que la pregunta del inciso siguiente.
+
+# (escribe el código aquí)
+
+
+
+# h) De las mujeres, ¿qué proporción percibe inseguridad? Pista: es un cociente
+#    entre dos conteos.
+
+# (escribe el código aquí)
+
+
+
+
+# i) ¿Hay alguna persona menor de edad en la muestra? ¿Todas son mayores de 15?
 
 # (escribe el código aquí)
 
@@ -139,27 +218,76 @@ readLines(".gitignore")
 
 ## 7. Valores faltantes ------------------------------------------------------=
 
-# Repite el vector, ahora con un dato desconocido:
+# Una persona no quiso dar su edad. Vuelve a capturar el vector con ese dato
+# desconocido en la tercera posición:
 
-edad_na = c(17, 22, NA, 15, 68, 41, 19)
+edad_na = c(34, 19, NA, 45, 23, 58, 71, 29, 16, 40, 52, 38)
 
-# Calcula la proporción de mayores de edad. ¿Qué devuelve y por qué?
-
-# (escribe el código aquí)
-
-
-
-# Corrígelo excluyendo el faltante, y cuenta cuántos faltantes había.
+# a) Calcula la proporción de mayores de edad. ¿Qué devuelve, y por qué?
 
 # (escribe el código aquí)
 
 
 
+# b) Corrígelo excluyendo el dato faltante.
 
-## 8. Cierre -----------------------------------------------------------------=
+# (escribe el código aquí)
 
-# Haz un commit con el trabajo de esta sesión y súbelo:
+
+
+# c) ¿Cuántos datos faltantes hay? Cuidado: `edad_na == NA` no sirve.
+
+# (escribe el código aquí)
+
+
+
+# d) Prueba `edad_na == NA` y explica por qué devuelve lo que devuelve.
+
+# (escribe el código aquí)
+
+
+
+
+# e) ¿Sobre cuántas personas se calculó realmente la proporción del inciso b)?
+
+# (escribe el código aquí)
+
+
+
+
+## 8. Listas -----------------------------------------------------------------=
+
+# Los resultados del ejercicio 6 son de tipos distintos: conteos, proporciones y
+# lógicos. Guárdalos juntos en una lista con nombres.
+
+# (escribe el código aquí)
+
+
+
+# Extrae la proporción de personas que perciben inseguridad, de dos maneras
+# distintas.
+
+# (escribe el código aquí)
+
+
+
+# Inspecciona la lista completa:
+
+str(resultados)
+
+
+## 9. Integrador (opcional) --------------------------------------------------=
+
+# Con los tres vectores originales, responde en un solo bloque de código:
 #
-#   git add .
-#   git commit -m "Ejercicios de la sesión 1"
-#   git push
+#   - ¿Cuál es la edad promedio de quienes perciben inseguridad?
+#   - ¿Y la de quienes no?
+#   - ¿La diferencia te parece grande?
+#
+# Pista: no necesitas nada que no hayas usado ya. Un promedio es una suma entre
+# un conteo, y ya sabes contar con condiciones lógicas.
+
+# (escribe el código aquí)
+
+
+

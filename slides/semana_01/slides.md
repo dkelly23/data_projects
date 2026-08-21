@@ -291,6 +291,68 @@ Se recomienda evitar trabajar escribiendo todo directamente en la consola. La co
 
 
 ---
+layout: default
+section: Sesión 1
+subsection: Paquetes
+---
+
+# Paquetes
+R base trae lo esencial; casi todo lo demás vive en [paquetes]{.colmex-blue}.
+
+Un paquete es una colección de funciones que alguien más escribió y publicó. Se [instalan una vez]{.colmex-orange} y se [cargan en cada sesión]{.colmex-blue}:
+
+```r
+install.packages("dplyr")   # una sola vez, descarga desde CRAN
+library(dplyr)              # en cada sesión, para tenerlo disponible
+```
+
+<br>
+
+[CRAN]{.colmex-blue} es el repositorio oficial: más de 20,000 paquetes revisados. Es de donde baja `install.packages()`.
+
+<br>
+
+<Rojo t="! Prácticas a Evitar">
+
+Dejar `install.packages()` dentro del script. Se ejecuta cada vez que alguien lo corre, descarga de nuevo y tarda una eternidad. La instalación se hace en la consola; el script solo carga.
+
+</Rojo>
+
+---
+layout: default
+section: Sesión 1
+subsection: Paquetes
+---
+
+# `pacman`
+Un solo comando en vez de dos, para cualquier número de paquetes.
+
+El problema del flujo anterior: si alguien más abre tu script sin tener los paquetes instalados, falla. `pacman` [instala lo que falte y carga todo]{.colmex-blue} en una sola línea.
+
+```r
+install.packages("pacman")   # una sola vez en la vida
+
+pacman::p_load(dplyr, ggplot2, readr)
+```
+
+<br>
+
+La convención del curso es que todo script empiece así:
+
+```r
+if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
+pacman::p_load(tidyverse)
+```
+
+<br>
+
+<Verde t="Sobre el operador ::">
+
+`paquete::funcion()` usa una función [sin cargar el paquete completo]{.colmex-blue}, y deja explícito de dónde viene.
+
+</Verde>
+
+---
 layout: section
 eyebrow: Sesión 1 — Bloque de exposición
 ---

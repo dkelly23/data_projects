@@ -25,6 +25,41 @@ cat("\014") # Limpiar consola
 
 # CODIGO ______________________________________________________________________
 
+# PAQUETES ____________________________________________________________________
+
+# R base trae lo esencial. Casi todo lo demás vive en paquetes: colecciones de
+# funciones que alguien más escribió y publicó, normalmente en CRAN.
+
+# El flujo clásico son dos pasos. Instalar ocurre una vez; cargar, en cada
+# sesión de trabajo:
+#
+#   install.packages("dplyr")   # descarga desde CRAN
+#   library(dplyr)              # lo deja disponible en esta sesión
+
+# La instalación va en la consola, nunca dentro del script. Un script con
+# install.packages() adentro vuelve a descargar el paquete cada vez que alguien
+# lo corre.
+
+## pacman --------------------------------------------------------------------=
+
+# El problema del flujo anterior: si alguien más abre el script sin tener los
+# paquetes instalados, falla. `pacman` resuelve ambos pasos en una línea, y
+# para cualquier número de paquetes:
+#
+#   pacman::p_load(dplyr, ggplot2, readr)
+
+# La convención del curso es que todo script arranque así:
+if (!requireNamespace("pacman", quietly = TRUE)) {
+    install.packages("pacman")
+}
+pacman::p_load(lobstr)
+
+# El operador `::` indica de qué paquete viene una función: `pacman::p_load` es
+# "la función p_load del paquete pacman". Sirve para usarla sin cargar el
+# paquete completo, y para dejar explícito el origen cuando dos paquetes tienen
+# funciones con el mismo nombre.
+
+
 # OBJETOS Y ASIGNACIONES DE NOMBRES -------------------------------------------
 
 ## Objeto de Prueba -----------------------------------------------------------
@@ -37,11 +72,8 @@ a = "prueba"
 # "prueba".
 # 2. Crea una asignación (`binding`) entre el nombre `a` y el objeto `"prueba"`.
 
-# Verificamos la instalación de lobstr:
-if (!requireNamespace("lobstr", quietly = TRUE)) {
-    install.packages("lobstr")
-}
-library(lobstr)
+# Usamos `lobstr`, cargado en el preámbulo de la sección anterior, para mirar
+# las direcciones de memoria:
 
 # Creamos un objeto que replica a `a`
 b = a
