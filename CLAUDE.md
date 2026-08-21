@@ -325,15 +325,14 @@ ln -s ../_theme/style.css style.css
 
 ### npm scripts (`package.json`)
 
-```json
-{
-  "dev":           "slidev --open",
-  "build":         "slidev build --base ./",
-  "preview":       "lsof -ti:4173 2>/dev/null | xargs kill -9 2>/dev/null; python3 -m http.server 4173 --directory dist",
-  "export":        "slidev export --output presentacion-instructor.pdf",
-  "build:student": "node ../_theme/scripts/build-student.mjs && slidev build slides.student.md --base ./ --out dist-student"
-}
-```
+Cada script tiene su variante `:student`, que corre `build-student.mjs` antes de invocar a Slidev:
+
+| Script | Qué hace |
+|---|---|
+| `dev` / `dev:student` | Servidor de desarrollo |
+| `build` / `build:student` | Build estático (`dist/` y `dist-student/`) |
+| `preview` / `preview:student` | Sirve el build por HTTP (puertos 4173 y 4174) |
+| `export` / `export:student` | Exporta a PDF |
 
 **`slidev` debe estar instalado globalmente** (`npm install -g @slidev/cli`). No usar `node_modules` local: iCloud Drive corrompe la sincronización de módulos.
 
@@ -388,7 +387,12 @@ El script `build-student.mjs` usa `process.cwd()` (no `__dirname`) para resolver
 
 ### GitHub Pages
 
-**Implementado** en `.github/workflows/deploy-slides.yml`. La documentación de referencia está en `slides/README.md`. Build target: `slidev build --base /data_projects/semana_NN/`. El workflow corre sobre Node 24 e instala `@slidev/theme-default` vía el `package.json` de la raíz.
+**Implementado** en `.github/workflows/deploy-slides.yml`. La documentación de referencia está en `slides/README.md`. Base: `/data_projects/semana_NN/`. El workflow corre sobre Node 24 e instala `@slidev/theme-default` vía el `package.json` de la raíz.
+
+Dos condiciones que el workflow respeta y hay que preservar:
+
+- **Publica la versión de estudiante** (`build-student.mjs` + `slides.student.md`), no el deck del instructor. Pages es material distribuido: lo que se marque `instructor: true` o `<!-- instructor-only -->` no debe salir del repositorio.
+- **Salta las carpetas `semana_NN/` que aún no tienen `slides.md`.** Las semanas 2–6 existen hoy solo con su `code/`; sin ese guardia, `slidev build` sale con código 1 y tumba el job completo.
 
 ---
 

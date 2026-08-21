@@ -40,7 +40,7 @@ Curso comprensivo orientado a la construcción de **proyectos completos de datos
 
 - **Filosofía:** [zero-to-hero]{.colmex-blue} (no es necesario tener experiencia previa en programación).
 - **Duración:** 6 semanas, con una sesión semanal de 3:00 h.
-- **Secuencia:** este es el [primero de dos cursos]{.colmex-orange}; el segundo retoma donde éste termina.
+- **Secuencia:** este es el [primero de dos cursos]{.colmex-orange}; el segundo retoma donde este termina.
 - **Lenguaje:** R como único lenguaje del curso (la decisión se justifica más adelante).
 - **IDE:** [Positron]{.colmex-orange}, entorno de trabajo recomendado para el curso.
 
@@ -279,7 +279,7 @@ Secuencia básica de trabajo en una sesión normal.
 4. Revisar el resultado en [Consola]{.colmex-blue}.
 5. Inspeccionar los objetos creados en [Environment]{.colmex-orange}.
 6. Guardar el script antes de cerrar la sesión.
-7. **Evita rutas absolútas en el código!!!!!!!**
+7. **¡Evita las rutas absolutas en el código!**
 
 <br>
 
@@ -581,7 +581,7 @@ Noten como ambos `bindings` tienen la misma dirección, porque de fondo **son el
 
 <br>
 
-> Los operadores `<-` y `=` son equivalente para asignar nombres a objetos. **Yo** prefiero el uso de `=` porque homologa la notación con la que se usa en funciones y otros operadores numéricos. Sujeto a preferencia personal siempre y cuando [se use consistentemente]{.colmex-orange}.
+> Los operadores `<-` y `=` son equivalentes para asignar nombres a objetos. **Yo** prefiero el uso de `=` porque homologa la notación con la que se usa en funciones y otros operadores numéricos. Sujeto a preferencia personal siempre y cuando [se use consistentemente]{.colmex-orange}.
 
 
 ---
@@ -629,9 +629,9 @@ subsection: Vectores
 # Listas y Vectores
 Los objetos clave de [R]{.colmex-blue}.
 
-[R]{.colmex-blue} está construído alrededor de [vectores]{.colmex-blue} que subsecuentemente se dividen en dos tipos: `atomic-vectors` y `listas`. La diferencia es **el tipo** de objetos que pueden alojar.
+[R]{.colmex-blue} está construido alrededor de [vectores]{.colmex-blue} que subsecuentemente se dividen en dos tipos: `atomic-vectors` y `listas`. La diferencia es **el tipo** de objetos que pueden alojar.
 
-- **Atomic Vectors:** Estructuras de datos dónde se pueden almacenar objetos con **los mismos tipos**. (Concepto clave: `coertion`).
+- **Atomic Vectors:** Estructuras de datos donde se pueden almacenar objetos con **los mismos tipos**. (Concepto clave: `coerción`).
 ```r
 vector = c("A", "B", "C")
 ```
@@ -807,7 +807,7 @@ subsection: Condiciones Lógicas
 # Evaluación de Condiciones Lógicas (1)
 ¿Cómo verificar que un statement es cierto?
 
-Utilizando el operador `==` (doble signo de igual) es cómo si le preguntaramos a [R]{.colmex-blue} si el **lado derecho** de la expresión es igual al **lado izquierdo**. A cambio, recibimos un `TRUE` o `FALSE` dependiendo del resultado.
+Utilizando el operador `==` (doble signo de igual) es como si le preguntáramos a [R]{.colmex-blue} si el **lado derecho** de la expresión es igual al **lado izquierdo**. A cambio, recibimos un `TRUE` o `FALSE` dependiendo del resultado.
 
 ```r
 "prueba" == "prueba"

@@ -67,6 +67,10 @@ pacman::p_load(lobstr)
 # Asignación de objetos:
 a = "prueba"
 
+# Los operadores `<-` y `=` son equivalentes para asignar. La convención del
+# curso es `=`, porque homologa la notación con la de los argumentos de una
+# función. Lo que no es negociable es usar uno solo, de forma consistente.
+
 # Al ejecutarlo, R hace dos cosas:
 # 1. Crea un objeto, sin nombre pero con dirección en memoria, que contiene
 # "prueba".

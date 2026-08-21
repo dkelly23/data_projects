@@ -231,6 +231,7 @@ Sesión de apertura. Cubre la justificación del lenguaje, la configuración del
     \item \textbf{Bienvenida y motivación del curso.} Estructura del curso, esquema de evaluación y relación con el segundo curso de la secuencia.
     \item \textbf{¿Por qué R?} R en el contexto de la investigación económica académica; contraste con Python; razones para descartar Stata. Ecosistema CRAN, tidyverse y Posit.
     \item \textbf{Setup: Positron + R.} Instalación; layout del IDE (consola, source, environment, plots, packages); configuración mínima.
+    \item \textbf{Paquetes.} R base y el ecosistema de paquetes; CRAN como repositorio oficial. Distinción entre instalación (\texttt{install.packages()}, una vez) y carga (\texttt{library()}, por sesión), y por qué la instalación no pertenece al \textit{script}. El paquete \texttt{pacman}: \texttt{p\_load()} resuelve ambos pasos para cualquier número de paquetes. Operador \texttt{::} para invocar una función indicando su paquete de origen. Convención del curso: todo \textit{script} abre con \texttt{pacman::p\_load()}.
     \item \textbf{Uso responsable de modelos de lenguaje.} Distinción operativa entre el uso de un LLM como \blue{chatbot} (pregunta y respuesta aisladas) y como \orange{agente integrado al proyecto} (lectura de archivos, propuesta de cambios y ejecución de comandos con supervisión humana en el ciclo de revisión), modalidad propia de herramientas como Claude Code de Anthropic o Codex de OpenAI. \textbf{Política del curso:} los agentes no están permitidos en los ejercicios de clase. El estudiante debe ser capaz de leer y modificar cualquier línea que entregue como propia.
     \item \textbf{Características del lenguaje.} R como lenguaje interpretado, vectorizado y multiparadigma. Tres modos de ejecución: REPL, \textit{script} con \texttt{source()}, ejecutable con \texttt{Rscript}.
     \item \textbf{Primeros objetos en R.} Asignación (\texttt{<-} frente a \texttt{=}); tipos atómicos (\texttt{numeric}, \texttt{integer}, \texttt{logical}, \texttt{character}); construcción de vectores con \texttt{c()}, vectorización aritmética; funciones de inspección (\texttt{class}, \texttt{typeof}, \texttt{length}, \texttt{str}).
@@ -239,13 +240,14 @@ Sesión de apertura. Cubre la justificación del lenguaje, la configuración del
     \item \textbf{Introducción a Git y GitHub.} Noción de repositorio e historial de versiones. Comandos básicos: \texttt{init}, \texttt{status}, \texttt{add}, \texttt{commit}, \texttt{log}. Concepto de \textit{remote} y sincronización con GitHub (\texttt{push}, \texttt{pull}). Convenciones de mensajes de \textit{commit}. El archivo \texttt{.gitignore}: datos crudos pesados, credenciales, \textit{outputs} grandes, archivos de sistema (\texttt{.DS\_Store}) e historial de R (\texttt{.Rhistory}, \texttt{.RData}). Implicaciones de versionar datos crudos o credenciales.
 \end{itemize}
 
-\practica{Instalación verificada de R y Positron. Creación del repositorio del curso con la estructura de directorios convenida, \texttt{.gitignore} inicial y primer \textit{commit} sincronizado a GitHub. Primer \textit{script}: construcción de vectores, inspección de tipos y cálculo de proporciones sobre condiciones lógicas.}
+\practica{Verificación del entorno y construcción de la estructura de directorios desde R. Sobre una encuesta breve capturada en clase: construcción de vectores, inspección de tipos, coerción implícita y explícita, operaciones vectorizadas, y cálculo de conteos y proporciones mediante condiciones lógicas, incluida la distinción entre proporción conjunta y condicional. Cierra con el tratamiento de valores faltantes y el agrupamiento de resultados en una lista. Git y GitHub se tratan de forma expositiva; no forman parte de los ejercicios.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
     \item Justificar la elección de R sobre alternativas programáticas en el contexto de un proyecto académico de investigación económica.
     \item Configurar Positron + R y ejecutar un \textit{script} básico tanto desde el IDE como desde la terminal.
+    \item Instalar y cargar paquetes, distinguiendo ambas operaciones y aplicando la convención del curso con \texttt{pacman}.
     \item Crear, asignar y operar con vectores atómicos, identificando su tipo y tamaño.
     \item Evaluar condiciones lógicas sobre vectores y aprovechar la coerción a numérico para contar y calcular proporciones.
     \item Organizar un proyecto de datos en directorios y versionarlo con Git, distinguiendo qué archivos se rastrean y cuáles se excluyen.
