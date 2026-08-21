@@ -20,5 +20,8 @@ node_modules/
 *.snm
 *.vrb
 
+# Artefactos de build (zip de estudiantes)
+build/
+
 # PDF build outputs
 syllabus/**/*.pdf

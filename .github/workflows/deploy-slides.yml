@@ -34,8 +34,22 @@ jobs:
           mkdir -p public
           for dir in slides/semana_*/; do
             week=$(basename "$dir")
+            # Las carpetas de semana pueden existir solo con code/ mientras el
+            # deck está pendiente; saltarlas en vez de romper el build.
+            if [ ! -f "$dir/slides.md" ]; then
+              echo "Saltando $week (sin deck todavía)"
+              continue
+            fi
             echo "Building $week..."
-            (cd "$dir" && slidev build --base "/data_projects/$week/" --out "../../public/$week")
+            # Se publica la versión de estudiante: Pages es material distribuido,
+            # y así los bloques instructor-only nunca salen del repositorio.
+            (
+              cd "$dir" \
+                && node ../_theme/scripts/build-student.mjs \
+                && slidev build slides.student.md \
+                     --base "/data_projects/$week/" \
+                     --out "../../public/$week"
+            )
           done
 
       - name: Generar index

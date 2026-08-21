@@ -1,0 +1,395 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ==============================================================================
+%% Encoding & idioma
+% ==============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+% ==============================================================================
+%% Tipografía y diseño
+% ==============================================================================
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% ==============================================================================
+%% Paleta de colores (consistente con plantilla Beamer Colmex)
+% ==============================================================================
+\definecolor{main}{HTML}{5E002B}
+\definecolor{subtitle}{RGB}{75,75,75}
+\definecolor{cerulean}{RGB}{0,123,167}
+\definecolor{redorange}{RGB}{210,77,49}
+\definecolor{forestgreen}{RGB}{36,128,103}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=main,
+    citecolor=main,
+    urlcolor=cerulean,
+    pdftitle={Programación para Proyectos de Datos I -- Temario sucinto},
+    pdfauthor={Daniel Kelly}
+}
+
+% ==============================================================================
+%% Estilo de secciones
+% ==============================================================================
+\titleformat{\section}
+  {\Large\bfseries\color{main}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{main}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{subtitle}}{}{0em}{}
+
+% ==============================================================================
+%% Comandos auxiliares (consistentes con plantilla Beamer)
+% ==============================================================================
+\newcommand{\blue}[1]{{\color{cerulean}#1}}
+\newcommand{\orange}[1]{{\color{redorange}#1}}
+\newcommand{\green}[1]{{\color{forestgreen}#1}}
+
+% Marcador de contenido pendiente (para iterar sesión por sesión)
+\newcommand{\porDesarrollar}{\textit{\color{redorange}[Por desarrollar]}}
+
+% Divisor de bloque del curso: nueva página, título grande, espacio respiratorio.
+\newcommand{\bloqueCurso}[1]{%
+  \clearpage%
+  \vspace*{0.5cm}%
+  {\centering\color{main}\fontsize{26pt}{32pt}\selectfont\bfseries #1\par}%
+  \vspace{0.8cm}%
+}
+
+% Bloque estandarizado para cada sesión. No fuerza \clearpage: las sesiones
+% fluyen continuas dentro de cada bloque. El título se renderiza prominente
+% (\Large bold, color vino) para mantener la jerarquía visual.
+\newcommand{\sesion}[2]{%
+  \bigskip%
+  {\color{main}\Large\bfseries Sesión #1: #2\par}%
+  \smallskip%
+}
+
+% Bloque de práctica al cierre de cada sesión
+\newcommand{\practica}[1]{%
+  \medskip\noindent\textbf{\orange{Bloque de práctica.}} #1\par%
+}
+
+% Referencia a cheatsheets oficiales de Posit (rstudio.github.io/cheatsheets)
+% Uso: \cheatsheet{slug-del-archivo}{Título descriptivo}
+\newcommand{\cheatsheet}[2]{%
+  \href{https://rstudio.github.io/cheatsheets/#1.pdf}{\textit{Cheatsheet: #2}}%
+}
+
+% ==============================================================================
+%% Bibliografía
+% ==============================================================================
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{../../bibliography.bib}
+
+% ==============================================================================
+%% Encabezado
+% ==============================================================================
+\title{\color{main}\textbf{Programación para Proyectos de Datos I}\\[0.3em]
+       \large\color{subtitle}Temario sucinto: objetivos y lecturas por sesión}
+\author{Daniel Kelly\\
+        \small El Colegio de México --- Licenciatura en Economía}
+\date{Otoño 2026}
+
+\begin{document}
+\maketitle
+
+% ==============================================================================
+\section{Presentación}
+% ==============================================================================
+
+El curso aborda la construcción de proyectos de datos como flujo integrado, no como yuxtaposición de habilidades. Los cursos previos de la Licenciatura en Economía de El Colegio de México proveen al estudiante de competencias específicas en programación y análisis estadístico; el énfasis aquí está en su articulación dentro de un mismo repositorio.
+
+Este temario corresponde al \blue{primer curso} de una secuencia de dos. El primer curso cubre los fundamentos del lenguaje, la manipulación de datos y la programación: desde la instalación del entorno hasta la escritura de funciones propias y su aplicación sobre colecciones. El \orange{segundo curso} retoma desde ahí para cubrir modelado estadístico programático, consumo de APIs, bases de datos relacionales y la construcción de entregables (documentos automatizados, aplicaciones interactivas e interfaces con modelos de lenguaje).
+
+El curso se imparte bajo la filosofía \textit{zero-to-hero}: se asume que el estudiante puede llegar sin experiencia previa de programación y se espera que cierre el curso capaz de levantar por su cuenta un pipeline de datos reproducible.
+
+El lenguaje del curso es R, pensado como una habilidad extremadamente relevante en el campo de las finanzas, la economía y el análisis de políticas públicas. Como IDE (\textit{Integrated Development Environment}) se recomienda usar Positron, el hermano más moderno de R-Studio. La elección de R sobre alternativas (Python, Stata) se discute formalmente en la primera sesión.
+
+% ==============================================================================
+\section{Objetivos}
+% ==============================================================================
+
+Al finalizar el curso, el estudiante será capaz de:
+
+\begin{enumerate}[leftmargin=*]
+    \item Configurar un entorno de trabajo en R y organizar un proyecto de datos bajo convenciones reproducibles, con control de versiones en Git y GitHub.
+    \item Importar datos desde archivos planos y hojas de cálculo, verificando tipos, \textit{encoding} y valores faltantes.
+    \item Explorar un conjunto de datos mediante estadística descriptiva y visualización.
+    \item Transformar datos crudos a formato \textit{tidy} mediante \texttt{dplyr}, \texttt{tidyr} y \texttt{stringr}.
+    \item Escribir funciones propias con manejo de errores y aplicarlas sobre colecciones mediante programación funcional.
+    \item Producir visualizaciones a medida con \texttt{ggplot2} razonando por capas.
+\end{enumerate}
+
+% ==============================================================================
+\section{Prerrequisitos}
+% ==============================================================================
+
+\begin{itemize}[leftmargin=*]
+    \item No se requiere experiencia previa en programación.
+    \item Se asume manejo básico de estadística descriptiva.
+    \item El curso no presenta teoría estadística; el tratamiento es programático.
+\end{itemize}
+
+% ==============================================================================
+\section{Metodología}
+% ==============================================================================
+
+\textbf{Duración.} 6 semanas, con una sesión de 3:00 hr por semana (18 horas totales). Las sesiones son los viernes, del 21 de agosto al 25 de septiembre de 2026.
+
+\textbf{Estructura de la sesión.} Cada sesión se divide en dos bloques separados por un receso:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{\blue{Bloque de exposición} ($\approx$1:45).} Desarrollo conceptual del tema, con código en vivo como ilustración.
+    \item \textbf{\orange{Bloque de práctica} ($\approx$1:15).} Ejercicios resueltos en clase sobre el conjunto de datos que hila el curso.
+\end{itemize}
+
+\textbf{Tareas.} El curso no contempla tareas fuera de clase. El trabajo evaluable se concentra en el bloque de práctica de cada sesión.
+
+\textbf{Uso de modelos de lenguaje.} Los agentes de programación no están permitidos en los ejercicios de clase. La política se detalla en la Sesión 1.
+
+% ==============================================================================
+\section{Evaluación}
+% ==============================================================================
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{Componente} & \textbf{Peso} \\
+\midrule
+Ejercicios del bloque de práctica (6)  & 70\% \\
+Asistencia y participación             & 30\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Hilo conductor: la ENSU}
+% ==============================================================================
+
+El curso no contempla un proyecto integrador con entregas evaluables; esa figura corresponde al segundo curso. En su lugar, las seis sesiones operan sobre un mismo conjunto de datos, de modo que cada tema nuevo se aplique sobre material ya conocido.
+
+El conjunto elegido es la \textbf{Encuesta Nacional de Seguridad Pública Urbana (ENSU)} del INEGI, de levantamiento trimestral. Las razones:
+
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Tamaño manejable.} Los archivos son ligeros y la lectura es inmediata en cualquier máquina.
+    \item \textbf{Varios módulos relacionables.} Cuestionario básico, módulo sociodemográfico y módulo de vivienda comparten identificadores, de modo que el ejercicio de \textit{join} es sustantivo y no artificial.
+    \item \textbf{Varios levantamientos.} La periodicidad trimestral justifica la acumulación temporal y el manejo de nombres de archivo variables.
+    \item \textbf{Datos crudos representativos.} Variables categóricas codificadas numéricamente, catálogos en descriptores externos, valores faltantes y no respuesta: el material típico de la limpieza de datos.
+\end{itemize}
+
+Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones.
+
+% ==============================================================================
+\section{Estructura del curso}
+% ==============================================================================
+
+El curso se organiza en tres bloques a lo largo de 6 sesiones:
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Bloque I --- Fundamentos}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Sesión 1.} El lenguaje y el proyecto: R, Positron, Git y GitHub.
+    \item \textbf{Sesión 2.} Estructuras de datos, importación y exploración.
+\end{itemize}
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Bloque II --- Manipulación}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Sesión 3.} \texttt{dplyr} I: \textit{pipe}, verbos básicos y sistema tidyverse.
+    \item \textbf{Sesión 4.} \texttt{dplyr} II y manejo de texto: \textit{joins}, \textit{pivots} y \texttt{stringr}.
+\end{itemize}
+
+\smallskip
+\noindent\textbf{\textcolor{main}{Bloque III --- Programación y visualización}}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textbf{Sesión 5.} Control de flujo, vectorización y funciones.
+    \item \textbf{Sesión 6.} Programación funcional y visualización con \texttt{ggplot2}.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\bloqueCurso{Bloque I --- Fundamentos}
+% ------------------------------------------------------------------------------
+
+\sesion{1}{El lenguaje y el proyecto: R, Positron, Git y GitHub}
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Justificar la elección de R sobre alternativas programáticas en el contexto de un proyecto académico de investigación económica.
+    \item Configurar Positron + R y ejecutar un \textit{script} básico tanto desde el IDE como desde la terminal.
+    \item Instalar y cargar paquetes, distinguiendo ambas operaciones y aplicando la convención del curso con \texttt{pacman}.
+    \item Crear, asignar y operar con vectores atómicos, identificando su tipo y tamaño.
+    \item Evaluar condiciones lógicas sobre vectores y aprovechar la coerción a numérico para contar y calcular proporciones.
+    \item Organizar un proyecto de datos en directorios y versionarlo con Git, distinguiendo qué archivos se rastrean y cuáles se excluyen.
+    \item Distinguir el uso de un LLM como chatbot frente a su uso como agente integrado al proyecto, y la política del curso al respecto.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), \textit{Introduction}, Cap.\ 2 \textit{Workflow: basics} y Cap.\ 6 \textit{Workflow: scripts and projects} \cite{wickham2023r4ds}.
+    \item \textit{Advanced R} (2.\textsuperscript{a} ed.), Cap.\ 2 §2.1--2.2 y Cap.\ 3 §3.1--3.2 \cite{wickham2019advr}.
+    \item \textit{Happy Git and GitHub for the useR} (Bryan): capítulos introductorios sobre \textit{setup} y operaciones básicas con Git \cite{bryan-happygit}.
+\end{itemize}
+
+\sesion{2}{Estructuras de datos, importación y exploración}
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Distinguir entre vectores atómicos, listas, DataFrames y tibbles, y elegir la estructura adecuada según los datos a representar.
+    \item Aplicar los operadores \texttt{[}, \texttt{[[} y \texttt{\$} según el resultado deseado: preservación de clase frente a extracción.
+    \item Anticipar las consecuencias de la coerción implícita al construir o transformar vectores con tipos mixtos.
+    \item Identificar y manejar valores faltantes en operaciones, distinguiéndolos de \texttt{NULL} y \texttt{NaN}.
+    \item Importar datos desde archivos (CSV, Excel) verificando \textit{encoding}, tipos y representación de \texttt{NA}.
+    \item Realizar una inspección sistemática post-importación que detecte errores tempranos.
+    \item Calcular estadísticas descriptivas univariadas y bivariadas y producir gráficas exploratorias con funciones base.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{Advanced R} (2.\textsuperscript{a} ed.), Cap.\ 3 \textit{Vectors} (§3.2.3, §3.5, §3.6) y Cap.\ 4 \textit{Subsetting} completo \cite{wickham2019advr}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 7 \textit{Data import}, Cap.\ 18 \textit{Missing values} y Cap.\ 20 \textit{Spreadsheets} \cite{wickham2023r4ds}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 10 \textit{Exploratory data analysis} (marco conceptual; los ejemplos visuales usan \texttt{ggplot2}, cubierto en la Sesión 6) \cite{wickham2023r4ds}.
+    \item \textit{An Introduction to R} (manual oficial), Cap.\ 12 \textit{Graphical procedures} \cite{rcoreteam-intro}.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Referencia rápida:} \cheatsheet{base-r}{Base R} (Posit); \cheatsheet{data-import}{Data import with \texttt{readr}} (Posit).
+
+% ------------------------------------------------------------------------------
+\bloqueCurso{Bloque II --- Manipulación}
+% ------------------------------------------------------------------------------
+
+\sesion{3}{dplyr I: pipe, verbos básicos y sistema tidyverse}
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Cargar el ecosistema tidyverse y reconocer qué paquete provee qué funcionalidad.
+    \item Identificar si un dataset está en formato \textit{tidy} y, en su caso, conceptualizar el \textit{reshape} requerido.
+    \item Componer secuencias de verbos \texttt{dplyr} conectados por el \textit{pipe} para resolver preguntas de manipulación de datos.
+    \item Leer código tidyverse escrito por terceros sin necesidad de ejecutarlo línea por línea.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 3 \textit{Data transformation} completo \cite{wickham2023r4ds}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 5 \textit{Data tidying} (§5.1--§5.2); §5.3--§5.4 sobre \textit{pivots} corresponden a la Sesión 4 \cite{wickham2023r4ds}.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Referencia rápida:} \cheatsheet{data-transformation}{Data transformation with \texttt{dplyr}} (Posit).
+
+\sesion{4}{dplyr II y manejo de texto: joins, pivots y stringr}
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Realizar \textit{reshape} de un dataset entre formatos ancho y largo según la operación requerida.
+    \item Combinar múltiples tablas con los \textit{joins} apropiados, identificando \textit{keys} y anticipando problemas de cardinalidad.
+    \item Decidir explícitamente el manejo de \texttt{NA} durante la limpieza, distinguiendo cuándo propagarlos y cuándo intervenir.
+    \item Construir variables derivadas categóricas mediante reglas explícitas con \texttt{if\_else()} y \texttt{case\_when()}.
+    \item Leer y escribir expresiones regulares para detectar, extraer y reemplazar patrones en datos textuales.
+    \item Limpiar inconsistencias textuales típicas en datos crudos combinando \texttt{stringr} con \textit{regex}, y construir \textit{strings} dinámicos con \texttt{glue}.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 5 \textit{Data tidying}, §5.3 \textit{Lengthening data} y §5.4 \textit{Widening data} \cite{wickham2023r4ds}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 19 \textit{Joins} completo \cite{wickham2023r4ds}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 14 \textit{Strings} y Cap.\ 15 \textit{Regular expressions} \cite{wickham2023r4ds}.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Referencia rápida:} \cheatsheet{tidyr}{Data tidying with \texttt{tidyr}} (Posit); \cheatsheet{strings}{String manipulation with \texttt{stringr}} (Posit); \cheatsheet{regex}{Regular Expressions} (Posit).
+
+% ------------------------------------------------------------------------------
+\bloqueCurso{Bloque III --- Programación y visualización}
+% ------------------------------------------------------------------------------
+
+\sesion{5}{Control de flujo, vectorización y funciones}
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Escribir condicionales y \textit{loops} con sintaxis correcta, pre-asignando la salida.
+    \item Identificar cuándo una operación se puede vectorizar y reescribirla sin \textit{loop} cuando proceda.
+    \item Diseñar funciones de un solo propósito con argumentos definidos y valor de retorno explícito.
+    \item Explicar la resolución de nombres dentro de una función y anticipar problemas de \textit{scoping}.
+    \item Validar argumentos, producir errores informativos y capturar fallas en flujos secuenciales con \texttt{tryCatch()}.
+    \item Diagnosticar errores con \texttt{traceback()} y \texttt{browser()}, distinguiendo cuándo es apropiada cada técnica.
+    \item Escribir funciones que reciban nombres de columnas como argumentos mediante el operador \texttt{\{\{~\}\}}.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{Advanced R} (2.\textsuperscript{a} ed.), Cap.\ 5 \textit{Control flow} y Cap.\ 6 \textit{Functions} completos \cite{wickham2019advr}.
+    \item \textit{Advanced R} (2.\textsuperscript{a} ed.), Cap.\ 8 \textit{Conditions}, §8.2 \textit{Signalling conditions} y §8.4 \textit{Handling conditions}; Cap.\ 22 \textit{Debugging} \cite{wickham2019advr}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 25 \textit{Functions}, §25.3 \textit{Data frame functions} \cite{wickham2023r4ds}.
+\end{itemize}
+
+\sesion{6}{Programación funcional y visualización con ggplot2}
+\medskip
+\noindent\textbf{Objetivos de aprendizaje}
+\begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Reconocer cuándo una iteración corresponde a un patrón funcional y elegir el \textit{functional} apropiado.
+    \item Usar la familia \texttt{map\_*()} de \texttt{purrr} con tipo de retorno predecible, incluyendo variantes para varias entradas y para \textit{side effects}.
+    \item Sustituir \textit{loops} explícitos sobre archivos, columnas o grupos por \textit{functionals}, distinguiendo cuándo el \textit{loop} sigue siendo la opción adecuada.
+    \item Aplicar \texttt{across()} para vectorizar transformaciones sobre múltiples columnas dentro de \texttt{dplyr}.
+    \item Explicar la arquitectura por capas de \texttt{ggplot2} y construir una gráfica eligiendo la geometría apropiada, distinguiendo entre \textit{mapping} y \textit{setting}.
+    \item Exportar gráficas con dimensiones y formato apropiados al medio de destino.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Lecturas}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item \textit{Advanced R} (2.\textsuperscript{a} ed.), Cap.\ 9 \textit{Functionals} (§9.1--§9.4) \cite{wickham2019advr}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 26 \textit{Iteration} completo \cite{wickham2023r4ds}.
+    \item \textit{R for Data Science} (2.\textsuperscript{a} ed.), Cap.\ 9 \textit{Layers} y Cap.\ 11 \textit{Communication} \cite{wickham2023r4ds}.
+    \item \textit{ggplot2: Elegant Graphics for Data Analysis} (Wickham): referencia comprehensiva \cite{wickham2016ggplot2}.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Referencia rápida:} \cheatsheet{purrr}{Apply Functions with \texttt{purrr}} (Posit); \cheatsheet{data-visualization}{Data visualization with \texttt{ggplot2}} (Posit).
+
+% ==============================================================================
+\section{Continuidad hacia el segundo curso}
+% ==============================================================================
+
+El segundo curso de la secuencia retoma desde el cierre de este y cubre:
+
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+    \item Reproducibilidad avanzada: \texttt{renv}, \textit{master script} y documentación del repositorio.
+    \item Consumo de APIs HTTP con \texttt{httr2}; caso de estudio con la API SIE de Banco de México.
+    \item Modelado estadístico programático (\texttt{lm}, \texttt{plm}, \texttt{broom}, \texttt{modelsummary}).
+    \item Datos a escala: SQL, \texttt{DBI} y \texttt{dbplyr}.
+    \item Visualización avanzada y el ecosistema de \texttt{ggplot2}.
+    \item Automatización de entregables con \texttt{officer}, \texttt{googledrive} y \texttt{gmailr}.
+    \item Aplicaciones interactivas con Shiny.
+    \item Interfaces de modelos de lenguaje con \texttt{ellmer} y \texttt{httr2}.
+\end{itemize}
+
+El proyecto integrador con entregas evaluables corresponde a ese segundo curso.
+
+% ==============================================================================
+\section{Referencias principales}
+% ==============================================================================
+
+Las lecturas específicas por sesión se indican en el temario detallado. Las obras de consulta general son:
+
+\nocite{wickham2023r4ds, wickham2019advr, wickham2016ggplot2, rcoreteam-intro, bryan-happygit}
+
+\printbibliography[heading=none]
+
+\end{document}
