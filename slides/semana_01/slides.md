@@ -59,7 +59,7 @@ subsection: Estructura del Curso
 - **Sesión 2:** Estructuras de datos, importación y exploración.
 
 ### Bloque 2: Manipulación
-- **Sesión 3:** `dplyr` 1; pipes, verbos y `tidyverse`.
+- **Sesión 3:** `dplyr` 1; verbos y `tidyverse`.
 - **Sesión 4:** `dplyr` 2; joins, pivots y manejo de texto con `stringr`.
 
 ### Bloque 3: Programación y Visualización

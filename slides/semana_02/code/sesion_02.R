@@ -20,7 +20,8 @@
 # BLOQUE DE EXPOSICIÓN — 1:45 hr. Reparto sugerido:
 #
 #   Nombres y estructuras   25 min
-#   Importación             35 min   <- el núcleo de la sesión
+#   Tidy y el pipe          15 min
+#   Importación             30 min   <- el núcleo de la sesión
 #   Indexación              20 min
 #   Coerción y faltantes    15 min
 #   Exploración             10 min
@@ -193,6 +194,73 @@ summary(hogares)   # descriptivas por columna
 # View(hogares)
 
 
+## Datos tidy ----------------------------------------------------------------=
+
+# Una misma información admite formas distintas. La forma tidy cumple tres
+# reglas: cada variable es una columna, cada observación una fila y cada valor
+# una celda. No es una preferencia estética: las funciones de R asumen esa
+# forma. table() espera una columna por variable, boxplot(y ~ g) espera la
+# variable y el grupo en columnas distintas, cor() espera cada variable en la
+# suya. Cuando la tabla no es tidy, cada operación exige un rodeo.
+
+# La pregunta que hay que hacerle a una tabla es qué es una observación aquí.
+# En la EIGH la respuesta cambia por tabla: en hogares es una vivienda, en
+# personas una persona, en gastos una combinación de hogar y rubro. Cada una es
+# tidy a su propio nivel.
+
+# La tabla de gastos está en formato largo: una fila por hogar y rubro, con el
+# rubro como valor de una columna. Se lee más adelante; así se ve:
+#
+#   folioviv   clave   gasto_tri   frecuencia
+#   0773233    A002      5396.77            5
+#   0773233    E001      3187.76            3
+#
+# Muchas encuestas la distribuyen en ancho, con una columna por rubro
+# (gasto_A001, gasto_A002, ...). Ahí el rubro deja de ser un valor y se esconde
+# en los nombres de las columnas. Ninguna de las dos está mal; son útiles para
+# cosas distintas. Pero solo la larga permite agrupar por rubro sin escribir el
+# nombre de cada columna. El reshape entre ambas es la Sesión 4.
+
+
+## El pipe -------------------------------------------------------------------=
+
+# El pipe nativo |> toma lo que está a su izquierda y lo inserta como primer
+# argumento de la función que está a su derecha. Los demás argumentos se
+# escriben normalmente en la llamada de la derecha.
+
+# Estas dos líneas son la misma operación:
+mean(hogares$ing_cor, na.rm = TRUE)
+hogares$ing_cor |> mean(na.rm = TRUE)
+
+# Requiere R 4.1 o superior, que es el requisito del curso. Y el lado derecho
+# tiene que ser una llamada, con paréntesis: `x |> mean` es un error de
+# sintaxis. Descomentar en clase para verlo:
+# hogares$ing_cor |> mean
+
+# En código ajeno se ve `%>%`, del paquete magrittr, que hace lo mismo y algo
+# más. La convención del curso es el nativo; la diferencia se trata en la S3.
+
+# ¿Cuándo conviene? Con una sola llamada no cambia nada, y f(x) suele leerse
+# mejor. La diferencia aparece al anidar: las llamadas se escriben de adentro
+# hacia afuera pero se leen al revés.
+round(prop.table(table(hogares$tam_loc)), 3)
+
+# Con el pipe, el orden de escritura y el de lectura coinciden:
+hogares$tam_loc |> table() |> prop.table() |> round(3)
+
+# Regla práctica: con dos o más llamadas anidadas, pipe; con una sola, la
+# llamada directa. Y cuando la cadena deja de caber en la pantalla, conviene
+# cortarla y darle nombre al resultado intermedio.
+
+#| nota
+# Las dos líneas de arriba usan `hogares`, que en este punto todavía es la tabla
+# de seis filas construida a mano. Correrlas ahí es deliberado: el resultado no
+# importa, importa comparar las dos formas de escribirlo. Los números de la
+# diapositiva salen de la tabla completa, que se lee en la sección siguiente.
+#| fin
+
+
+
 # IMPORTACIÓN _________________________________________________________________
 
 # Los archivos de la EIGH viven en files/ y de ahí no se mueven. Las rutas son
@@ -221,6 +289,8 @@ class(hogares_base)
 # hasta que se intenta el join.
 hogares$folioviv[1]
 hogares_base$folioviv[1]
+
+# De aquí en adelante el curso usa el pipe donde las llamadas se anidan.
 
 
 ## Texto delimitado y archivos .txt ------------------------------------------=
@@ -333,11 +403,11 @@ entidades
 # Cinco verificaciones, siempre en este orden, inmediatamente después de leer.
 # No producen resultados de análisis: producen la certeza de que el análisis se
 # hará sobre lo que se cree.
-dim(hogares)              # 1. ¿coincide con lo documentado?
-glimpse(hogares)          # 2. ¿el tipo de cada columna es el correcto?
-summary(hogares)          # 3. ¿los rangos son plausibles?
-colSums(is.na(hogares))   # 4. ¿cuántos faltantes por columna?
-problems(hogares)         # 5. ¿hubo incidentes de lectura?
+hogares |> dim()                    # 1. ¿coincide con lo documentado?
+hogares |> glimpse()                # 2. ¿los tipos son los correctos?
+hogares |> summary()                # 3. ¿los rangos son plausibles?
+hogares |> is.na() |> colSums()     # 4. ¿cuántos faltantes por columna?
+hogares |> problems()               # 5. ¿hubo incidentes de lectura?
 
 # Lo documentado está en docs/: el descriptor declara el tipo de cada variable y
 # los códigos de no respuesta. La verificación es contra ese archivo, no contra
@@ -357,7 +427,7 @@ descriptor[descriptor$tabla == "hogares", ]
 # Los ejemplos de aquí en adelante usan la tabla completa, la que quedó en
 # memoria tras la importación.
 ingresos = hogares$ing_cor
-head(ingresos)
+ingresos |> head()
 
 ## Formas de escribir el índice ----------------------------------------------=
 
@@ -394,8 +464,8 @@ hogares[, "ing_cor"]
 hogares[3, "ing_cor"]
 
 # El patrón central: una condición lógica en la posición de las filas.
-nrow(hogares[hogares$tot_integ >= 6, ])
-nrow(hogares[hogares$tot_integ >= 6 & hogares$entidad == "16", ])
+hogares[hogares$tot_integ >= 6, ] |> nrow()
+hogares[hogares$tot_integ >= 6 & hogares$entidad == "16", ] |> nrow()
 
 # Esta notación es correcta, pero obliga a repetir el nombre de la tabla en cada
 # término y se vuelve ilegible en cuanto la condición crece. Es exactamente el
@@ -407,14 +477,14 @@ nrow(hogares[hogares$tot_integ >= 6 & hogares$entidad == "16", ])
 # únicamente las posiciones seleccionadas.
 ingresos[2] = 32000
 ingresos[ingresos > 1e7] = NA
-head(ingresos)
+ingresos |> head()
 
 # Sobre una tabla, el mismo mecanismo crea o reemplaza columnas. La corrección
 # se escribe sobre una copia: si resulta equivocada, la tabla cruda sigue ahí.
 limpia = hogares
 limpia$deficit = limpia$gasto_mon > limpia$ing_cor
 limpia$tam_loc[limpia$tam_loc == 9] = NA
-table(limpia$tam_loc, useNA = "ifany")
+limpia$tam_loc |> table(useNA = "ifany")
 
 #| nota
 # Recalcar: esto se escribe SIEMPRE sobre un objeto nuevo, nunca sobre la tabla
@@ -442,8 +512,8 @@ typeof(c(1, "a"))
 # La coerción que sí conviene aprovechar: TRUE vale 1 y FALSE vale 0.
 deficit = hogares$gasto_mon > hogares$ing_cor
 
-sum(deficit, na.rm = TRUE)     # cuántos gastan más de lo que ingresan
-mean(deficit, na.rm = TRUE)    # qué proporción del total lo hace
+deficit |> sum(na.rm = TRUE)     # cuántos gastan más de lo que ingresan
+deficit |> mean(na.rm = TRUE)    # qué proporción del total lo hace
 
 # Y sobre una condición cualquiera, sin construir la columna:
 mean(hogares$tam_loc == 9)     # qué fracción trae el código de no especificado
@@ -454,7 +524,7 @@ mean(hogares$tam_loc == 9)     # qué fracción trae el código de no especifica
 # texto, porque el archivo traía un guion o un "n.d." en alguna celda. Es
 # exactamente lo que pasa con el ingreso por trabajo de la EIGH.
 ing_trab = c("12500", "8500", "n.d.", "15300")
-as.numeric(ing_trab)
+ing_trab |> as.numeric()
 
 # La advertencia no es ruido: informa cuántos valores no pudieron convertirse.
 # Si ese número no coincide con lo esperado, la columna traía algo más.
@@ -480,13 +550,13 @@ ingresos_na = c(48200, 31500, NA, 76400, 19900)
 is.na(ingresos_na)
 
 # Sobre esa máscara lógica, sum() cuenta y mean() da la proporción de faltantes.
-sum(is.na(ingresos_na))
-mean(is.na(ingresos_na))
+ingresos_na |> is.na() |> sum()
+ingresos_na |> is.na() |> mean()
 
 # Las funciones agregadoras aceptan un argumento que los descarta antes de
 # operar. Existe en sum, median, sd, var, min, max y quantile.
-mean(ingresos_na)
-mean(ingresos_na, na.rm = TRUE)
+ingresos_na |> mean()
+ingresos_na |> mean(na.rm = TRUE)
 
 # Ojo con lo que significa: na.rm no rellena el dato, lo saca del denominador.
 # El promedio pasa a ser el de los casos observados, no el de la muestra.
@@ -510,15 +580,17 @@ is.nan(NA)
 
 ## Descriptivas univariadas --------------------------------------------------=
 
-mean(hogares$ing_cor, na.rm = TRUE)
-median(hogares$ing_cor, na.rm = TRUE)
-sd(hogares$ing_cor, na.rm = TRUE)
-var(hogares$ing_cor, na.rm = TRUE)
-range(hogares$ing_cor, na.rm = TRUE)
-quantile(hogares$ing_cor, na.rm = TRUE)
+ing = hogares$ing_cor
+
+ing |> mean(na.rm = TRUE)
+ing |> median(na.rm = TRUE)
+ing |> sd(na.rm = TRUE)
+ing |> var(na.rm = TRUE)
+ing |> range(na.rm = TRUE)
+ing |> quantile(na.rm = TRUE)
 
 # summary() reúne casi todo lo anterior y además informa cuántos faltantes hay.
-summary(hogares$ing_cor)
+ing |> summary()
 
 # La media supera a la mediana por casi diez mil pesos: es la asimetría a la
 # derecha característica de una distribución de ingreso. Reportar solo el
@@ -529,16 +601,16 @@ summary(hogares$ing_cor)
 
 # En datos crudos, 1 y 2 no son cantidades: son etiquetas codificadas como
 # número. Promediarlas no significa nada; lo que corresponde es tabular.
-table(hogares$tam_loc)
+hogares$tam_loc |> table()
 
 # El 9 no es una categoría: es el código de no especificado que declara el
 # descriptor. Y table() descarta los NA por defecto, que es justo lo que
 # interesa verificar.
-table(hogares$tam_loc, useNA = "ifany")
+hogares$tam_loc |> table(useNA = "ifany")
 
 # Las proporciones se calculan sobre la tabla de frecuencias ya construida.
-prop.table(table(hogares$tam_loc))
-round(prop.table(table(hogares$tam_loc)), 3)
+hogares$tam_loc |> table() |> prop.table()
+hogares$tam_loc |> table() |> prop.table() |> round(3)
 
 # Dos variables a la vez. La columna se construye primero:
 hogares$deficit = hogares$gasto_mon > hogares$ing_cor
@@ -548,8 +620,8 @@ table(hogares$tam_loc, hogares$deficit)
 # Por fila: "de los hogares rurales, qué proporción gasta más de lo que ingresa".
 # Por columna: "de los hogares en déficit, qué proporción son rurales". Son
 # números distintos y responden cosas distintas.
-round(prop.table(table(hogares$tam_loc, hogares$deficit), margin = 1), 3)
-round(prop.table(table(hogares$tam_loc, hogares$deficit), margin = 2), 3)
+table(hogares$tam_loc, hogares$deficit) |> prop.table(margin = 1) |> round(3)
+table(hogares$tam_loc, hogares$deficit) |> prop.table(margin = 2) |> round(3)
 
 addmargins(table(hogares$tam_loc, hogares$deficit))
 

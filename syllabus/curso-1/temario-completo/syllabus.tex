@@ -207,7 +207,7 @@ El curso se organiza en tres bloques a lo largo de 6 sesiones:
 \smallskip
 \noindent\textbf{\textcolor{main}{Bloque II --- Manipulación}}
 \begin{itemize}[leftmargin=*, itemsep=1pt]
-    \item \textbf{Sesión 3.} \texttt{dplyr} I: \textit{pipe}, verbos básicos y sistema tidyverse.
+    \item \textbf{Sesión 3.} \texttt{dplyr} I: verbos básicos y sistema tidyverse.
     \item \textbf{Sesión 4.} \texttt{dplyr} II y manejo de texto: \textit{joins}, \textit{pivots} y \texttt{stringr}.
 \end{itemize}
 
@@ -267,13 +267,15 @@ Sesión de apertura. Cubre la justificación del lenguaje, la configuración del
 
 Extensión del vocabulario del lenguaje más allá de los vectores atómicos, seguida del flujo inicial de cualquier proyecto: traer datos reales al entorno, verificar que llegaron bien y explorarlos.
 
-El uso se restringe deliberadamente a las funciones base de R y a los paquetes de importación. La decisión es pedagógica: el estudiante reconoce qué ofrece el lenguaje por sí mismo antes de incorporar el tidyverse (Sesiones 3--4) y \texttt{ggplot2} (Sesión 6).
+El uso se restringe deliberadamente a las funciones base de R y a los paquetes de importación. La decisión es pedagógica: el estudiante reconoce qué ofrece el lenguaje por sí mismo antes de incorporar el tidyverse (Sesiones 3--4) y \texttt{ggplot2} (Sesión 6). Se anticipan dos elementos porque el resto de la sesión los ocupa: la noción de datos \textit{tidy}, que justifica la forma rectangular sobre la que operan las funciones base, y el \textit{pipe} nativo, que es parte del lenguaje y no del tidyverse.
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{Listas.} Contenedores heterogéneos; nombres; acceso con \texttt{\$} y con \texttt{[[]]}; diferencia operativa con vectores atómicos. Uso típico: agrupar resultados de tipos distintos provenientes de un mismo análisis.
     \item \textbf{DataFrames y tibbles.} Estructura interna (lista de vectores de igual longitud con clase \texttt{data.frame}); constructores \texttt{data.frame()} y \texttt{tibble()}; funciones de inspección (\texttt{names}, \texttt{nrow}, \texttt{ncol}, \texttt{dim}, \texttt{head}, \texttt{str}, \texttt{glimpse}). Diferencias prácticas entre \texttt{tibble} y \texttt{data.frame}: impresión, ausencia de \textit{partial matching}, no conversión automática de \textit{strings}, \textit{subsetting} que no simplifica. Por convención el curso utiliza \texttt{tibble} por defecto.
+    \item \textbf{Datos \textit{tidy}.} Tres reglas: cada variable es una columna, cada observación una fila, cada valor una celda. La unidad de observación como pregunta previa a cualquier manipulación. Diagnóstico de formatos no \textit{tidy} típicos en encuestas: variables-columna con sufijos por rubro, módulo o año. El \textit{reshape} operativo con \texttt{pivot\_longer()} y \texttt{pivot\_wider()} corresponde a la Sesión 4.
+    \item \textbf{El \textit{pipe}.} \textit{Pipe} nativo \texttt{|>} (R 4.1+): el resultado del lado izquierdo se inserta como primer argumento del derecho. Exigencia de llamada con paréntesis en el lado derecho. Criterio de uso: la composición encadenada se justifica frente a la llamada anidada cuando hay dos o más niveles. Mención del \textit{pipe} de \texttt{magrittr} (\texttt{\%>\%}), cuyo tratamiento corresponde a la Sesión 3.
     \item \textbf{Indexación.} Operadores \texttt{[}, \texttt{[[} y \texttt{\$}: preservación de clase frente a extracción de elemento. Indexación posicional, por nombre, lógica y negativa. Función \texttt{which()}. Asignación por \textit{subsetting}.
     \item \textbf{Coerción de tipos.} Coerción implícita en la construcción de vectores y en operaciones aritméticas; jerarquía \texttt{logical} $\to$ \texttt{integer} $\to$ \texttt{double} $\to$ \texttt{character}. Coerción explícita con \texttt{as.numeric()}, \texttt{as.character()}, \texttt{as.logical()}. Caso recurrente en datos de encuesta: variables numéricas almacenadas como \textit{string}.
     \item \textbf{Valores faltantes.} Naturaleza del \texttt{NA}; propagación en operaciones; \texttt{is.na()}; argumento \texttt{na.rm = TRUE} en funciones agregadoras. Distinción entre \texttt{NA}, \texttt{NULL} y \texttt{NaN}, y casos en que aparece cada uno.
@@ -290,6 +292,8 @@ El uso se restringe deliberadamente a las funciones base de R y a los paquetes d
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
     \item Distinguir entre vectores atómicos, listas, DataFrames y tibbles, y elegir la estructura adecuada según los datos a representar.
+    \item Determinar si una tabla está en formato \textit{tidy} identificando su unidad de observación.
+    \item Componer operaciones con el \textit{pipe} nativo y juzgar cuándo la llamada directa es preferible.
     \item Aplicar los operadores \texttt{[}, \texttt{[[} y \texttt{\$} según el resultado deseado: preservación de clase frente a extracción.
     \item Anticipar las consecuencias de la coerción implícita al construir o transformar vectores con tipos mixtos.
     \item Identificar y manejar valores faltantes en operaciones, distinguiéndolos de \texttt{NULL} y \texttt{NaN}.
@@ -314,16 +318,15 @@ El uso se restringe deliberadamente a las funciones base de R y a los paquetes d
 \bloqueCurso{Bloque II --- Manipulación}
 % ------------------------------------------------------------------------------
 
-\sesion{3}{dplyr I: pipe, verbos básicos y sistema tidyverse}
+\sesion{3}{dplyr I: verbos básicos y sistema tidyverse}
 
-El contenido subsiguiente del curso ---limpieza avanzada, programación y visualización--- presupone fluidez con \texttt{dplyr} y con el \textit{pipe} como mecanismo de composición. La meta de la sesión es alcanzar dicha fluidez: traducir una pregunta sobre un \texttt{tibble} en una secuencia de verbos, y leer código tidyverse de terceros sin interrupciones.
+El contenido subsiguiente del curso ---limpieza avanzada, programación y visualización--- presupone fluidez con \texttt{dplyr}. La sesión parte de la noción de datos \textit{tidy} y del \textit{pipe}, introducidos en la Sesión 2, y los aplica sobre el vocabulario de verbos. La meta es traducir una pregunta sobre un \texttt{tibble} en una secuencia de verbos, y leer código tidyverse de terceros sin interrupciones.
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
     \item \textbf{El sistema tidyverse.} Paquetes que componen el ecosistema: \texttt{dplyr}, \texttt{tidyr}, \texttt{ggplot2}, \texttt{readr}, \texttt{tibble}, \texttt{purrr}, \texttt{forcats}, \texttt{stringr}, \texttt{lubridate}. Gramática y vocabulario compartidos frente a la alternativa de paquetes desacoplados. Convención del curso: carga mediante \texttt{pacman::p\_load(tidyverse)}.
-    \item \textbf{Tidy data.} Tres reglas: cada variable es una columna, cada observación una fila, cada valor una celda. Diagnóstico de formatos no \textit{tidy} típicos en encuestas (variables-columna con sufijos por año o módulo). El \textit{reshape} hacia \textit{tidy} se introduce conceptualmente; el detalle operativo con \texttt{pivot\_longer()} y \texttt{pivot\_wider()} corresponde a la Sesión 4.
-    \item \textbf{El \textit{pipe}.} \textit{Pipe} nativo \texttt{|>} (R 4.1+) y \textit{pipe} del tidyverse \texttt{\%>\%} (\texttt{magrittr}). Semántica: el resultado del lado izquierdo se inserta como primer argumento del derecho. Convención del curso: \textit{pipe} nativo por defecto; \texttt{\%>\%} solo cuando se requieren sus capacidades específicas.
+    \item \textbf{Los dos \textit{pipes}.} Diferencias entre el nativo \texttt{|>}, ya conocido, y el de \texttt{magrittr} (\texttt{\%>\%}): marcador de posición, inserción en argumentos distintos del primero y comportamiento con funciones anónimas. Convención del curso: nativo por defecto; \texttt{\%>\%} solo cuando se requieren sus capacidades específicas.
     \item \textbf{Los seis verbos de \texttt{dplyr}.} \texttt{filter()} (filas por condición), \texttt{arrange()} (ordenamiento), \texttt{select()} (columnas, con \textit{helpers} \texttt{starts\_with}, \texttt{ends\_with}, \texttt{contains}, \texttt{where}), \texttt{mutate()} (creación o modificación), \texttt{summarize()} (colapso a resumen), \texttt{group\_by()} y \texttt{ungroup()} (contexto de grupo). \textit{Helpers} frecuentes: \texttt{slice\_*()}, \texttt{count()}, \texttt{distinct()}, \texttt{if\_else()}, \texttt{between()}, \texttt{n()}, \texttt{n\_distinct()}. Los verbos como bloques componibles: toda transformación es una secuencia conectada por el \textit{pipe}.
     \item \textbf{\textit{Non-Standard Evaluation} (NSE).} Justificación de por qué \texttt{filter(df, x > 5)} funciona sin \texttt{df\$x} ni \texttt{"x"}. Introducción suficiente para anticipar las limitaciones que aparecen al escribir funciones que reciben nombres de columnas como argumentos. El tratamiento operativo (\texttt{\{\{~\}\}}, \textit{tunneling}) se difiere a la Sesión 5.
 \end{itemize}
@@ -334,7 +337,7 @@ El contenido subsiguiente del curso ---limpieza avanzada, programación y visual
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
     \item Cargar el ecosistema tidyverse y reconocer qué paquete provee qué funcionalidad.
-    \item Identificar si un dataset está en formato \textit{tidy} y, en su caso, conceptualizar el \textit{reshape} requerido.
+    \item Conceptualizar el \textit{reshape} que requiere un dataset que no está en formato \textit{tidy}.
     \item Componer secuencias de verbos \texttt{dplyr} conectados por el \textit{pipe} para resolver preguntas de manipulación de datos.
     \item Leer código tidyverse escrito por terceros sin necesidad de ejecutarlo línea por línea.
 \end{enumerate}

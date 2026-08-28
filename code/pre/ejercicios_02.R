@@ -256,7 +256,41 @@ list.files("files")
 #    gráficas. Una línea basta, pero tiene que decir algo.
 
 
-## 8. Integrador (opcional) --------------------------------------------------=
+## 8. Tidy y pipe --------------------------------------------------=
+
+# a) ¿Cuál es la unidad de observación de `personas`? ¿Y la de `gastos`? Es la
+#    pregunta que define si una tabla está en forma tidy.
+
+# (escribe el código aquí)
+
+
+
+# b) La tabla de gastos está en formato largo. Explica en un comentario qué se
+#    perdería si estuviera en ancho, con una columna por rubro.
+
+# (escribe el código aquí)
+
+
+
+# c) Reescribe esta línea con el pipe y comprueba que da lo mismo:
+#
+#      round(prop.table(table(gastos$clave)), 3)
+
+# (escribe el código aquí)
+
+
+
+# d) ¿En cuál de estas dos líneas NO conviene el pipe, y por qué?
+#
+#      nrow(personas)
+#      round(prop.table(table(personas$sexo)), 3)
+
+# (escribe el código aquí)
+
+
+
+
+## 9. Integrador (opcional) ---------------------------------------------------=
 
 # Con la tabla de personas ya corregida, responde en un solo bloque de código:
 #

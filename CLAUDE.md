@@ -65,7 +65,7 @@ Tres bloques, dos sesiones cada uno:
 |---|---|---|
 | 1 | El lenguaje y el proyecto: R, Positron, Git y GitHub | I — Fundamentos |
 | 2 | Estructuras de datos, importación y exploración | I — Fundamentos |
-| 3 | dplyr I: pipe, verbos básicos y sistema tidyverse | II — Manipulación |
+| 3 | dplyr I: verbos básicos y sistema tidyverse | II — Manipulación |
 | 4 | dplyr II y manejo de texto: joins, pivots y `stringr` | II — Manipulación |
 | 5 | Control de flujo, vectorización y funciones | III — Programación y visualización |
 | 6 | Programación funcional y visualización con `ggplot2` | III — Programación y visualización |
@@ -75,8 +75,8 @@ Tres bloques, dos sesiones cada uno:
 | Sesión nueva | Absorbe del temario de 16 semanas |
 |---|---|
 | 1 | S1 completa + estructura de carpetas, Git y GitHub de S4 |
-| 2 | S2 (estructuras + indexación) + S3 (importación + EDA base) |
-| 3 | S5 (dplyr I) |
+| 2 | S2 (estructuras + indexación) + S3 (importación + EDA base) + *tidy* y *pipe* de S5 |
+| 3 | S5 (dplyr I), menos *tidy* y *pipe*, que se adelantan a la Sesión 2 |
 | 4 | S6 (dplyr II) + S7 (strings/regex) |
 | 5 | S8 (control de flujo) + S9 (funciones) |
 | 6 | S10 (purrr) + fundamentos de S13 (ggplot2) |

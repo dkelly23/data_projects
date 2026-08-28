@@ -29,7 +29,7 @@ Hasta ahora todos los objetos se escribieron a mano dentro del script. Ningún p
 
 ### Contenido de la sesión
 
-1. [**Estructuras de datos**]{.colmex-blue} — listas, `data.frame` y `tibble`; qué contenedor corresponde a qué información.
+1. [**Estructuras de datos**]{.colmex-blue} — listas, `data.frame` y `tibble`; datos *tidy* y el *pipe*.
 2. [**Importación**]{.colmex-orange} — traer un archivo al entorno y verificar que llegó completo.
 3. [**Indexación**]{.colmex-blue} — cómo se extrae una pieza de la tabla ya cargada.
 4. [**Coerción y valores faltantes**]{.colmex-blue} — qué hace R cuando los tipos no coinciden y cuando el dato no existe.
@@ -278,6 +278,61 @@ La conversión automática a `factor` fue el comportamiento de R hasta la versi�
 ---
 layout: default
 section: Sesión 2
+subsection: Datos Tidy
+---
+
+# Datos *tidy*
+La forma que hace que todo lo demás funcione.
+
+Una tabla puede contener la misma información con formas muy distintas. La forma [*tidy*]{.colmex-blue} es la que cumple tres reglas:
+
+1. Cada [variable]{.colmex-orange} es una columna.
+2. Cada [observación]{.colmex-orange} es una fila.
+3. Cada [valor]{.colmex-orange} es una celda.
+
+No es una preferencia estética. Las funciones de R asumen esa forma: `table()` espera una columna por variable, `boxplot(y ~ g)` espera la variable y el grupo en columnas distintas, y `cor()` espera cada variable en su propia columna. Cuando la tabla no es *tidy*, cada operación exige un rodeo.
+
+<br>
+
+<Verde t="La pregunta que hay que hacerle a una tabla">
+
+¿Qué es una observación aquí? En la EIGH la respuesta cambia por tabla: en `hogares` es una vivienda, en `personas` una persona, en `gastos` una combinación de hogar y rubro. Cada una es *tidy* [a su propio nivel]{.colmex-blue}.
+
+</Verde>
+
+---
+layout: default
+section: Sesión 2
+subsection: Datos Tidy
+---
+
+# Cuando la tabla no es *tidy*
+El caso que más aparece en datos de encuesta.
+
+La tabla de gastos está en formato [largo]{.colmex-blue}: una fila por hogar y rubro, con el rubro como valor de una columna.
+
+```r
+gastos |> head(4)
+# A tibble: 4 × 4
+  folioviv clave gasto_tri frecuencia
+  <chr>    <chr>     <dbl>      <dbl>
+1 0773233  A002      5397.          5
+2 0773233  E001      3188.          3
+3 0773233  B001      2124.          3
+4 0773233  A001      4332.          1
+```
+
+Muchas encuestas la distribuyen en formato [ancho]{.colmex-orange}, con una columna por rubro. El rubro deja de ser un valor y se esconde en los nombres de las columnas:
+
+| `folioviv` | `gasto_A001` | `gasto_A002` | `gasto_B001` |
+|---|---|---|---|
+| 0773233 | 4332.11 | 5396.77 | 2124.30 |
+
+Ninguna de las dos está mal: son útiles para cosas distintas. Pero solo la primera permite agrupar por rubro sin escribir el nombre de cada columna. El *reshape* entre ambas es la Sesión 4.
+
+---
+layout: default
+section: Sesión 2
 subsection: DataFrames y Tibbles
 ---
 # Inspección de una tabla
@@ -305,6 +360,62 @@ $ gasto_mon <dbl> 41300, 33800, 18500, 59200, 24600, 47700
 ```
 
 > `View()` sirve para mirar; no deja rastro en el script y no se usa dentro de un flujo automatizado.
+---
+layout: default
+section: Sesión 2
+subsection: El Pipe
+---
+
+# El *pipe*
+Un operador que reordena la lectura del código.
+
+El *pipe* nativo `|>` toma lo que está a su izquierda y lo inserta como [primer argumento]{.colmex-orange} de la función que está a su derecha. Las dos líneas siguientes son la misma; los demás argumentos se escriben normalmente en la llamada de la derecha.
+
+```r
+mean(hogares$ing_cor, na.rm = TRUE)
+hogares$ing_cor |> mean(na.rm = TRUE)
+[1] 70781.16
+```
+
+Dos condiciones que conviene tener presentes:
+
+- Necesita [R 4.1 o superior]{.colmex-blue}, que es el requisito del curso.
+- El lado derecho tiene que ser una [llamada]{.colmex-orange}, con paréntesis: `x |> mean()` funciona, `x |> mean` es un error de sintaxis.
+
+<Azul t="Sobre el otro pipe">
+
+En código ajeno se ve `%>%`, del paquete `magrittr`, que hace lo mismo y algo más. La convención del curso es el nativo `|>`; la diferencia se trata en la Sesión 3.
+
+</Azul>
+---
+layout: default
+section: Sesión 2
+subsection: El Pipe
+---
+
+# Cuándo conviene
+El *pipe* paga cuando las llamadas se anidan.
+
+Con una sola llamada no cambia nada, y `f(x)` suele leerse mejor. La diferencia aparece al anidar: las llamadas se escriben de adentro hacia afuera, pero se leen al revés.
+
+```r
+round(prop.table(table(hogares$tam_loc)), 3)
+```
+
+Para saber qué hace hay que localizar el paréntesis más interno y avanzar hacia afuera. Con el *pipe*, el orden de escritura y el de lectura coinciden:
+
+```r
+hogares$tam_loc |> table() |> prop.table() |> round(3)
+
+    1     2     3     4     9
+0.429 0.245 0.186 0.111 0.029
+```
+
+<Verde t="Regla práctica">
+
+Con dos o más llamadas anidadas, *pipe*; con una sola, la llamada directa. Y cuando la cadena deja de caber en la pantalla, conviene cortarla y darle nombre al resultado intermedio: ese nombre documenta qué se tiene a medio camino.
+
+</Verde>
 ---
 layout: section
 eyebrow: Sesión 2 — Bloque de exposición
@@ -502,7 +613,7 @@ Por qué se rompen los acentos.
 Un archivo de texto es una secuencia de bytes, y el *encoding* es la tabla que dice qué carácter representa cada byte. Cuando el lector usa una tabla distinta a la del generador, aparece el síntoma:
 
 ```r
-unique(read_csv("files/eigh_hogares_latin1.csv")$nom_ent)
+read_csv("files/eigh_hogares_latin1.csv")$nom_ent |> unique()
 [1] "Quer\xe9taro"           "Michoac\xe1n de Ocampo" "Oaxaca"
 [4] "Ciudad de M\xe9xico"    "Yucat\xe1n"             "Nuevo Le\xf3n"
 ```
@@ -591,11 +702,11 @@ subsection: Importación
 Cinco verificaciones antes de tocar los datos.
 
 ```r
-dim(hogares)              # 1. ¿coincide con lo documentado?
-glimpse(hogares)          # 2. ¿el tipo de cada columna es el correcto?
-summary(hogares)          # 3. ¿los rangos son plausibles?
-colSums(is.na(hogares))   # 4. ¿cuántos faltantes por columna?
-problems(hogares)         # 5. ¿hubo incidentes de lectura?
+hogares |> dim()                    # 1. ¿coincide con lo documentado?
+hogares |> glimpse()                # 2. ¿los tipos son los correctos?
+hogares |> summary()                # 3. ¿los rangos son plausibles?
+hogares |> is.na() |> colSums()     # 4. ¿cuántos faltantes por columna?
+hogares |> problems()               # 5. ¿hubo incidentes de lectura?
 ```
 
 Las cinco líneas se escriben [siempre]{.colmex-orange}, en ese orden, inmediatamente después de la importación. No producen resultados de análisis: producen la certeza de que el análisis se hará sobre lo que se cree.
@@ -671,7 +782,7 @@ Lo que va dentro de los corchetes admite varias notaciones.
 
 ```r
 ingresos = hogares$ing_cor
-head(ingresos)
+ingresos |> head()
 [1]  35847.45  75262.01        NA  99132.64 106901.24  37024.57
 ```
 
@@ -740,8 +851,11 @@ hogares[3, "ing_cor"]              # el cruce de ambas
 La última forma es el patrón central: una condición lógica en la posición de las filas y nada en la de las columnas.
 
 ```r
-hogares[hogares$tot_integ >= 6, ]                              # 66 hogares
-hogares[hogares$tot_integ >= 6 & hogares$entidad == "16", ]    #  9 hogares
+hogares[hogares$tot_integ >= 6, ] |> nrow()
+[1] 66
+
+hogares[hogares$tot_integ >= 6 & hogares$entidad == "16", ] |> nrow()
+[1] 9
 ```
 
 <Azul t="Hacia la Sesión 3">
@@ -838,10 +952,10 @@ Al operar aritméticamente sobre un vector lógico, R lo convierte a numérico. 
 ```r
 deficit = hogares$gasto_mon > hogares$ing_cor
 
-sum(deficit, na.rm = TRUE)     # cuántos hogares gastan más de lo que ingresan
+deficit |> sum(na.rm = TRUE)     # cuántos gastan más de lo que ingresan
 [1] 223
 
-mean(deficit, na.rm = TRUE)    # qué proporción del total lo hace
+deficit |> mean(na.rm = TRUE)    # qué proporción del total lo hace
 [1] 0.2851662
 ```
 
@@ -878,7 +992,7 @@ El caso recurrente en datos de encuesta: una variable numérica almacenada como 
 ```r
 ing_trab = c("12500", "8500", "n.d.", "15300")
 
-as.numeric(ing_trab)
+ing_trab |> as.numeric()
 [1] 12500  8500    NA 15300
 Aviso:
 NAs introducidos por coerción
@@ -939,15 +1053,17 @@ is.na(c(48200, NA, 22800))
 Sobre esa máscara lógica, `sum()` cuenta y `mean()` calcula la proporción de no respuesta:
 
 ```r
-sum(is.na(hogares$ing_cor))     # cuántos faltantes tiene la columna
-mean(is.na(hogares$ing_cor))    # qué fracción de la columna falta
+hogares$ing_cor |> is.na() |> sum()      # cuántos faltantes tiene
+[1] 18
 
-colSums(is.na(hogares))         # el conteo, para todas las columnas a la vez
+hogares$ing_cor |> is.na() |> mean()     # qué fracción de la columna falta
+
+hogares |> is.na() |> colSums()          # el conteo, columna por columna
 ```
 
 <Verde t="La línea que resume el diagnóstico">
 
-`colSums(is.na(hogares))` responde en una sola llamada dónde está concentrada la no respuesta. Es parte de la inspección posterior a cualquier importación.
+`hogares |> is.na() |> colSums()` responde en una sola cadena dónde está concentrada la no respuesta. Es parte de la inspección posterior a cualquier importación.
 
 </Verde>
 ---
@@ -963,10 +1079,10 @@ Las funciones agregadoras aceptan un argumento que los descarta antes de operar:
 ```r
 ingresos = c(48200, 31500, NA, 76400, 19900)
 
-mean(ingresos)
+ingresos |> mean()
 [1] NA
 
-mean(ingresos, na.rm = TRUE)
+ingresos |> mean(na.rm = TRUE)
 [1] 44000
 ```
 
@@ -1021,17 +1137,17 @@ Las funciones base sobre una columna numérica.
 ```r
 ing = hogares$ing_cor
 
-mean(ing, na.rm = TRUE)       # media
-median(ing, na.rm = TRUE)     # mediana
-sd(ing, na.rm = TRUE)         # desviación estándar
-range(ing, na.rm = TRUE)      # mínimo y máximo
-quantile(ing, na.rm = TRUE)   # cuartiles
+ing |> mean(na.rm = TRUE)       # media
+ing |> median(na.rm = TRUE)     # mediana
+ing |> sd(na.rm = TRUE)         # desviación estándar
+ing |> range(na.rm = TRUE)      # mínimo y máximo
+ing |> quantile(na.rm = TRUE)   # cuartiles
 ```
 
 `summary()` reúne casi todo lo anterior en una sola llamada, e informa además el número de faltantes:
 
 ```r
-summary(hogares$ing_cor)
+hogares$ing_cor |> summary()
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's
    7694   40814   61116   70781   89538  347889      18
 ```
@@ -1046,7 +1162,7 @@ subsection: Descriptivas
 `table()` sobre variables categóricas.
 
 ```r
-table(hogares$tam_loc)
+hogares$tam_loc |> table()
 
   1   2   3   4   9
 343 196 149  89  23
@@ -1057,7 +1173,7 @@ table(hogares$tam_loc)
 El `9` no es una categoría: es el código de no especificado que declara el descriptor. `table()` además [descarta los `NA` por defecto]{.colmex-orange}, lo que oculta justo lo que interesa verificar:
 
 ```r
-table(hogares$tam_loc, useNA = "ifany")
+hogares$tam_loc |> table(useNA = "ifany")
 ```
 
 <br>
@@ -1078,7 +1194,7 @@ subsection: Descriptivas
 Las proporciones no se calculan sobre la columna, sino sobre la tabla de frecuencias ya construida:
 
 ```r
-prop.table(table(hogares$tam_loc))
+hogares$tam_loc |> table() |> prop.table()
 
       1       2       3       4       9
 0.42875 0.24500 0.18625 0.11125 0.02875
@@ -1089,7 +1205,7 @@ prop.table(table(hogares$tam_loc))
 `round()` la vuelve legible:
 
 ```r
-round(prop.table(table(hogares$tam_loc)), 3)
+hogares$tam_loc |> table() |> prop.table() |> round(3)
 
     1     2     3     4     9
 0.429 0.245 0.186 0.111 0.029
@@ -1122,8 +1238,8 @@ table(hogares$tam_loc, hogares$deficit)
 Sobre una tabla de dos entradas, `prop.table()` admite la dirección del porcentaje:
 
 ```r
-prop.table(table(hogares$tam_loc, hogares$deficit), margin = 1)   # por fila
-prop.table(table(hogares$tam_loc, hogares$deficit), margin = 2)   # por columna
+table(hogares$tam_loc, hogares$deficit) |> prop.table(margin = 1)   # por fila
+table(hogares$tam_loc, hogares$deficit) |> prop.table(margin = 2)   # por columna
 ```
 
 La elección del margen [es la pregunta de investigación]{.colmex-orange}. Por fila responde "de los hogares rurales, qué proporción gasta más de lo que ingresa"; por columna, "de los hogares en déficit, qué proporción son rurales". Son números distintos.
@@ -1259,6 +1375,7 @@ subsection: Cierre
 Lo que esta sesión deja instalado.
 
 - [**Contenedores.**]{.colmex-blue} Una lista agrupa objetos heterogéneos; un `tibble` es una lista de vectores de igual longitud. La convención del curso es `tibble`.
+- [**Tidy y *pipe*.**]{.colmex-blue} Una variable por columna, una observación por fila. `x |> f()` es `f(x)`, y paga cuando las llamadas se anidan.
 - [**Importación.**]{.colmex-orange} La función se elige por el contenido del archivo, no por su extensión. `readLines()` antes de leer; las cinco verificaciones después.
 - [**Indexación.**]{.colmex-blue} `[` preserva la clase, `[[` y `$` extraen el contenido. La indexación lógica es la base del filtrado.
 - [**Coerción.**]{.colmex-orange} R convierte en silencio siguiendo la jerarquía `logical` $\to$ `integer` $\to$ `double` $\to$ `character`.

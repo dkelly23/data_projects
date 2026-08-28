@@ -53,7 +53,7 @@ que después tengas la referencia correcta sin haber estado copiando a ciegas.
 |---|---|
 | 1 | El lenguaje y el proyecto: R, Positron, Git y GitHub |
 | 2 | Estructuras de datos, importación y exploración |
-| 3 | dplyr I: pipe, verbos básicos y sistema tidyverse |
+| 3 | dplyr I: verbos básicos y sistema tidyverse |
 | 4 | dplyr II y manejo de texto: joins, pivots y stringr |
 | 5 | Control de flujo, vectorización y funciones |
 | 6 | Programación funcional y visualización con ggplot2 |

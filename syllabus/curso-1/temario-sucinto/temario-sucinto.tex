@@ -207,7 +207,7 @@ El curso se organiza en tres bloques a lo largo de 6 sesiones:
 \smallskip
 \noindent\textbf{\textcolor{main}{Bloque II --- Manipulación}}
 \begin{itemize}[leftmargin=*, itemsep=1pt]
-    \item \textbf{Sesión 3.} \texttt{dplyr} I: \textit{pipe}, verbos básicos y sistema tidyverse.
+    \item \textbf{Sesión 3.} \texttt{dplyr} I: verbos básicos y sistema tidyverse.
     \item \textbf{Sesión 4.} \texttt{dplyr} II y manejo de texto: \textit{joins}, \textit{pivots} y \texttt{stringr}.
 \end{itemize}
 
@@ -248,6 +248,8 @@ El curso se organiza en tres bloques a lo largo de 6 sesiones:
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
     \item Distinguir entre vectores atómicos, listas, DataFrames y tibbles, y elegir la estructura adecuada según los datos a representar.
+    \item Determinar si una tabla está en formato \textit{tidy} identificando su unidad de observación.
+    \item Componer operaciones con el \textit{pipe} nativo y juzgar cuándo la llamada directa es preferible.
     \item Aplicar los operadores \texttt{[}, \texttt{[[} y \texttt{\$} según el resultado deseado: preservación de clase frente a extracción.
     \item Anticipar las consecuencias de la coerción implícita al construir o transformar vectores con tipos mixtos.
     \item Identificar y manejar valores faltantes en operaciones, distinguiéndolos de \texttt{NULL} y \texttt{NaN}.
@@ -272,12 +274,12 @@ El curso se organiza en tres bloques a lo largo de 6 sesiones:
 \bloqueCurso{Bloque II --- Manipulación}
 % ------------------------------------------------------------------------------
 
-\sesion{3}{dplyr I: pipe, verbos básicos y sistema tidyverse}
+\sesion{3}{dplyr I: verbos básicos y sistema tidyverse}
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
     \item Cargar el ecosistema tidyverse y reconocer qué paquete provee qué funcionalidad.
-    \item Identificar si un dataset está en formato \textit{tidy} y, en su caso, conceptualizar el \textit{reshape} requerido.
+    \item Conceptualizar el \textit{reshape} que requiere un dataset que no está en formato \textit{tidy}.
     \item Componer secuencias de verbos \texttt{dplyr} conectados por el \textit{pipe} para resolver preguntas de manipulación de datos.
     \item Leer código tidyverse escrito por terceros sin necesidad de ejecutarlo línea por línea.
 \end{enumerate}

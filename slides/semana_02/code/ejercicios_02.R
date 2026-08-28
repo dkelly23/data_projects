@@ -26,13 +26,14 @@
 #   Ej. 5  Indexación                     10 min
 #   Ej. 6  Exploración descriptiva        15 min
 #   Ej. 7  Exploración gráfica             5 min
-#   Ej. 8  Integrador                   opcional
+#   Ej. 8  Tidy y pipe                      5 min
+#   Ej. 9  Integrador                   opcional
 #
 # Los primeros 15 minutos, el 1 y el 2 en conjunto en el proyector: es la primera
 # vez que leen un archivo de verdad y conviene que nadie arranque con la ruta mal
 # escrita. Del 3 en adelante, trabajo individual.
 #
-# Si el tiempo aprieta, el 8 se va a casa y el 7 se resuelve en voz alta. Lo que
+# Si el tiempo aprieta, el 9 se va a casa y el 7 se resuelve en voz alta. Lo que
 # NO se puede sacrificar es el 4: la idea de que un 999 y un "n.d." son datos
 # faltantes disfrazados de dato es la que sostiene toda la limpieza del curso.
 #| fin
@@ -142,7 +143,7 @@ desc_personas
 #    con un tipo distinto al que dice el descriptor?
 
 #| solucion
-glimpse(personas)
+personas |> glimpse()
 # `ing_trab` está declarada como double y llegó como character.
 #| fin
 
@@ -204,7 +205,7 @@ personas = read_delim(
 #    esperabas de los incisos anteriores?
 
 #| solucion
-colSums(is.na(personas))
+personas |> is.na() |> colSums()
 #| fin
 
 # f) Vuelve a calcular la edad promedio. ¿Cuánto cambió?
@@ -259,15 +260,15 @@ personas$folioviv[which.max(personas$edad)]
 #    faltantes.
 
 #| solucion
-summary(personas$edad)
-summary(personas$ing_trab)
+personas$edad     |> summary()
+personas$ing_trab |> summary()
 #| fin
 
 # b) Frecuencias de `sexo` y de `nivel_esc`, sin esconder los faltantes.
 
 #| solucion
-table(personas$sexo, useNA = "ifany")
-table(personas$nivel_esc, useNA = "ifany")
+personas$sexo      |> table(useNA = "ifany")
+personas$nivel_esc |> table(useNA = "ifany")
 #| fin
 
 # c) ¿Qué proporción de las personas no percibe ingreso por trabajo? Ojo: no
@@ -281,7 +282,7 @@ mean(personas$ing_trab == 0, na.rm = TRUE)
 #    ¿Qué pregunta responde ese margen, y cuál respondería el otro?
 
 #| solucion
-round(prop.table(table(personas$sexo, personas$nivel_esc), margin = 1), 3)
+table(personas$sexo, personas$nivel_esc) |> prop.table(margin = 1) |> round(3)
 # Por fila: de las mujeres, qué proporción está en cada nivel. Por columna: de
 # quienes están en un nivel, qué proporción son mujeres.
 #| fin
@@ -319,7 +320,47 @@ boxplot(ing_trab ~ sexo, data = personas,
 #    gráficas. Una línea basta, pero tiene que decir algo.
 
 
-## 8. Integrador (opcional) --------------------------------------------------=
+## 8. Tidy y pipe --------------------------------------------------=
+
+# a) ¿Cuál es la unidad de observación de `personas`? ¿Y la de `gastos`? Es la
+#    pregunta que define si una tabla está en forma tidy.
+
+#| solucion
+# En `personas`, una persona dentro de un hogar (folioviv + numren). En
+# `gastos`, una combinación de hogar y rubro (folioviv + clave). Cada tabla es
+# tidy a su propio nivel de observación.
+#| fin
+
+# b) La tabla de gastos está en formato largo. Explica en un comentario qué se
+#    perdería si estuviera en ancho, con una columna por rubro.
+
+#| solucion
+# El rubro dejaría de ser un valor y pasaría a los nombres de las columnas, así
+# que agrupar o filtrar por rubro exigiría escribir el nombre de cada columna en
+# vez de usar una sola variable.
+#| fin
+
+# c) Reescribe esta línea con el pipe y comprueba que da lo mismo:
+#
+#      round(prop.table(table(gastos$clave)), 3)
+
+#| solucion
+round(prop.table(table(gastos$clave)), 3)
+gastos$clave |> table() |> prop.table() |> round(3)
+#| fin
+
+# d) ¿En cuál de estas dos líneas NO conviene el pipe, y por qué?
+#
+#      nrow(personas)
+#      round(prop.table(table(personas$sexo)), 3)
+
+#| solucion
+# En la primera: una sola llamada, sin anidar. `nrow(personas)` se lee mejor que
+# `personas |> nrow()`. El pipe paga cuando hay dos o más llamadas anidadas.
+#| fin
+
+
+## 9. Integrador (opcional) ---------------------------------------------------=
 
 # Con la tabla de personas ya corregida, responde en un solo bloque de código:
 #
@@ -336,7 +377,7 @@ percibe = personas$ing_trab > 0
 mean(personas$edad[percibe], na.rm = TRUE)
 mean(personas$edad[!percibe], na.rm = TRUE)
 
-round(prop.table(table(personas$nivel_esc, percibe), margin = 1), 3)
+table(personas$nivel_esc, percibe) |> prop.table(margin = 1) |> round(3)
 #| fin
 
 #| nota
