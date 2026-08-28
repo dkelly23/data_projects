@@ -1,0 +1,20 @@
+tabla,variable,tipo,descripcion,codigos
+hogares,folioviv,character,"Folio de la vivienda. Identificador, conserva el cero inicial",
+hogares,entidad,character,"Clave de la entidad federativa, dos dígitos",
+hogares,nom_ent,character,Nombre de la entidad federativa,
+hogares,tam_loc,integer,Tamaño de localidad,1 a 4; 9 = no especificado
+hogares,tot_integ,integer,Total de integrantes del hogar,
+hogares,ing_cor,double,"Ingreso corriente trimestral del hogar, en pesos",vacío = no respuesta
+hogares,gasto_mon,double,"Gasto monetario trimestral del hogar, en pesos",
+hogares,factor,integer,Factor de expansión de la vivienda,
+personas,folioviv,character,Folio de la vivienda. Llave con la tabla de hogares,
+personas,numren,integer,Número de renglón de la persona dentro del hogar,
+personas,parentesco,integer,Parentesco con el jefe del hogar,1 jefe; 2 cónyuge; 3 hijo; 4 otro
+personas,sexo,integer,Sexo de la persona,1 hombre; 2 mujer
+personas,edad,integer,Edad en años cumplidos,999 = no especificado
+personas,nivel_esc,integer,Nivel de escolaridad,0 a 5; vacío = no respuesta
+personas,ing_trab,double,"Ingreso trimestral por trabajo, en pesos",n.d. = no declarado
+gastos,folioviv,character,Folio de la vivienda. Llave con la tabla de hogares,
+gastos,clave,character,Clave del rubro de gasto,
+gastos,gasto_tri,double,"Gasto trimestral en el rubro, en pesos",
+gastos,frecuencia,integer,Frecuencia declarada del gasto,1 semanal a 6 anual

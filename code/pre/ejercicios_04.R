@@ -3,7 +3,7 @@
 # Proyecto:       Programación para Proyectos de Datos
 #
 # Script:         ejercicios_04.R
-# Objetivo:       Bloque de práctica de la Sesión 4. Construir el ETL de la ENSU.
+# Objetivo:       Bloque de práctica de la Sesión 4. Construir el ETL de la EIGH.
 #
 # Autor:          Daniel Kelly
 # Correo(s):      djsanchez@colmex.mx

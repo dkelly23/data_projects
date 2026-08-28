@@ -174,21 +174,22 @@ Asistencia y participación             & 30\% \\
 \end{center}
 
 % ==============================================================================
-\section{Hilo conductor: la ENSU}
+\section{Hilo conductor: la EIGH}
 % ==============================================================================
 
 El curso no contempla un proyecto integrador con entregas evaluables; esa figura corresponde al segundo curso. En su lugar, las seis sesiones operan sobre un mismo conjunto de datos, de modo que cada tema nuevo se aplique sobre material ya conocido.
 
-El conjunto elegido es la \textbf{Encuesta Nacional de Seguridad Pública Urbana (ENSU)} del INEGI, de levantamiento trimestral. Las razones:
+El conjunto elegido es la \textbf{Encuesta de Ingresos y Gastos de los Hogares (EIGH)}, un levantamiento simulado que se genera por programa y acompaña al material del curso. Las razones:
 
 \begin{itemize}[leftmargin=*, itemsep=1pt]
-    \item \textbf{Tamaño manejable.} Los archivos son ligeros y la lectura es inmediata en cualquier máquina.
-    \item \textbf{Varios módulos relacionables.} Cuestionario básico, módulo sociodemográfico y módulo de vivienda comparten identificadores, de modo que el ejercicio de \textit{join} es sustantivo y no artificial.
-    \item \textbf{Varios levantamientos.} La periodicidad trimestral justifica la acumulación temporal y el manejo de nombres de archivo variables.
-    \item \textbf{Datos crudos representativos.} Variables categóricas codificadas numéricamente, catálogos en descriptores externos, valores faltantes y no respuesta: el material típico de la limpieza de datos.
+    \item \textbf{Tamaño manejable.} Los archivos son ligeros y la lectura es inmediata en cualquier máquina, sin descargas ni registros previos.
+    \item \textbf{Varias tablas relacionables.} Hogares, personas y gastos comparten el folio de la vivienda, de modo que el ejercicio de \textit{join} es sustantivo y no artificial. Los catálogos de entidad y de rubro viven en archivo aparte.
+    \item \textbf{Varios formatos.} El mismo levantamiento se distribuye en texto delimitado por comas, texto delimitado por barra vertical y hoja de cálculo, lo que obliga a elegir la función de lectura por el contenido y no por la extensión.
+    \item \textbf{Defectos deliberados.} Identificadores con ceros a la izquierda, categóricas codificadas numéricamente, códigos de no respuesta, una columna numérica capturada como texto y una copia en \textit{Latin-1}: el material típico de la limpieza de datos, sembrado a propósito.
+    \item \textbf{Estabilidad.} Al generarse con semilla fija, el levantamiento es idéntico en todas las máquinas y en todos los semestres, y las salidas del material de clase no se desfasan.
 \end{itemize}
 
-Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones.
+Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones. La EIGH no corresponde a ninguna encuesta real; su estructura imita la de una encuesta de ingreso-gasto de las que produce el INEGI.
 
 % ==============================================================================
 \section{Estructura del curso}
@@ -250,7 +251,7 @@ El curso se organiza en tres bloques a lo largo de 6 sesiones:
     \item Aplicar los operadores \texttt{[}, \texttt{[[} y \texttt{\$} según el resultado deseado: preservación de clase frente a extracción.
     \item Anticipar las consecuencias de la coerción implícita al construir o transformar vectores con tipos mixtos.
     \item Identificar y manejar valores faltantes en operaciones, distinguiéndolos de \texttt{NULL} y \texttt{NaN}.
-    \item Importar datos desde archivos (CSV, Excel) verificando \textit{encoding}, tipos y representación de \texttt{NA}.
+    \item Importar datos desde archivos (CSV, texto delimitado, Excel) verificando delimitador, \textit{encoding}, tipos y representación de \texttt{NA}.
     \item Realizar una inspección sistemática post-importación que detecte errores tempranos.
     \item Calcular estadísticas descriptivas univariadas y bivariadas y producir gráficas exploratorias con funciones base.
 \end{enumerate}

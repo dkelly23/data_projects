@@ -134,7 +134,7 @@ Desglose de la evaluación para el curso.
 [Sin tareas fuera de clase.]{.colmex-orange} Cada sesión de 3:00 h se divide en un [bloque de exposición]{.colmex-blue} (≈1:45) y un [bloque de práctica]{.colmex-orange} (≈1:15). Lo evaluable se resuelve en clase.
 
 ### Un solo conjunto de datos
-- Las seis sesiones trabajan sobre la [ENSU]{.colmex-blue} (Encuesta Nacional de Seguridad Pública Urbana, INEGI).
+- Las seis sesiones trabajan sobre la [EIGH]{.colmex-blue}, una encuesta simulada de ingreso y gasto de los hogares.
 - Cada práctica continúa la anterior: importar $\to$ transformar $\to$ automatizar $\to$ graficar.
 - No hay proyecto con entregas parciales; eso corresponde al segundo curso.
 

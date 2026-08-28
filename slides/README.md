@@ -111,7 +111,7 @@ Contenido en **markdown**.
 
 </Azul>
 
-<Rojo t="Título" cita="ENSU 4T 2023">
+<Rojo t="Título" cita="EIGH, tabla de hogares">
 
 La moción aquí.
 

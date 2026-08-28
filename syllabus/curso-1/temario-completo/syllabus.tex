@@ -174,21 +174,22 @@ Asistencia y participación             & 30\% \\
 \end{center}
 
 % ==============================================================================
-\section{Hilo conductor: la ENSU}
+\section{Hilo conductor: la EIGH}
 % ==============================================================================
 
 El curso no contempla un proyecto integrador con entregas evaluables; esa figura corresponde al segundo curso. En su lugar, las seis sesiones operan sobre un mismo conjunto de datos, de modo que cada tema nuevo se aplique sobre material ya conocido.
 
-El conjunto elegido es la \textbf{Encuesta Nacional de Seguridad Pública Urbana (ENSU)} del INEGI, de levantamiento trimestral. Las razones:
+El conjunto elegido es la \textbf{Encuesta de Ingresos y Gastos de los Hogares (EIGH)}, un levantamiento simulado que se genera por programa y acompaña al material del curso. Las razones:
 
 \begin{itemize}[leftmargin=*, itemsep=1pt]
-    \item \textbf{Tamaño manejable.} Los archivos son ligeros y la lectura es inmediata en cualquier máquina.
-    \item \textbf{Varios módulos relacionables.} Cuestionario básico, módulo sociodemográfico y módulo de vivienda comparten identificadores, de modo que el ejercicio de \textit{join} es sustantivo y no artificial.
-    \item \textbf{Varios levantamientos.} La periodicidad trimestral justifica la acumulación temporal y el manejo de nombres de archivo variables.
-    \item \textbf{Datos crudos representativos.} Variables categóricas codificadas numéricamente, catálogos en descriptores externos, valores faltantes y no respuesta: el material típico de la limpieza de datos.
+    \item \textbf{Tamaño manejable.} Los archivos son ligeros y la lectura es inmediata en cualquier máquina, sin descargas ni registros previos.
+    \item \textbf{Varias tablas relacionables.} Hogares, personas y gastos comparten el folio de la vivienda, de modo que el ejercicio de \textit{join} es sustantivo y no artificial. Los catálogos de entidad y de rubro viven en archivo aparte.
+    \item \textbf{Varios formatos.} El mismo levantamiento se distribuye en texto delimitado por comas, texto delimitado por barra vertical y hoja de cálculo, lo que obliga a elegir la función de lectura por el contenido y no por la extensión.
+    \item \textbf{Defectos deliberados.} Identificadores con ceros a la izquierda, categóricas codificadas numéricamente, códigos de no respuesta, una columna numérica capturada como texto y una copia en \textit{Latin-1}: el material típico de la limpieza de datos, sembrado a propósito.
+    \item \textbf{Estabilidad.} Al generarse con semilla fija, el levantamiento es idéntico en todas las máquinas y en todos los semestres, y las salidas del material de clase no se desfasan.
 \end{itemize}
 
-Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones.
+Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones. La EIGH no corresponde a ninguna encuesta real; su estructura imita la de una encuesta de ingreso-gasto de las que produce el INEGI.
 
 % ==============================================================================
 \section{Estructura del curso}
@@ -276,14 +277,14 @@ El uso se restringe deliberadamente a las funciones base de R y a los paquetes d
     \item \textbf{Indexación.} Operadores \texttt{[}, \texttt{[[} y \texttt{\$}: preservación de clase frente a extracción de elemento. Indexación posicional, por nombre, lógica y negativa. Función \texttt{which()}. Asignación por \textit{subsetting}.
     \item \textbf{Coerción de tipos.} Coerción implícita en la construcción de vectores y en operaciones aritméticas; jerarquía \texttt{logical} $\to$ \texttt{integer} $\to$ \texttt{double} $\to$ \texttt{character}. Coerción explícita con \texttt{as.numeric()}, \texttt{as.character()}, \texttt{as.logical()}. Caso recurrente en datos de encuesta: variables numéricas almacenadas como \textit{string}.
     \item \textbf{Valores faltantes.} Naturaleza del \texttt{NA}; propagación en operaciones; \texttt{is.na()}; argumento \texttt{na.rm = TRUE} en funciones agregadoras. Distinción entre \texttt{NA}, \texttt{NULL} y \texttt{NaN}, y casos en que aparece cada uno.
-    \item \textbf{Importación desde archivos.} Lectura de CSV con \texttt{readr} (\texttt{read\_csv}; diferencia con \texttt{read.csv} de base; \texttt{problems()}, \texttt{col\_types}) y de Excel con \texttt{readxl} (\texttt{read\_excel}, \texttt{sheets}, \texttt{range}). Argumentos relevantes: \textit{encoding} (UTF-8 frente a Latin-1, recurrente en datos mexicanos), representaciones de \texttt{NA}, \texttt{locale}.
+    \item \textbf{Importación desde archivos.} Lectura de CSV y de archivos de texto delimitado con \texttt{readr} (\texttt{read\_csv}, \texttt{read\_delim}, \texttt{read\_tsv}, \texttt{read\_table}; inspección previa del archivo con \texttt{readLines()}; diferencia con \texttt{read.csv} de base; \texttt{problems()}, \texttt{col\_types}) y de Excel con \texttt{readxl} (\texttt{read\_excel}, \texttt{sheets}, \texttt{range}). La extensión \texttt{.txt} no declara formato: el delimitador se identifica antes de elegir la función. Argumentos relevantes: \textit{encoding} (UTF-8 frente a Latin-1, recurrente en datos mexicanos), separador decimal (\texttt{read\_csv2}, \texttt{locale}) y representaciones de \texttt{NA}.
     \item \textbf{Inspección post-importación.} Verificación con \texttt{str}, \texttt{glimpse}, \texttt{summary}, \texttt{head}, \texttt{tail}, \texttt{dim}. Errores frecuentes: tipos mal inferidos, \texttt{NA}s no reconocidos, \textit{encoding} corrupto.
     \item \textbf{Estadística descriptiva con base R.} Univariadas: \texttt{mean}, \texttt{median}, \texttt{var}, \texttt{sd}, \texttt{quantile}, \texttt{range}, \texttt{summary}. Frecuencias: \texttt{table}, \texttt{prop.table}. Bivariadas: \texttt{cor}, tablas cruzadas con \texttt{table()}. Manejo de \texttt{NA} en agregaciones.
     \item \textbf{Visualización exploratoria con \textit{base graphics}.} \texttt{plot}, \texttt{hist}, \texttt{boxplot}, \texttt{barplot} y argumentos básicos (\texttt{main}, \texttt{xlab}, \texttt{ylab}, \texttt{col}). Criterios para elegir tipo de gráfica según la pregunta. El tratamiento sistemático de la visualización corresponde a la Sesión 6.
     \item \textbf{Flujo de EDA.} Iteración entre pregunta, carga, inspección, descriptivas, visualización y ajuste de pregunta. Documentación de hallazgos.
 \end{itemize}
 
-\practica{Importación de un trimestre de la ENSU desde archivo plano, con verificación de \textit{encoding} y tipos contra el descriptor técnico. Inspección post-importación, corrección de las variables mal inferidas y primera exploración descriptiva y gráfica.}
+\practica{Importación de las tablas de personas y de gastos de la EIGH, cada una en un formato distinto, con identificación previa del delimitador y verificación de tipos contra el descriptor técnico. Corrección de los códigos de no respuesta y de las variables mal inferidas, y primera exploración descriptiva y gráfica.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
@@ -292,7 +293,7 @@ El uso se restringe deliberadamente a las funciones base de R y a los paquetes d
     \item Aplicar los operadores \texttt{[}, \texttt{[[} y \texttt{\$} según el resultado deseado: preservación de clase frente a extracción.
     \item Anticipar las consecuencias de la coerción implícita al construir o transformar vectores con tipos mixtos.
     \item Identificar y manejar valores faltantes en operaciones, distinguiéndolos de \texttt{NULL} y \texttt{NaN}.
-    \item Importar datos desde archivos (CSV, Excel) verificando \textit{encoding}, tipos y representación de \texttt{NA}.
+    \item Importar datos desde archivos (CSV, texto delimitado, Excel) verificando delimitador, \textit{encoding}, tipos y representación de \texttt{NA}.
     \item Realizar una inspección sistemática post-importación que detecte errores tempranos.
     \item Calcular estadísticas descriptivas univariadas y bivariadas y producir gráficas exploratorias con funciones base.
 \end{enumerate}
@@ -327,7 +328,7 @@ El contenido subsiguiente del curso ---limpieza avanzada, programación y visual
     \item \textbf{\textit{Non-Standard Evaluation} (NSE).} Justificación de por qué \texttt{filter(df, x > 5)} funciona sin \texttt{df\$x} ni \texttt{"x"}. Introducción suficiente para anticipar las limitaciones que aparecen al escribir funciones que reciben nombres de columnas como argumentos. El tratamiento operativo (\texttt{\{\{~\}\}}, \textit{tunneling}) se difiere a la Sesión 5.
 \end{itemize}
 
-\practica{Traducción de un conjunto de preguntas sustantivas sobre la ENSU a secuencias de verbos: filtrado por ciudad y trimestre, construcción de indicadores con \texttt{mutate()} y agregación por grupo con \texttt{group\_by()} y \texttt{summarize()}.}
+\practica{Traducción de un conjunto de preguntas sustantivas sobre la EIGH a secuencias de verbos: filtrado por entidad y por tamaño de localidad, construcción de indicadores de ingreso y gasto con \texttt{mutate()} y agregación por grupo con \texttt{group\_by()} y \texttt{summarize()}.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
@@ -364,7 +365,7 @@ La sesión completa las herramientas necesarias para transformar datos crudos en
     \item \textbf{Construcción dinámica de \textit{strings}: \texttt{glue}.} Interpolación de variables (\texttt{glue("Hola \{nombre\}")}), iteración natural sobre vectores, formateo \textit{inline}. Comparación con \texttt{paste0()} y \texttt{sprintf()}. Aplicación a la generación de \textit{paths} de archivo que varían por trimestre.
 \end{itemize}
 
-\practica{Construcción del ETL de la ENSU: \textit{join} entre módulos por identificador de vivienda, \textit{reshape} de las baterías de preguntas a formato largo, recodificación de categóricas con \texttt{case\_when()} y limpieza de los catálogos de texto con \texttt{stringr}.}
+\practica{Construcción del ETL de la EIGH: \textit{join} de hogares, personas y gastos por folio de vivienda, \textit{reshape} de los rubros de gasto a formato ancho, recodificación de categóricas con \texttt{case\_when()} y limpieza de los catálogos de texto con \texttt{stringr}.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
@@ -408,7 +409,7 @@ La sesión marca la transición del estudiante de consumidor de código a autor 
     \item \textbf{Funciones que reciben nombres de columnas: NSE en \texttt{dplyr}.} Razón por la que \texttt{mi\_funcion(df, edad)} falla cuando internamente llama \texttt{filter(df, edad > 18)}. El operador \textit{embrace} \texttt{\{\{~var~\}\}} reenvía un argumento al ámbito de evaluación de \texttt{dplyr}. Operador \texttt{:=} para asignar nombres dinámicos en \texttt{mutate()}.
 \end{itemize}
 
-\practica{Refactor del ETL de la Sesión 4 en funciones de un solo propósito: una que lea y valide un trimestre, otra que recodifique las categóricas, otra que produzca un resumen por ciudad recibiendo la columna como argumento. Validación de argumentos y captura de fallas con \texttt{tryCatch()}.}
+\practica{Refactor del ETL de la Sesión 4 en funciones de un solo propósito: una que lea y valide una tabla del levantamiento, otra que recodifique las categóricas, otra que produzca un resumen por entidad recibiendo la columna como argumento. Validación de argumentos y captura de fallas con \texttt{tryCatch()}.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
@@ -455,7 +456,7 @@ Cierre del curso. La primera mitad aborda la programación funcional como paradi
     \item \textbf{Scales, facets, themes y exportación.} \texttt{scale\_x\_continuous}, \texttt{scale\_x\_discrete}, \texttt{scale\_x\_date} y sus análogos para \texttt{y}, \texttt{color} y \texttt{fill}; control de \texttt{limits}, \texttt{breaks} y \texttt{labels}; \texttt{scale\_*\_manual()} con vectores nombrados. \textit{Formatters} del paquete \texttt{scales} (\texttt{label\_percent()}, \texttt{label\_comma()}). \texttt{facet\_wrap} frente a \texttt{facet\_grid}. Themes predefinidos (\texttt{theme\_minimal}, \texttt{theme\_bw}, \texttt{theme\_classic}) y \texttt{theme\_set()} para fijar el tema del proyecto. Exportación con \texttt{ggsave()}: \texttt{width}, \texttt{height}, \texttt{units}, \texttt{dpi}, \texttt{bg = 'white'}. El tratamiento comprehensivo de \texttt{ggplot2} y su ecosistema corresponde al segundo curso.
 \end{itemize}
 
-\practica{Cierre del pipeline: lectura de todos los trimestres disponibles de la ENSU con \texttt{map()} sobre la función de lectura escrita en la Sesión 5, consolidación en un solo \texttt{tibble} y producción de una serie de gráficas de percepción de inseguridad por ciudad, exportadas a \texttt{output/} con \texttt{walk()}.}
+\practica{Cierre del pipeline: lectura de todos los levantamientos disponibles de la EIGH con \texttt{map()} sobre la función escrita en la Sesión 5, consolidación en un solo \texttt{tibble} y producción de una serie de gráficas de ingreso y gasto por entidad, exportadas a \texttt{output/} con \texttt{walk()}.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}

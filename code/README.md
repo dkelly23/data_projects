@@ -17,6 +17,26 @@ La separación no es cosmética. `files/` es insumo y se trata como de solo lect
 `output/` es desechable y se puede borrar completo, porque el código lo regenera.
 Si borrar `output/` rompe algo, el pipeline no es reproducible.
 
+## Los datos
+
+El curso trabaja sobre la **EIGH**, una encuesta simulada de ingreso y gasto de los
+hogares. No corresponde a ningún levantamiento real: se generó para que todas las
+sesiones operen sobre los mismos datos, con los mismos defectos, sin depender de
+una descarga.
+
+| Archivo | Contenido | Formato |
+|---|---|---|
+| `files/eigh_hogares.csv` | 800 hogares: ingreso, gasto, entidad, integrantes | CSV separado por comas |
+| `files/eigh_personas.txt` | 2,606 personas: sexo, edad, escolaridad, ingreso | texto separado por barra vertical |
+| `files/eigh_gastos.csv` | 4,418 renglones de gasto por rubro | CSV separado por punto y coma, coma decimal |
+| `files/eigh_catalogos.xlsx` | catálogos de entidad y de rubro de gasto | hoja de cálculo |
+| `files/eigh_hogares_latin1.csv` | copia del primero, codificada en Latin-1 | CSV |
+| `docs/eigh_descriptor.csv` | tipo, descripción y códigos de cada variable | CSV |
+
+Las tres tablas se relacionan por `folioviv`, el folio de la vivienda. El descriptor
+es el documento contra el que se verifica cada importación: declara qué tipo tiene
+cada variable y qué códigos representan la no respuesta.
+
 ## Scripts
 
 Cada sesión de 3:00 h tiene dos bloques, y a cada bloque le corresponde un archivo.

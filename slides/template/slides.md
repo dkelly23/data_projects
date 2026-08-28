@@ -60,7 +60,7 @@ subsection: Bloques de contenido
 
 # Bloque Rojo
 
-<Rojo t="Título del bloque" cita="Caso ENSU, 4T 2023.">
+<Rojo t="Título del bloque" cita="Caso EIGH, tabla de hogares.">
 
 La distinción entre `geom_bar()` y `geom_col()` importa: `bar` cuenta filas, `col` grafica el valor que se le pasa.
 

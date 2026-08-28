@@ -42,7 +42,7 @@ Curso comprensivo de programación orientado a la construcción de **proyectos c
 
 Una sola sesión semanal de 3:00 hr, dividida en dos bloques separados por un receso:
 - **Bloque de exposición (~1:45).** Desarrollo conceptual del tema con código en vivo demostrativo.
-- **Bloque de práctica (~1:15).** Ejercicios resueltos en clase sobre la ENSU.
+- **Bloque de práctica (~1:15).** Ejercicios resueltos en clase sobre la EIGH.
 
 **Sin tareas fuera de clase.** El trabajo evaluable se concentra en el bloque de práctica.
 
@@ -87,13 +87,26 @@ Tres bloques, dos sesiones cada uno:
 
 ---
 
-## Hilo conductor del curso 1: la ENSU
+## Hilo conductor del curso 1: la EIGH
 
 El curso 1 **no tiene proyecto integrador evaluable**. En su lugar, las seis sesiones operan sobre un mismo conjunto de datos para que cada tema nuevo se aplique sobre material ya conocido.
 
-**Dataset:** Encuesta Nacional de Seguridad Pública Urbana (ENSU) del INEGI, levantamiento trimestral. Razones: archivos ligeros, varios módulos relacionables por identificador (cuestionario básico, sociodemográfico, vivienda), varios levantamientos en el tiempo, y datos crudos representativos (categóricas codificadas numéricamente, catálogos en descriptores externos, no respuesta).
+**Dataset:** Encuesta de Ingresos y Gastos de los Hogares (**EIGH**), un levantamiento **simulado** que se genera por programa. No corresponde a ninguna encuesta real; imita la estructura de una encuesta de ingreso-gasto del INEGI.
 
-Cada sesión cierra con un bloque de práctica sobre la ENSU que continúa el del bloque anterior: importación (S2) → verbos (S3) → ETL con joins y limpieza de texto (S4) → refactor en funciones (S5) → consolidación con `map()` y gráficas (S6).
+Razones de la elección: archivos ligeros y sin descarga previa; tres tablas relacionables por `folioviv` (hogares, personas, gastos) más catálogos en archivo aparte, de modo que el *join* de la S4 es sustantivo; los tres formatos de la S2 en el mismo levantamiento (CSV por comas, texto por barra vertical, hoja de cálculo); defectos sembrados a propósito (ceros a la izquierda, códigos de no respuesta, columna numérica capturada como texto, copia en Latin-1); y semilla fija, así que el levantamiento es idéntico en toda máquina y las salidas del material no se desfasan.
+
+| Tabla | Archivo | Formato |
+|---|---|---|
+| hogares (800) | `files/eigh_hogares.csv` | CSV, comas, UTF-8 |
+| personas (2,606) | `files/eigh_personas.txt` | texto, barra vertical |
+| gastos (4,418) | `files/eigh_gastos.csv` | CSV, punto y coma, coma decimal |
+| catálogos | `files/eigh_catalogos.xlsx` | Excel, 3 hojas con título y filas en blanco |
+| copia rota | `files/eigh_hogares_latin1.csv` | CSV en Latin-1 |
+| descriptor | `docs/eigh_descriptor.csv` | CSV con tipo, descripción y códigos |
+
+**Generador:** `slides/semana_02/code/generar_data.R`. Se corre desde cualquier carpeta del repositorio (localiza la raíz por `code/curso-ppd.Rproj`) y escribe en `code/files/` y `code/docs/`. Con la semilla fija, regenerar produce archivos idénticos. Las salidas que aparecen en las slides y en los scripts se copiaron de una corrida real: **si se cambia el generador, hay que volver a verificarlas**.
+
+Cada sesión cierra con un bloque de práctica sobre la EIGH que continúa el del bloque anterior: importación (S2) → verbos (S3) → ETL con joins y limpieza de texto (S4) → refactor en funciones (S5) → consolidación con `map()` y gráficas (S6).
 
 ## Proyecto integrador (curso 2)
 
@@ -139,7 +152,7 @@ Estas convenciones aplican a TODO el contenido generado: temario, slides, materi
 
 ### Terminología
 
-- *"datos"* como término genérico, NO *"microdatos"* salvo contexto de encuesta (ENSU, ENIGH).
+- *"datos"* como término genérico, NO *"microdatos"* salvo contexto de encuesta (EIGH, ENIGH).
 - **Banco de México** (forma extendida) o **BANXICO** (versalitas), NO "Banxico" coloquial.
 - *"regresión lineal univariable"* cuando se mencione el prerrequisito.
 - *"los estudiantes"* (no "el equipo") en contextos pedagógicos.
@@ -148,8 +161,9 @@ Estas convenciones aplican a TODO el contenido generado: temario, slides, materi
 
 ### Vínculo con el hilo conductor
 
-- Los subtemas y objetivos NO mencionan la ENSU. La narrativa del contenido usa formulaciones genéricas ("el proyecto en el que se trabaje", "un pipeline ETL").
-- La ENSU aparece únicamente en el bloque `\practica{}` de cada sesión y en la sección del hilo conductor.
+- Los subtemas y objetivos del temario NO mencionan la EIGH. La narrativa del contenido usa formulaciones genéricas ("el proyecto en el que se trabaje", "un pipeline ETL").
+- En el **temario**, la EIGH aparece únicamente en el bloque `\practica{}` de cada sesión y en la sección del hilo conductor.
+- En las **slides y los scripts** sí se usa como material de ejemplo en todo el bloque de exposición: es lo que permite que las salidas mostradas sean reales.
 - Nunca "Checkpoint N" en el curso 1: esa figura pertenece al curso 2.
 
 ### Recortes preferidos
@@ -192,7 +206,7 @@ Los estudiantes no reciben este archivo por adelantado: siguen la exposición y 
 
 **Nunca editar los derivados a mano.** Todo cambio va en la fuente de `slides/semana_NN/code/`.
 
-`code/` en la raíz es el proyecto R que reciben los estudiantes: `curso-ppd.Rproj`, `README.md` y la estructura `files/` `docs/` `pre/` `output/` que enseña la Sesión 1. Los datos de la ENSU van en `code/files/` y **los coloca el profesor** (no están versionados).
+`code/` en la raíz es el proyecto R que reciben los estudiantes: `curso-ppd.Rproj`, `README.md` y la estructura `files/` `docs/` `pre/` `output/` que enseña la Sesión 1. Los archivos de la EIGH viven en `code/files/` y `code/docs/`; **sí se versionan**, porque son sintéticos, ligeros y forman parte del distribuible. Se regeneran con `generar_data.R`, nunca se editan a mano.
 
 ### Marcas de derivación
 
@@ -214,6 +228,10 @@ mean(edad >= 18)      queda "# (escribe el código aquí)" más un hueco; la
 ```
 
 El guion (`sesion_NN.R`) usa solo `#| nota`: todo su código es material que el instructor reproduce, no ejercicio.
+
+### Datos de trabajo
+
+`slides/semana_NN/code/generar_data.R` (hoy solo en `semana_02/`) genera los archivos de la EIGH en `code/files/` y `code/docs/`. No lo toca `build-code.py`: se corre a mano cuando cambia el diseño de los datos.
 
 ### Build
 
@@ -447,12 +465,11 @@ Programming for Data Projects/
 
 **Curso 1 (arranca el 21 de agosto de 2026):**
 - [ ] Actualizar el deck `slides/semana_01/` para que cubra el contenido nuevo de la Sesión 1 (Git, GitHub y estructura de carpetas se agregaron desde la antigua S4).
-- [ ] Desarrollar slides de las Sesiones 2–6.
+- [ ] Desarrollar slides de las Sesiones 3–6 (el deck de la Sesión 2 ya está en `slides/semana_02/`).
 - [ ] Desarrollar el contenido de `sesion_02.R` … `sesion_06.R` y de `ejercicios_02.R` … `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
-- [ ] Colocar los archivos de ENSU en `code/files/` antes de armar el zip.
+- [ ] Extender `generar_data.R` para que emita **varios levantamientos** de la EIGH: la práctica de la Sesión 6 (`map()` sobre la función de lectura de la S5) necesita más de uno. Hoy genera uno solo.
 
-**Nota sobre la Sesión 1:** Git y GitHub son **solo teoría**. Los ejercicios no piden escribir `.gitignore` ni commitear: el bloque de práctica trabaja sobre una mini encuesta capturada a mano (12 personas: edad, sexo, percepción de seguridad codificada 1/2), que anticipa la estructura de la ENSU sin necesitar archivos.
-- [ ] Elegir los trimestres concretos de ENSU y descargar los archivos de trabajo.
+**Nota sobre la Sesión 1:** Git y GitHub son **solo teoría**. Los ejercicios no piden escribir `.gitignore` ni commitear: el bloque de práctica trabaja sobre una mini encuesta capturada a mano (12 personas: edad, sexo, percepción de seguridad codificada 1/2), que no necesita archivos. Su tabla no coincide con la de la EIGH; conviene revisar si conviene alinearla (folio, integrantes, ingreso) para que la Sesión 2 continúe de ella.
 
 **Curso 2:**
 - [ ] Definir duración, calendario y estructura de bloques.
