@@ -20,8 +20,9 @@
 # BLOQUE DE EXPOSICIÓN — 1:45 hr. Reparto sugerido:
 #
 #   Nombres y estructuras   25 min
-#   Tidy y el pipe          15 min
+#   El pipe                  8 min
 #   Importación             30 min   <- el núcleo de la sesión
+#   Datos tidy               7 min
 #   Indexación              20 min
 #   Coerción y faltantes    15 min
 #   Exploración             10 min
@@ -194,34 +195,6 @@ summary(hogares)   # descriptivas por columna
 # View(hogares)
 
 
-## Datos tidy ----------------------------------------------------------------=
-
-# Una misma información admite formas distintas. La forma tidy cumple tres
-# reglas: cada variable es una columna, cada observación una fila y cada valor
-# una celda. No es una preferencia estética: las funciones de R asumen esa
-# forma. table() espera una columna por variable, boxplot(y ~ g) espera la
-# variable y el grupo en columnas distintas, cor() espera cada variable en la
-# suya. Cuando la tabla no es tidy, cada operación exige un rodeo.
-
-# La pregunta que hay que hacerle a una tabla es qué es una observación aquí.
-# En la EIGH la respuesta cambia por tabla: en hogares es una vivienda, en
-# personas una persona, en gastos una combinación de hogar y rubro. Cada una es
-# tidy a su propio nivel.
-
-# La tabla de gastos está en formato largo: una fila por hogar y rubro, con el
-# rubro como valor de una columna. Se lee más adelante; así se ve:
-#
-#   folioviv   clave   gasto_tri   frecuencia
-#   0773233    A002      5396.77            5
-#   0773233    E001      3187.76            3
-#
-# Muchas encuestas la distribuyen en ancho, con una columna por rubro
-# (gasto_A001, gasto_A002, ...). Ahí el rubro deja de ser un valor y se esconde
-# en los nombres de las columnas. Ninguna de las dos está mal; son útiles para
-# cosas distintas. Pero solo la larga permite agrupar por rubro sin escribir el
-# nombre de cada columna. El reshape entre ambas es la Sesión 4.
-
-
 ## El pipe -------------------------------------------------------------------=
 
 # El pipe nativo |> toma lo que está a su izquierda y lo inserta como primer
@@ -253,10 +226,10 @@ hogares$tam_loc |> table() |> prop.table() |> round(3)
 # cortarla y darle nombre al resultado intermedio.
 
 #| nota
-# Las dos líneas de arriba usan `hogares`, que en este punto todavía es la tabla
-# de seis filas construida a mano. Correrlas ahí es deliberado: el resultado no
-# importa, importa comparar las dos formas de escribirlo. Los números de la
-# diapositiva salen de la tabla completa, que se lee en la sección siguiente.
+# Todo esto corre sobre la tabla de seis filas, que es la que existe en este
+# punto. Es deliberado: lo que importa no es el resultado sino comparar las dos
+# formas de escribir lo mismo. Los números de la diapositiva son los de esa
+# misma tabla.
 #| fin
 
 
@@ -420,6 +393,35 @@ descriptor[descriptor$tabla == "hogares", ]
 # producen una tabla que se imprime sin quejarse. Por eso la verificación tiene
 # que ser deliberada: no hay nada que avise.
 #| fin
+
+
+# DATOS TIDY __________________________________________________________________
+
+
+# Una misma información admite formas distintas. La forma tidy cumple tres
+# reglas: cada variable es una columna, cada observación una fila y cada valor
+# una celda. No es una preferencia estética: las funciones de R asumen esa
+# forma. table() espera una columna por variable, boxplot(y ~ g) espera la
+# variable y el grupo en columnas distintas, cor() espera cada variable en la
+# suya. Cuando la tabla no es tidy, cada operación exige un rodeo.
+
+# La pregunta que hay que hacerle a una tabla es qué es una observación aquí.
+# En la EIGH la respuesta cambia por tabla: en hogares es una vivienda, en
+# personas una persona, en gastos una combinación de hogar y rubro. Cada una es
+# tidy a su propio nivel.
+
+# La tabla de gastos, ya leída, está en formato largo: una fila por hogar y
+# rubro, con el rubro como valor de una columna.
+gastos |> head(4)
+
+# Cada tabla del levantamiento es tidy a su propio nivel de observación:
+personas |> head(3)
+
+# Muchas encuestas la distribuyen en ancho, con una columna por rubro
+# (gasto_A001, gasto_A002, ...). Ahí el rubro deja de ser un valor y se esconde
+# en los nombres de las columnas. Ninguna de las dos está mal; son útiles para
+# cosas distintas. Pero solo la larga permite agrupar por rubro sin escribir el
+# nombre de cada columna. El reshape entre ambas es la Sesión 4.
 
 
 # INDEXACIÓN __________________________________________________________________

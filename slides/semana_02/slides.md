@@ -29,11 +29,12 @@ Hasta ahora todos los objetos se escribieron a mano dentro del script. Ningún p
 
 ### Contenido de la sesión
 
-1. [**Estructuras de datos**]{.colmex-blue} — listas, `data.frame` y `tibble`; datos *tidy* y el *pipe*.
+1. [**Estructuras de datos**]{.colmex-blue} — listas, `data.frame` y `tibble`, y el *pipe* como forma de encadenar.
 2. [**Importación**]{.colmex-orange} — traer un archivo al entorno y verificar que llegó completo.
-3. [**Indexación**]{.colmex-blue} — cómo se extrae una pieza de la tabla ya cargada.
-4. [**Coerción y valores faltantes**]{.colmex-blue} — qué hace R cuando los tipos no coinciden y cuando el dato no existe.
-5. [**Exploración**]{.colmex-orange} — descriptivas y gráficas con funciones base.
+3. [**Datos *tidy***]{.colmex-blue} — qué forma debe tener una tabla y cuál es su unidad de observación.
+4. [**Indexación**]{.colmex-blue} — cómo se extrae una pieza de la tabla ya cargada.
+5. [**Coerción y valores faltantes**]{.colmex-blue} — qué hace R cuando los tipos no coinciden y cuando el dato no existe.
+6. [**Exploración**]{.colmex-orange} — descriptivas y gráficas con funciones base.
 
 <br>
 
@@ -87,7 +88,9 @@ edad 2024 = 1     # error: contiene un espacio
 Las columnas de una tabla importada no siempre cumplen esas reglas, porque el encabezado del archivo lo escribió alguien más. R las admite entre acentos graves:
 
 ```r
-datos$`Entidad federativa`
+catalogo = list(`Entidad federativa` = "Oaxaca")
+catalogo$`Entidad federativa`
+[1] "Oaxaca"
 ```
 
 <Verde t="Convención del curso">
@@ -230,6 +233,8 @@ subsection: DataFrames y Tibbles
 El `data.frame` del `tidyverse`, con el comportamiento corregido.
 
 ```r
+pacman::p_load(tibble)
+
 hogares = tibble(
     folioviv  = c("0100012", "0100027", "0100034", "0100041", "0100056", "0100063"),
     entidad   = c("09", "16", "09", "22", "16", "31"),
@@ -238,14 +243,12 @@ hogares = tibble(
     ing_cor   = c(48200, 31500, 22800, 76400, 19900, 54100),
     gasto_mon = c(41300, 33800, 18500, 59200, 24600, 47700)
 )
-```
 
-Un `tibble` [es]{.colmex-blue} un `data.frame`: hereda su clase y funciona con todo lo que espera una tabla. Las diferencias son de comportamiento, no de estructura.
-
-```r
 class(hogares)
 [1] "tbl_df"     "tbl"        "data.frame"
 ```
+
+Un `tibble` [es]{.colmex-blue} un `data.frame`: hereda su clase y funciona con todo lo que espera una tabla. Las diferencias son de comportamiento, no de estructura.
 
 <Azul t="Convención del curso">
 
@@ -275,61 +278,6 @@ Por qué la convención es `tibble` y no `data.frame`.
 La conversión automática a `factor` fue el comportamiento de R hasta la versión 4.0. Código anterior a 2020 puede depender de ella; conviene reconocerla al leerlo.
 
 </Verde>
----
-layout: default
-section: Sesión 2
-subsection: Datos Tidy
----
-
-# Datos *tidy*
-La forma que hace que todo lo demás funcione.
-
-Una tabla puede contener la misma información con formas muy distintas. La forma [*tidy*]{.colmex-blue} es la que cumple tres reglas:
-
-1. Cada [variable]{.colmex-orange} es una columna.
-2. Cada [observación]{.colmex-orange} es una fila.
-3. Cada [valor]{.colmex-orange} es una celda.
-
-No es una preferencia estética. Las funciones de R asumen esa forma: `table()` espera una columna por variable, `boxplot(y ~ g)` espera la variable y el grupo en columnas distintas, y `cor()` espera cada variable en su propia columna. Cuando la tabla no es *tidy*, cada operación exige un rodeo.
-
-<br>
-
-<Verde t="La pregunta que hay que hacerle a una tabla">
-
-¿Qué es una observación aquí? En la EIGH la respuesta cambia por tabla: en `hogares` es una vivienda, en `personas` una persona, en `gastos` una combinación de hogar y rubro. Cada una es *tidy* [a su propio nivel]{.colmex-blue}.
-
-</Verde>
-
----
-layout: default
-section: Sesión 2
-subsection: Datos Tidy
----
-
-# Cuando la tabla no es *tidy*
-El caso que más aparece en datos de encuesta.
-
-La tabla de gastos está en formato [largo]{.colmex-blue}: una fila por hogar y rubro, con el rubro como valor de una columna.
-
-```r
-gastos |> head(4)
-# A tibble: 4 × 4
-  folioviv clave gasto_tri frecuencia
-  <chr>    <chr>     <dbl>      <dbl>
-1 0773233  A002      5397.          5
-2 0773233  E001      3188.          3
-3 0773233  B001      2124.          3
-4 0773233  A001      4332.          1
-```
-
-Muchas encuestas la distribuyen en formato [ancho]{.colmex-orange}, con una columna por rubro. El rubro deja de ser un valor y se esconde en los nombres de las columnas:
-
-| `folioviv` | `gasto_A001` | `gasto_A002` | `gasto_B001` |
-|---|---|---|---|
-| 0773233 | 4332.11 | 5396.77 | 2124.30 |
-
-Ninguna de las dos está mal: son útiles para cosas distintas. Pero solo la primera permite agrupar por rubro sin escribir el nombre de cada columna. El *reshape* entre ambas es la Sesión 4.
-
 ---
 layout: default
 section: Sesión 2
@@ -372,9 +320,9 @@ Un operador que reordena la lectura del código.
 El *pipe* nativo `|>` toma lo que está a su izquierda y lo inserta como [primer argumento]{.colmex-orange} de la función que está a su derecha. Las dos líneas siguientes son la misma; los demás argumentos se escriben normalmente en la llamada de la derecha.
 
 ```r
-mean(hogares$ing_cor, na.rm = TRUE)
-hogares$ing_cor |> mean(na.rm = TRUE)
-[1] 70781.16
+mean(hogares$ing_cor)
+hogares$ing_cor |> mean()
+[1] 42150
 ```
 
 Dos condiciones que conviene tener presentes:
@@ -408,7 +356,7 @@ Para saber qué hace hay que localizar el paréntesis más interno y avanzar hac
 hogares$tam_loc |> table() |> prop.table() |> round(3)
 
     1     2     3     4     9
-0.429 0.245 0.186 0.111 0.029
+0.333 0.167 0.167 0.167 0.167
 ```
 
 <Verde t="Regla práctica">
@@ -743,6 +691,66 @@ Ninguno de los seis casos produce un error al importar. Los seis producen una ta
 layout: section
 eyebrow: Sesión 2 — Bloque de exposición
 ---
+
+# Datos tidy
+---
+layout: default
+section: Sesión 2
+subsection: Datos Tidy
+---
+
+# Datos *tidy*
+La forma que hace que todo lo demás funcione.
+
+Una tabla puede contener la misma información con formas muy distintas. La forma [*tidy*]{.colmex-blue} es la que cumple tres reglas:
+
+1. Cada [variable]{.colmex-orange} es una columna.
+2. Cada [observación]{.colmex-orange} es una fila.
+3. Cada [valor]{.colmex-orange} es una celda.
+
+No es una preferencia estética. Las funciones de R asumen esa forma: `table()` espera una columna por variable, `boxplot(y ~ g)` espera la variable y el grupo en columnas distintas, y `cor()` espera cada variable en su propia columna. Cuando la tabla no es *tidy*, cada operación exige un rodeo.
+
+<br>
+
+<Verde t="La pregunta que hay que hacerle a una tabla">
+
+¿Qué es una observación aquí? En la EIGH la respuesta cambia por tabla: en `hogares` es una vivienda, en `personas` una persona, en `gastos` una combinación de hogar y rubro. Cada una es *tidy* [a su propio nivel]{.colmex-blue}.
+
+</Verde>
+
+---
+layout: default
+section: Sesión 2
+subsection: Datos Tidy
+---
+
+# Cuando la tabla no es *tidy*
+El caso que más aparece en datos de encuesta.
+
+La tabla de gastos está en formato [largo]{.colmex-blue}: una fila por hogar y rubro, con el rubro como valor de una columna.
+
+```r
+gastos |> head(4)
+# A tibble: 4 × 4
+  folioviv clave gasto_tri frecuencia
+  <chr>    <chr>     <dbl>      <dbl>
+1 0773233  A002      5397.          5
+2 0773233  E001      3188.          3
+3 0773233  B001      2124.          3
+4 0773233  A001      4332.          1
+```
+
+Muchas encuestas la distribuyen en formato [ancho]{.colmex-orange}, con una columna por rubro. El rubro deja de ser un valor y se esconde en los nombres de las columnas:
+
+| `folioviv` | `gasto_A001` | `gasto_A002` | `gasto_B001` |
+|---|---|---|---|
+| 0773233 | 4332.11 | 5396.77 | 2124.30 |
+
+Ninguna de las dos está mal: son útiles para cosas distintas. Pero solo la primera permite agrupar por rubro sin escribir el nombre de cada columna. El *reshape* entre ambas es la Sesión 4.
+---
+layout: section
+eyebrow: Sesión 2 — Bloque de exposición
+---
 # Indexación
 
 ---
@@ -980,14 +988,9 @@ subsection: Coerción
 # Coerción explícita
 Cuando la conversión la decide el analista.
 
-```r
-as.numeric(x)      # a double
-as.integer(x)      # a entero, truncando decimales
-as.character(x)    # a texto
-as.logical(x)      # a TRUE / FALSE
-```
+La familia `as.*()` convierte de forma deliberada: `as.numeric()`, `as.integer()` —que trunca los decimales—, `as.character()` y `as.logical()`, para la que el `0` es `FALSE`.
 
-El caso recurrente en datos de encuesta: una variable numérica almacenada como texto, porque el archivo original traía un guion o un `"n.d."` en alguna celda. Es exactamente lo que ocurre con el ingreso por trabajo de la EIGH:
+El caso recurrente en datos de encuesta es una variable numérica almacenada como texto, porque el archivo original traía un guion o un `"n.d."` en alguna celda. Es exactamente lo que ocurre con el ingreso por trabajo de la EIGH:
 
 ```r
 ing_trab = c("12500", "8500", "n.d.", "15300")
@@ -1375,8 +1378,9 @@ subsection: Cierre
 Lo que esta sesión deja instalado.
 
 - [**Contenedores.**]{.colmex-blue} Una lista agrupa objetos heterogéneos; un `tibble` es una lista de vectores de igual longitud. La convención del curso es `tibble`.
-- [**Tidy y *pipe*.**]{.colmex-blue} Una variable por columna, una observación por fila. `x |> f()` es `f(x)`, y paga cuando las llamadas se anidan.
+- [**El *pipe*.**]{.colmex-blue} `x |> f()` es `f(x)`. Paga cuando las llamadas se anidan; con una sola, la llamada directa se lee mejor.
 - [**Importación.**]{.colmex-orange} La función se elige por el contenido del archivo, no por su extensión. `readLines()` antes de leer; las cinco verificaciones después.
+- [**Tidy.**]{.colmex-blue} Una variable por columna, una observación por fila. La unidad de observación es la pregunta previa a cualquier manipulación.
 - [**Indexación.**]{.colmex-blue} `[` preserva la clase, `[[` y `$` extraen el contenido. La indexación lógica es la base del filtrado.
 - [**Coerción.**]{.colmex-orange} R convierte en silencio siguiendo la jerarquía `logical` $\to$ `integer` $\to$ `double` $\to$ `character`.
 - [**Faltantes.**]{.colmex-orange} `NA` se propaga y no se compara; `na.rm = TRUE` cambia el denominador del cálculo.
