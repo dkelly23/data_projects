@@ -742,9 +742,9 @@ gastos |> head(4)
 
 Muchas encuestas la distribuyen en formato [ancho]{.colmex-orange}, con una columna por rubro. El rubro deja de ser un valor y se esconde en los nombres de las columnas:
 
-| `folioviv` | `gasto_A001` | `gasto_A002` | `gasto_B001` |
-|---|---|---|---|
-| 0773233 | 4332.11 | 5396.77 | 2124.30 |
+| `folioviv` | `gasto_A001` | `gasto_A002` | `gasto_B001` | … |
+|---|---|---|---|---|
+| 0773233 | 4332.12 | 5396.77 | 2124.28 | … |
 
 Ninguna de las dos está mal: son útiles para cosas distintas. Pero solo la primera permite agrupar por rubro sin escribir el nombre de cada columna. El *reshape* entre ambas es la Sesión 4.
 ---
