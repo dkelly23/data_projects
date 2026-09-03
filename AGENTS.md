@@ -317,7 +317,7 @@ slides/
 │   ├── slides.md
 │   ├── package.json
 │   └── vite.config.mjs
-├── semana_01/               # Contenido S1 (único deck completo al momento)
+├── semana_01/               # Contenido S1 (S2 y S3 con la misma estructura)
 │   ├── slides.md
 │   ├── package.json         # symlink → ../template/package.json
 │   ├── vite.config.mjs      # symlink → ../template/vite.config.mjs
@@ -451,8 +451,10 @@ Programming for Data Projects/
 │   ├── README.md
 │   ├── _theme/            (assets compartidos — layouts, components, CSS, public)
 │   ├── template/          (plantilla maestra)
-│   ├── semana_01/         (deck de la Sesión 1, único completo al momento)
-│   └── semana_02..06/     (solo code/ por ahora; los decks faltan)
+│   ├── semana_01/         (deck de la Sesión 1)
+│   ├── semana_02/         (deck de la Sesión 2)
+│   ├── semana_03/         (deck de la Sesión 3)
+│   └── semana_04..06/     (solo code/ por ahora; los decks faltan)
 ├── docs/                  (guías de contenido por tema, insumo para armar decks)
 └── muestra_ppt/           (referencia Beamer — no tocar)
 ```
@@ -465,8 +467,8 @@ Programming for Data Projects/
 
 **Curso 1 (arranca el 21 de agosto de 2026):**
 - [ ] Actualizar el deck `slides/semana_01/` para que cubra el contenido nuevo de la Sesión 1 (Git, GitHub y estructura de carpetas se agregaron desde la antigua S4).
-- [ ] Desarrollar slides de las Sesiones 3–6 (el deck de la Sesión 2 ya está en `slides/semana_02/`).
-- [ ] Desarrollar el contenido de `sesion_02.R` … `sesion_06.R` y de `ejercicios_02.R` … `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
+- [ ] Desarrollar slides de las Sesiones 4–6 (los decks de las Sesiones 2 y 3 ya están en `slides/semana_02/` y `slides/semana_03/`).
+- [ ] Desarrollar el contenido de `sesion_04.R` … `sesion_06.R` y de `ejercicios_04.R` … `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
 - [ ] Extender `generar_data.R` para que emita **varios levantamientos** de la EIGH: la práctica de la Sesión 6 (`map()` sobre la función de lectura de la S5) necesita más de uno. Hoy genera uno solo.
 
 **Nota sobre la Sesión 1:** Git y GitHub son **solo teoría**. Los ejercicios no piden escribir `.gitignore` ni commitear: el bloque de práctica trabaja sobre una mini encuesta capturada a mano (12 personas: edad, sexo, percepción de seguridad codificada 1/2), que no necesita archivos. Su tabla no coincide con la de la EIGH; conviene revisar si conviene alinearla (folio, integrantes, ingreso) para que la Sesión 2 continúe de ella.

@@ -25,3 +25,4 @@ build/
 
 # PDF build outputs
 syllabus/**/*.pdf
+.Rproj.user
