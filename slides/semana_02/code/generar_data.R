@@ -31,6 +31,7 @@
 #   eigh_gastos.csv        punto y coma como separador, coma como decimal
 #   eigh_hogares_latin1    el mismo CSV codificado en Latin-1 en vez de UTF-8
 #   eigh_catalogos.xlsx    hojas con título y filas en blanco antes de los datos
+#   hoja rubros_texto      clave pegada a la etiqueta, espacios y mayúsculas sueltas
 #
 # Se corre UNA vez, desde la raíz del repositorio. Los archivos quedan en
 # code/files/ y code/docs/, que es lo que reciben los estudiantes en el zip.
@@ -99,6 +100,25 @@ claves_gasto = tibble(
         "Transporte público y particular", "Colegiaturas y material escolar",
         "Consultas, medicamentos y hospitalización",
         "Ropa, calzado y accesorios")
+)
+
+# Clasificación del gasto, capturada a mano. Es el catálogo que llega sucio: la
+# clave viene pegada a la etiqueta con separadores que cambian de fila en fila,
+# sobran espacios, y la capitalización no es consistente. El dato que aporta
+# —si el rubro es necesario o discrecional— no está en ninguna otra tabla, así
+# que hay que limpiarlo para poder usarlo.
+rubros_texto = tibble(
+    rubro_completo = c(
+        "A001 - Alimentos consumidos dentro del hogar",
+        "A002 – ALIMENTOS CONSUMIDOS FUERA DEL HOGAR ",
+        "  B001- Renta o pago de vivienda",
+        "B002 : Electricidad,  agua y combustible",
+        "C001 - transporte público y particular",
+        "D001  -  Colegiaturas y material escolar",
+        "E001- CONSULTAS, medicamentos y hospitalización",
+        "F001 – Ropa, calzado y accesorios  "),
+    tipo = c("necesario", "discrecional", "NECESARIO", "Necesario",
+        "necesario", "", "NECESARIO", "Discrecional")
 )
 
 
@@ -312,6 +332,10 @@ writeData(wb, "entidades", entidades, startCol = 1, startRow = 4)
 addWorksheet(wb, "claves_gasto")
 writeData(wb, "claves_gasto", "Catálogo de rubros de gasto", startCol = 1, startRow = 1)
 writeData(wb, "claves_gasto", claves_gasto, startCol = 1, startRow = 3)
+
+addWorksheet(wb, "rubros_texto")
+writeData(wb, "rubros_texto", "Clasificación del gasto - captura de campo", startCol = 1, startRow = 1)
+writeData(wb, "rubros_texto", rubros_texto, startCol = 1, startRow = 3)
 
 addWorksheet(wb, "notas")
 writeData(wb, "notas", c(

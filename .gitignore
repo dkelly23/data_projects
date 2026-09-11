@@ -26,3 +26,8 @@ build/
 # PDF build outputs
 syllabus/**/*.pdf
 .Rproj.user
+
+# Salidas del proyecto de estudiantes (se regeneran corriendo los scripts)
+code/output/*
+!code/output/.gitkeep
+code/.Rhistory

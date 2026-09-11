@@ -622,7 +622,7 @@ Hojas de cálculo.
 pacman::p_load(readxl)
 
 excel_sheets("files/eigh_catalogos.xlsx")    # qué hojas contiene el archivo
-[1] "entidades"    "claves_gasto"    "notas"
+[1] "entidades"    "claves_gasto"    "rubros_texto"    "notas"
 ```
 
 El problema del formato es que la hoja mezcla los datos con su presentación. Leer la de entidades completa arrastra el título y las filas en blanco:

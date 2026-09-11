@@ -93,14 +93,14 @@ El curso 1 **no tiene proyecto integrador evaluable**. En su lugar, las seis ses
 
 **Dataset:** Encuesta de Ingresos y Gastos de los Hogares (**EIGH**), un levantamiento **simulado** que se genera por programa. No corresponde a ninguna encuesta real; imita la estructura de una encuesta de ingreso-gasto del INEGI.
 
-Razones de la elección: archivos ligeros y sin descarga previa; tres tablas relacionables por `folioviv` (hogares, personas, gastos) más catálogos en archivo aparte, de modo que el *join* de la S4 es sustantivo; los tres formatos de la S2 en el mismo levantamiento (CSV por comas, texto por barra vertical, hoja de cálculo); defectos sembrados a propósito (ceros a la izquierda, códigos de no respuesta, columna numérica capturada como texto, copia en Latin-1); y semilla fija, así que el levantamiento es idéntico en toda máquina y las salidas del material no se desfasan.
+Razones de la elección: archivos ligeros y sin descarga previa; tres tablas relacionables por `folioviv` (hogares, personas, gastos) más catálogos en archivo aparte, de modo que el *join* de la S4 es sustantivo; los tres formatos de la S2 en el mismo levantamiento (CSV por comas, texto por barra vertical, hoja de cálculo); defectos sembrados a propósito (ceros a la izquierda, códigos de no respuesta, columna numérica capturada como texto, copia en Latin-1, y un catálogo de texto con la clave pegada a la etiqueta); y semilla fija, así que el levantamiento es idéntico en toda máquina y las salidas del material no se desfasan.
 
 | Tabla | Archivo | Formato |
 |---|---|---|
 | hogares (800) | `files/eigh_hogares.csv` | CSV, comas, UTF-8 |
 | personas (2,606) | `files/eigh_personas.txt` | texto, barra vertical |
 | gastos (4,418) | `files/eigh_gastos.csv` | CSV, punto y coma, coma decimal |
-| catálogos | `files/eigh_catalogos.xlsx` | Excel, 3 hojas con título y filas en blanco |
+| catálogos | `files/eigh_catalogos.xlsx` | Excel, 4 hojas con título y filas en blanco |
 | copia rota | `files/eigh_hogares_latin1.csv` | CSV en Latin-1 |
 | descriptor | `docs/eigh_descriptor.csv` | CSV con tipo, descripción y códigos |
 
@@ -454,7 +454,8 @@ Programming for Data Projects/
 │   ├── semana_01/         (deck de la Sesión 1)
 │   ├── semana_02/         (deck de la Sesión 2)
 │   ├── semana_03/         (deck de la Sesión 3)
-│   └── semana_04..06/     (solo code/ por ahora; los decks faltan)
+│   ├── semana_04/         (deck de la Sesión 4)
+│   └── semana_05..06/     (solo code/ por ahora; los decks faltan)
 ├── docs/                  (guías de contenido por tema, insumo para armar decks)
 └── muestra_ppt/           (referencia Beamer — no tocar)
 ```
@@ -467,8 +468,8 @@ Programming for Data Projects/
 
 **Curso 1 (arranca el 21 de agosto de 2026):**
 - [ ] Actualizar el deck `slides/semana_01/` para que cubra el contenido nuevo de la Sesión 1 (Git, GitHub y estructura de carpetas se agregaron desde la antigua S4).
-- [ ] Desarrollar slides de las Sesiones 4–6 (los decks de las Sesiones 2 y 3 ya están en `slides/semana_02/` y `slides/semana_03/`).
-- [ ] Desarrollar el contenido de `sesion_04.R` … `sesion_06.R` y de `ejercicios_04.R` … `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
+- [ ] Desarrollar slides de las Sesiones 5–6 (los decks de las Sesiones 2, 3 y 4 ya están en `slides/semana_02/`, `slides/semana_03/` y `slides/semana_04/`).
+- [ ] Desarrollar el contenido de `sesion_05.R` y `sesion_06.R` y de `ejercicios_05.R` y `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
 - [ ] Extender `generar_data.R` para que emita **varios levantamientos** de la EIGH: la práctica de la Sesión 6 (`map()` sobre la función de lectura de la S5) necesita más de uno. Hoy genera uno solo.
 
 **Nota sobre la Sesión 1:** Git y GitHub son **solo teoría**. Los ejercicios no piden escribir `.gitignore` ni commitear: el bloque de práctica trabaja sobre una mini encuesta capturada a mano (12 personas: edad, sexo, percepción de seguridad codificada 1/2), que no necesita archivos. Su tabla no coincide con la de la EIGH; conviene revisar si conviene alinearla (folio, integrantes, ingreso) para que la Sesión 2 continúe de ella.
