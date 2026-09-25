@@ -414,6 +414,25 @@ El archivo `style.css` en `_theme/` define la paleta Colmex y overrides de tipog
 
 **Evitar `[N:M]` en output de código.** UnoCSS interpreta literales como `[1:2]` como utilidades CSS, causando `SyntaxError`. Reescribir los ejemplos que produzcan esa notación.
 
+### Verificar que ninguna diapositiva se desborde
+
+El contenido que no cabe en los 720 px del lienzo **no se ve**: queda tapado por el pie de página, sin ningún aviso en el build. Conviene comprobarlo antes de publicar, y se hace sin abrir el navegador a mano:
+
+```bash
+npm run build                                   # en slides/semana_NN/
+python3 scripts/serve-spa.py slides/semana_NN/dist 4180 &   # servidor con fallback de SPA
+for n in $(seq 1 58); do
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+    --window-size=1280,720 --virtual-time-budget=9000 \
+    --screenshot=/tmp/tiros/s$n.png "http://localhost:4180/$n"
+done
+python3 scripts/revisar-desborde.py /tmp/tiros slides/semana_NN/slides.md
+```
+
+El servidor con *fallback* es necesario porque el deck usa rutas (`/13`), no *hash*: `python3 -m http.server` devuelve 404 en cada diapositiva. El revisor mide, en cada captura, cuántos píxeles quedan entre la última tinta y el borde del pie. **Menos de 25 px es señal de recorte**; en la Sesión 5 ninguna baja de 33.
+
+Medir el DOM desde un `iframe` no funciona: Slidev solo maqueta la diapositiva activa, y con `--virtual-time-budget` las transiciones no alcanzan a asentarse.
+
 ### Versión estudiante vs instructor
 
 Mecanismo de filtrado para generar `slides.student.md`:

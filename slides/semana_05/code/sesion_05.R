@@ -25,8 +25,8 @@
 #   Loops                      18 min
 #   Vectorización              14 min
 #   Ambientes y diseño         12 min
-#   Errores y debugging        16 min
-#   Columnas como argumentos    6 min
+#   Errores y debugging        13 min
+#   Columnas como argumentos    8 min
 #   Cierre                      2 min
 #
 # ÚNICA SESIÓN SIN LA EIGH. Todo lo que hace falta se declara en el script: tres
@@ -1327,18 +1327,12 @@ paste0("Calculados ", sum(ok), " de ", nrow(escenarios), " escenarios. ",
 
 ## traceback() y browser() -----------------------------------------------------=
 
-# PARA QUÉ SIRVEN. Mientras R evalúa, mantiene una pila de llamadas activas: la que
-# se escribió en la consola, la que esa llamó, la que esa otra llamó, y así. Cuando
-# algo falla, el error se señala en la llamada más profunda, que casi nunca es la
-# que se escribió. El mensaje entonces menciona una función que no aparece en la
-# línea que se corrió, y ahí empieza la confusión.
-#
-# traceback() imprime esa pila después del error. browser() hace algo distinto:
-# detiene la ejecución en medio de una función y entrega la consola con el ambiente
-# de esa llamada disponible, para poder mirar los objetos locales.
+# Dos herramientas de diagnóstico, y con saber cuándo sirve cada una alcanza.
 
-# EN CÓDIGO. costo_total() no valida nada; la validación está una llamada más
-# abajo, en pago_seguro():
+# Mientras R evalúa, mantiene una pila de llamadas activas: la que se escribió,
+# la que esa llamó, y así. El error se señala en la más profunda, que casi nunca
+# es la que uno escribió. costo_total() no valida nada; la validación está una
+# llamada más abajo:
 costo_total = function(capital, tasa, plazo) {
     pago_seguro(capital, tasa, plazo) * plazo - capital
 }
@@ -1346,8 +1340,9 @@ costo_total = function(capital, tasa, plazo) {
 round(costo_total(250000, 0.01, 24), 2)
 # [1] 32440.83
 
-# Con un argumento mal escrito, el mensaje habla de pago_seguro(), que es una
-# función que la llamada nunca menciona:
+# Con un argumento mal escrito, el mensaje habla de pago_seguro(), que esta
+# llamada nunca menciona. traceback(), corrido enseguida del error, muestra la
+# pila y resuelve el desconcierto:
 #
 #   costo_total("250000", 0.01, 24)
 #   Error in pago_seguro(capital, tasa, plazo) : capital tiene que ser numérico
@@ -1358,38 +1353,19 @@ round(costo_total(250000, 0.01, 24), 2)
 #   2: pago_seguro(capital, tasa, plazo)
 #   1: costo_total("250000", 0.01, 24)
 #
-# La pila se lee de abajo hacia arriba: el 1 es lo que se escribió y el 4 es donde
-# reventó. El nivel que suele interesar es el intermedio, porque ahí está la
-# llamada que recibió el argumento equivocado.
+# Se lee de abajo hacia arriba: el 1 es lo que se escribió, el 4 es donde reventó,
+# y el intermedio es el que recibió el argumento equivocado.
 
-# browser() se pega en el cuerpo de la función que se quiere inspeccionar, se
-# vuelve a llamar la función, y R se detiene en esa línea:
-costo_total = function(capital, tasa, plazo) {
-    # browser()          <- descomentar para inspeccionar
-    pago_seguro(capital, tasa, plazo) * plazo - capital
-}
-
-# En la pausa el prompt cambia a Browse[1]> y acepta código normal —`capital`,
-# `class(capital)`, `tasa * plazo`— además de cuatro comandos:
-#
-#   n      ejecuta la siguiente línea
-#   c      continúa hasta el final
-#   Q      sale y cancela la llamada
-#   where  imprime la pila de llamadas
-#
-# Cada una contesta una pregunta distinta: traceback() dice dónde falló, browser()
-# dice con qué valores. La primera es gratis y va siempre primero; la segunda
-# cuesta una corrida más y se usa cuando el mensaje no alcanza.
-#
-# En Positron se puede lograr lo mismo sin editar el código, poniendo un
-# breakpoint en el margen del editor.
+# browser() contesta la otra pregunta, la de con qué valores: se pega en el cuerpo
+# de la función, R se detiene ahí y entrega la consola con los objetos locales. El
+# prompt cambia a Browse[1]> y se sale con Q. En Positron se consigue lo mismo con
+# un breakpoint en el margen, sin tocar el código.
 
 #| nota
-# browser() no se puede mostrar en una diapositiva: hay que hacerlo en vivo.
-# Descomentar la línea, llamar costo_total("250000", 0.01, 24), teclear `capital` y
-# `class(capital)` en el prompt, salir con Q. Noventa segundos, y es lo único de
-# esta sección que no se puede aprender leyendo. Volver a comentar la línea antes
-# de seguir, o el resto del script se detiene en cada llamada.
+# Tres minutos para toda la sección, y dos de ellos son la demostración en vivo de
+# browser(): pegar la línea en costo_total(), llamarla con "250000", teclear
+# `capital` y `class(capital)`, salir con Q, volver a comentar la línea. No hay
+# forma de enseñarlo en una diapositiva y no hay mucho más que decir de él.
 #| fin
 
 

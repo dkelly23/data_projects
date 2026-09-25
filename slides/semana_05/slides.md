@@ -148,22 +148,18 @@ pago_mensual = function(capital, tasa, plazo) {
 round(pago_mensual(250000, 0.01, 24), 2)   # [1] 11768.37
 ```
 
-| Parte | Qué es | Cómo se inspecciona |
-|---|---|---|
-| argumentos | lo que entra | `formals()` |
-| cuerpo | lo que hace | `body()` |
-| ambiente | dónde busca los nombres | `environment()` |
+```r
+formals(pago_mensual)       # los argumentos: lo que entra
+body(pago_mensual)          # el cuerpo: lo que hace
+environment(pago_mensual)   # el ambiente: dónde busca los nombres
+```
 
-La tercera es la que nadie escribe y la que explica los comportamientos raros. Vuelve en la sección de *scoping*.
+La tercera es la que nadie escribe y la que explica los comportamientos raros; vuelve en la sección de *scoping*. Y como el cuerpo está armado con operaciones vectorizadas, la función hereda la vectorización sin haber hecho nada especial:
 
 ```r
-pago_mensual(1200, 0.0001, 12)      # [1] 100.065      la prueba: 1200 / 12 = 100
-
 round(pago_mensual(creditos$capital, creditos$tasa, creditos$plazo))
 # [1] 12051  6453  8408  8873  9371  7532  9582    NA
 ```
-
-El cuerpo está armado con operaciones vectorizadas, así que la función hereda la vectorización sin haber hecho nada especial: los ocho créditos de una sola llamada.
 ---
 layout: default
 section: Sesión 5
@@ -172,19 +168,18 @@ subsection: Funciones
 # Argumentos y valores por defecto
 Los argumentos son la interfaz: lo único que el que llama tiene que saber.
 
-Dar valor por defecto a uno significa que hay una decisión habitual, y deja esa decisión escrita en la definición en vez de repetida en cada llamada. Un argumento sin defecto es obligatorio; con defecto es opcional, y el valor se evalúa dentro de la función, así que puede depender de los otros argumentos.
+Un argumento sin defecto es obligatorio; con defecto es opcional, y deja la decisión habitual escrita en la definición en vez de repetida en cada llamada.
 
 ```r
 pago_mensual = function(capital, tasa = 0.01, plazo = 24) {
     capital * tasa / (1 - (1 + tasa)^-plazo)
 }
 
-round(pago_mensual(250000), 2)                                       # [1] 11768.37
-round(pago_mensual(250000, plazo = 36), 2)                           # [1] 8303.58
-round(pago_mensual(plazo = 12, capital = 250000, tasa = 0.015), 2)   # [1] 22920
+round(pago_mensual(250000), 2)                # [1] 11768.37
+round(pago_mensual(250000, plazo = 36), 2)    # [1] 8303.58
 ```
 
-Por nombre, el orden deja de importar y se pueden saltar los de en medio. Y aquí está el argumento a favor de escribir los nombres: los mismos tres valores en el orden equivocado no producen ningún error.
+Por nombre, el orden deja de importar y se pueden saltar los de en medio. Y ahí está el argumento a favor de escribir los nombres: los mismos tres valores en el orden equivocado no producen ningún error.
 
 ```r
 round(pago_mensual(250000, 24, 0.01), 2)
@@ -287,21 +282,11 @@ El error más frecuente de la sesión sale de olvidarlo.
 tasas_ofrecidas = c(0.008, 0.012, 0.025)
 
 if (tasas_ofrecidas > 0.01) "alta" else "baja"
-
-Error in if (tasas_ofrecidas > 0.01) "alta" else "baja" :
-  the condition has length > 1
+# Error in if (tasas_ofrecidas > 0.01) "alta" else "baja" :
+#   the condition has length > 1
 ```
 
 Hasta R 4.1 esa línea corría: R usaba el primer elemento del vector y seguía con un aviso. Hay mucho código publicado y varios libros escritos bajo esa regla. Desde la versión 4.2 es un error.
-
-Un `NA` en la condición falla por otra razón, y el mensaje no dice qué lo provocó. `monto > 100000` con `monto` faltante devuelve `NA`, y con `NA` no hay rama que elegir:
-
-```r
-monto = creditos$capital[8]        # el octavo crédito no tiene monto capturado
-
-if (monto > 100000) "grande" else "chico"
-# Error: valor ausente donde TRUE/FALSE es necesario   <- el faltante va primero
-```
 
 La función de la sección anterior tropieza con la misma regla, y el ejemplo vale doble porque el mensaje sale de adentro de una función propia:
 
@@ -311,6 +296,35 @@ pago_mensual(creditos$capital, creditos$tasa, creditos$plazo)
 ```
 
 Es la misma llamada que corrió sin problema [antes de agregarle la guardia]{.colmex-orange}. Ahora hay que elegir: una función escalar con guardia, o una vectorizada sin ella. La tercera opción es escribir la guardia con `if_else()`, y es la que pide el bloque de práctica.
+---
+layout: default
+section: Sesión 5
+subsection: Condicionales
+---
+# El faltante en la condición
+`if` tampoco tolera un `NA`, y el mensaje no dice de dónde salió.
+
+`monto > 100000` con `monto` faltante devuelve `NA`, y con `NA` no hay rama que elegir: R no puede decidir entre dos alternativas cuando no sabe si la condición se cumple.
+
+```r
+monto = creditos$capital[8]        # el octavo crédito no tiene monto capturado
+
+if (monto > 100000) "grande" else "chico"
+# Error: valor ausente donde TRUE/FALSE es necesario
+```
+
+El faltante se atiende antes que todo lo demás, con su propia rama:
+
+```r
+if (is.na(monto)) "sin dato" else if (monto > 100000) "grande" else "chico"
+# [1] "sin dato"
+```
+
+<Azul t="Los mensajes de error y su idioma">
+
+Los de R base se traducen según el *locale*; los del tidyverse siempre están en inglés. Al buscar un error en internet, [la versión en inglés encuentra resultados]{.colmex-blue} y la traducida casi nunca.
+
+</Azul>
 ---
 layout: default
 section: Sesión 5
@@ -729,15 +743,9 @@ section: Sesión 5
 subsection: Vectorización
 ---
 # Contrapatrones
-Tres, con lo que va en su lugar. El tercero es el más frecuente.
+Crecer el vector dentro del *loop*; iterar con `1:length(x)`; y este, el más frecuente:
 
-| Contrapatrón | Reemplazo |
-|---|---|
-| crecer el vector dentro del *loop* | pre-asignar, o vectorizar |
-| iterar con `1:length(x)` | `seq_along(x)` / `seq_len(n)` |
-| recorrer filas para llenar una columna | `mutate()` con `if_else()` / `case_when()` |
-
-El tercero llega siempre de la misma parte: de quien aprendió a programar donde no había otra opción.
+**recorrer filas para llenar una columna**, que se reemplaza con `mutate()` y `case_when()`.
 
 ```r
 etiqueta = character(nrow(creditos))            # 10 líneas, 4 índices, 1 contenedor
@@ -804,11 +812,27 @@ Ese lugar se llama **ambiente**, y es una correspondencia entre nombres y valore
     ambiente de la llamada  ->  ambiente de definición  ->  global  ->  paquetes
 ```
 
+Que la cadena la fije el lugar del texto donde se escribió la función, y no el lugar desde donde se la llamó, es lo que se llama *scoping* léxico.
+
+<Verde t="Las dos consecuencias que se usan a diario">
+
+Asignar adentro no toca nada de afuera, ni siquiera usando un nombre que ya existe. Y los objetos intermedios no sobreviven: una función puede calcular en diez pasos sin dejar diez objetos en el entorno.
+
+</Verde>
+---
+layout: default
+section: Sesión 5
+subsection: Ambientes y diseño
+---
+# Las dos consecuencias, en código
+Lo que pasa adentro se queda adentro.
+
 ```r
 f = function() {
     tasa = 0.99
     tasa
 }
+
 f()       # [1] 0.99
 tasa      # [1] 0.01      <- intacto: asignar adentro no toca nada de afuera
 
@@ -816,6 +840,7 @@ g = function() {
     parcial = 1:10
     sum(parcial)
 }
+
 g()                  # [1] 55
 exists("parcial")    # [1] FALSE     <- los objetos intermedios no sobreviven
 ```
@@ -925,15 +950,12 @@ validar_credito = function(capital, tasa, plazo) {
     invisible(TRUE)
 }
 
-validar_credito(250000, 0.01, 24)
-# Crédito válido: 250000 a 24 pagos.
-
-validar_credito(-5000, 0.01, 24)
-# Error in validar_credito(-5000, 0.01, 24) :
-#   capital tiene que ser un número positivo; llegó: -5000.
+validar_credito(250000, 0.01, 24)   # Crédito válido: 250000 a 24 pagos.
+validar_credito(-5000, 0.01, 24)    # Error: capital tiene que ser un número
+                                    #   positivo; llegó: -5000.
 ```
 
-`invisible()` devuelve el valor sin imprimirlo. El mensaje de error incluye el valor que llegó, que es la diferencia entre un error que se arregla solo y uno que obliga a reconstruir la llamada.
+`invisible()` devuelve el valor sin imprimirlo. El mensaje incluye [el valor que llegó]{.colmex-orange}, que es la diferencia entre un error que se arregla solo y uno que obliga a reconstruir la llamada.
 ---
 layout: default
 section: Sesión 5
@@ -956,17 +978,12 @@ pago_seguro = function(capital, tasa = 0.01, plazo = 24) {
     capital * tasa / (1 - (1 + tasa)^-plazo)
 }
 
-pago_seguro("250000")            # Error: capital tiene que ser numérico
 pago_seguro(250000, plazo = 24.5)   # Error: el plazo tiene que ser entero
 ```
 
 Desde R 4.0 el **nombre** de cada condición es el mensaje de error. Sin nombre, el mensaje es la condición literal — `is.numeric(capital) is not TRUE` — que dice qué se violó pero no qué se esperaba.
 
-<Verde t="Qué revisar">
-
-Lo que, si viene mal, produce un resultado [equivocado en vez de un error]{.colmex-blue}: un tipo, un signo, un largo, un entero que llegó con decimales. Lo que de todos modos va a reventar no necesita guardia.
-
-</Verde>
+Qué revisar: lo que, si viene mal, produce un resultado [equivocado en vez de un error]{.colmex-blue} —un tipo, un signo, un largo, un entero con decimales—. Lo que de todos modos va a reventar no necesita guardia.
 ---
 layout: default
 section: Sesión 5
@@ -1001,14 +1018,9 @@ subsection: Errores
 # El lote que sobrevive a un caso roto
 Pre-asignar, capturar, registrar, reportar.
 
-```r
-escenarios = tibble(
-    nombre  = c("base", "sin monto", "tasa negativa", "plazo largo"),
-    capital = c(250000, -5000, 180000, 320000),
-    tasa    = c(0.010, 0.010, -0.020, 0.011),
-    plazo   = c(24, 24, 36, 48)
-)
+`escenarios` es un `tibble` de cuatro renglones —*base*, *sin monto*, *tasa negativa*, *plazo largo*— y dos de ellos traen valores imposibles.
 
+```r
 pagos = numeric(nrow(escenarios))
 ok = logical(nrow(escenarios))
 
@@ -1028,16 +1040,12 @@ layout: default
 section: Sesión 5
 subsection: Errores
 ---
-# `traceback()` y `browser()`
+# Dónde falló: `traceback()`
 Mientras R evalúa, mantiene una pila de llamadas activas.
 
-La que se escribió en la consola, la que esa llamó, la que esa otra llamó. Cuando algo falla, el error se señala en la llamada más profunda, que casi nunca es la que se escribió: el mensaje menciona entonces una función que no aparece en la línea que se corrió.
+El error se señala en la llamada más profunda, que casi nunca es la que se escribió, y el mensaje menciona una función que no aparece en la línea que se corrió.
 
 ```r
-costo_total = function(capital, tasa, plazo) {
-    pago_seguro(capital, tasa, plazo) * plazo - capital   # la validación está aquí abajo
-}
-
 costo_total("250000", 0.01, 24)
 # Error in pago_seguro(capital, tasa, plazo) : capital tiene que ser numérico
 
@@ -1048,11 +1056,11 @@ traceback()
 # 1: costo_total("250000", 0.01, 24)
 ```
 
-La pila se lee de abajo hacia arriba: el 1 es lo que se escribió y el 4 es donde reventó. El nivel que suele interesar es el intermedio, porque ahí está la llamada que recibió el argumento equivocado.
+Se lee de abajo hacia arriba: el 1 es lo que se escribió, el 4 es donde reventó, y el nivel intermedio es el que recibió el argumento equivocado.
 
-<Azul t="browser() contesta otra pregunta">
+<Azul t="Y con qué valores: browser()">
 
-`traceback()` dice **dónde** falló; `browser()` detiene la ejecución dentro de la función y entrega la consola con los objetos locales, así que dice **con qué valores**. Acepta código normal más `n` (siguiente línea), `c` (continuar), `Q` (salir) y `where` (la pila). En Positron se logra igual con un *breakpoint* en el margen.
+Detiene la ejecución dentro de la función y entrega la consola con los objetos locales. En Positron, lo mismo con un *breakpoint* en el margen. Se ve en vivo; no hay mucho más que decir de él.
 
 </Azul>
 ---
@@ -1130,20 +1138,13 @@ resumen_por = function(datos, grupo, variable) {
 }
 
 resumen_por(creditos, banco, capital)
-# A tibble: 3 × 3
-  banco  casos  media
-  <chr>  <int>  <dbl>
-1 Sur        3 275000
-2 Norte      3 215000
-3 Centro     2 212500
+#   banco  casos  media
+# 1 Sur        3 275000
+# 2 Norte      3 215000
+# 3 Centro     2 212500
 ```
 
-```r
-resumen_por(creditos, banco, tasa)       # tasa media por banco
-resumen_por(creditos, atraso, capital)   # monto medio por nivel de atraso
-```
-
-Lo que se ganó no es escribir menos. Antes, cada respuesta era un `summarize()` completo, y bastaba que en uno se olvidara `na.rm` para que dejaran de ser comparables.
+La misma función contesta `resumen_por(creditos, banco, tasa)` o `resumen_por(creditos, atraso, capital)`. Lo que se ganó no es escribir menos: antes, cada respuesta era un `summarize()` completo, y bastaba que en uno se olvidara `na.rm` para que dejaran de ser comparables.
 ---
 layout: default
 section: Sesión 5
@@ -1206,15 +1207,30 @@ tabla_amortizacion = function(capital, tasa = 0.01, plazo = 24) {
            saldo_final   = saldo[seq_len(plazo) + 1])
 }
 ```
-
-Devolver una tabla en lugar de imprimir es lo que permite verificar el resultado, y esa es la razón de haberla escrito así:
+---
+layout: default
+section: Sesión 5
+subsection: Cierre
+---
+# Y la verificación
+Devolver una tabla en lugar de imprimir es lo que permite comprobar el resultado.
 
 ```r
 amortizacion = tabla_amortizacion(250000, 0.01, 24)
 
 all.equal(sum(amortizacion$amortizacion), 250000)   # [1] TRUE   ¿se pagó el capital?
 all.equal(last(amortizacion$saldo_final), 0)        # [1] TRUE   ¿quedó liquidado?
+
+round(sum(amortizacion$interes), 2)                 # [1] 32440.83   el costo
 ```
+
+Las dos comprobaciones son independientes del camino: cualquier error en la fórmula del pago, en el acumulado del *loop* o en el orden de las columnas rompe al menos una. Esa es la razón de haber escrito la función para que devuelva un objeto.
+
+<Verde t="La misma idea, en el bloque de práctica">
+
+Ahí la comprobación es otra: la simulación mes por mes y la fórmula cerrada tienen que coincidir. Dos caminos independientes al mismo número.
+
+</Verde>
 ---
 layout: default
 section: Sesión 5
