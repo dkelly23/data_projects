@@ -89,7 +89,7 @@ Tres bloques, dos sesiones cada uno:
 
 ## Hilo conductor del curso 1: la EIGH
 
-El curso 1 **no tiene proyecto integrador evaluable**. En su lugar, las seis sesiones operan sobre un mismo conjunto de datos para que cada tema nuevo se aplique sobre material ya conocido.
+El curso 1 **no tiene proyecto integrador evaluable**. En su lugar, las sesiones operan sobre un mismo conjunto de datos para que cada tema nuevo se aplique sobre material ya conocido. **La Sesión 5 es la excepción deliberada: es autocontenida y no toca la EIGH** (ver abajo).
 
 **Dataset:** Encuesta de Ingresos y Gastos de los Hogares (**EIGH**), un levantamiento **simulado** que se genera por programa. No corresponde a ninguna encuesta real; imita la estructura de una encuesta de ingreso-gasto del INEGI.
 
@@ -106,7 +106,27 @@ Razones de la elección: archivos ligeros y sin descarga previa; tres tablas rel
 
 **Generador:** `slides/semana_02/code/generar_data.R`. Se corre desde cualquier carpeta del repositorio (localiza la raíz por `code/curso-ppd.Rproj`) y escribe en `code/files/` y `code/docs/`. Con la semilla fija, regenerar produce archivos idénticos. Las salidas que aparecen en las slides y en los scripts se copiaron de una corrida real: **si se cambia el generador, hay que volver a verificarlas**.
 
-Cada sesión cierra con un bloque de práctica sobre la EIGH que continúa el del bloque anterior: importación (S2) → verbos (S3) → ETL con joins y limpieza de texto (S4) → refactor en funciones (S5) → consolidación con `map()` y gráficas (S6).
+Cada sesión cierra con un bloque de práctica sobre la EIGH que continúa el del bloque anterior: importación (S2) → verbos (S3) → ETL con joins y limpieza de texto (S4) → **[S5 fuera de la cadena]** → consolidación con `map()` y gráficas (S6).
+
+### La Sesión 5 no usa la EIGH
+
+Decisión del profesor, tomada al desarrollar la sesión: **toda la Sesión 5 —exposición y bloque de práctica— es autocontenida**. Sus temas (control de flujo, vectorización, diseño de funciones, manejo de errores) son propiedades del lenguaje y no del dato; con la encuesta de fondo no se distingue si una falla vino del código o del archivo.
+
+- **Exposición.** El hilo es una calculadora de crédito: tres escalares, una serie de tasas de inflación y un `tibble` de ocho créditos, todo declarado en `sesion_05.R`. La tabla de amortización es el caso donde el *loop* es obligatorio (cada saldo depende del anterior), y eso sostiene la discusión de vectorización.
+- **Práctica.** Un plan de ahorro: dos series de doce meses y un `tibble` de ocho contratos. Cierra verificando que la simulación iterativa y la fórmula cerrada coinciden (`all.equal()` en `TRUE`), que es el análogo autocontenido de la verificación contra un archivo.
+- **Consecuencia para la S6.** Su bloque de práctica **no hereda** la función de lectura de la S5: tiene que escribirla al inicio del propio bloque. El `\practica{}` del temario ya está redactado así.
+- **`paste0()`, no `glue()`.** Instrucción del profesor para esta sesión: los mensajes se arman con `paste0()`. Coherente con el encuadre —la S5 es la sesión de R base— pero **contradice a la S4**, cuyo deck presenta `glue()` como la opción preferida frente a `paste0()`. El guion de la S5 lo resuelve con una nota que explica la diferencia; queda por decidir si `paste0()` es convención de todo el curso o solo de esta sesión.
+
+**Estructura didáctica de la S5.** Cada subtema va en tres pasos marcados en el guion: `PARA QUÉ SIRVE` (el problema que resuelve), `CÓMO SE COMPORTA` (la semántica) y `EN CÓDIGO`. Los dos primeros son para hablar; el tercero para teclear. Petición explícita del profesor: demostrar qué hace una función no sustituye a explicar para qué sirve.
+
+**Orden de la S5: funciones primero.** Decisión del profesor, contra el orden de *Advanced R* (control de flujo → funciones) y contra el orden original del temario. Las funciones se ven en dos tandas:
+
+1. **`# FUNCIONES`** abre la sesión con lo que no depende del resto: qué es, anatomía, argumentos y valor de retorno. Ahí se escribe `pago_mensual()`, y **todas las secciones siguientes la llaman** en lugar de repetir la fórmula.
+2. **`# AMBIENTES Y DISEÑO DE FUNCIONES`** va después de vectorización: `...`, *scoping* léxico, dependencia silenciosa, funciones puras.
+
+La salida temprana con `return()` queda en medio, dentro de condicionales, porque es una aplicación del `if`. Eso produce el mejor ejemplo de la sesión: la guardia `if (tasa == 0)` rompe la llamada vectorizada que funcionaba dos secciones antes, y con eso el "`if` es escalar" deja de ser un dato y se vuelve una consecuencia.
+
+El orden de los subtemas y de los objetivos en `syllabus/curso-1/temario-completo/syllabus.tex` ya está alineado con esto.
 
 ## Proyecto integrador (curso 2)
 
@@ -455,7 +475,8 @@ Programming for Data Projects/
 │   ├── semana_02/         (deck de la Sesión 2)
 │   ├── semana_03/         (deck de la Sesión 3)
 │   ├── semana_04/         (deck de la Sesión 4)
-│   └── semana_05..06/     (solo code/ por ahora; los decks faltan)
+│   ├── semana_05/         (deck de la Sesión 5)
+│   └── semana_06/         (solo code/ por ahora; el deck falta)
 ├── docs/                  (guías de contenido por tema, insumo para armar decks)
 └── muestra_ppt/           (referencia Beamer — no tocar)
 ```
@@ -468,9 +489,9 @@ Programming for Data Projects/
 
 **Curso 1 (arranca el 21 de agosto de 2026):**
 - [ ] Actualizar el deck `slides/semana_01/` para que cubra el contenido nuevo de la Sesión 1 (Git, GitHub y estructura de carpetas se agregaron desde la antigua S4).
-- [ ] Desarrollar slides de las Sesiones 5–6 (los decks de las Sesiones 2, 3 y 4 ya están en `slides/semana_02/`, `slides/semana_03/` y `slides/semana_04/`).
-- [ ] Desarrollar el contenido de `sesion_05.R` y `sesion_06.R` y de `ejercicios_05.R` y `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
-- [ ] Extender `generar_data.R` para que emita **varios levantamientos** de la EIGH: la práctica de la Sesión 6 (`map()` sobre la función de lectura de la S5) necesita más de uno. Hoy genera uno solo.
+- [ ] Desarrollar el deck de la Sesión 6 (los de las Sesiones 2 a 5 ya están en `slides/semana_02/` … `slides/semana_05/`).
+- [ ] Desarrollar el contenido de `sesion_06.R` y `ejercicios_06.R` (hoy solo tienen el esqueleto de secciones marcado POR DESARROLLAR).
+- [ ] Extender `generar_data.R` para que emita **varios levantamientos** de la EIGH: la práctica de la Sesión 6 (`map()` sobre una función de lectura escrita en el propio bloque) necesita más de uno. Hoy genera uno solo.
 
 **Nota sobre la Sesión 1:** Git y GitHub son **solo teoría**. Los ejercicios no piden escribir `.gitignore` ni commitear: el bloque de práctica trabaja sobre una mini encuesta capturada a mano (12 personas: edad, sexo, percepción de seguridad codificada 1/2), que no necesita archivos. Su tabla no coincide con la de la EIGH; conviene revisar si conviene alinearla (folio, integrantes, ingreso) para que la Sesión 2 continúe de ella.
 

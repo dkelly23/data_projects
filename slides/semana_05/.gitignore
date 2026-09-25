@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist-student/
+slides.student.md
+*.pdf
+.slidev/
+.DS_Store

@@ -189,7 +189,9 @@ El conjunto elegido es la \textbf{Encuesta de Ingresos y Gastos de los Hogares (
     \item \textbf{Estabilidad.} Al generarse con semilla fija, el levantamiento es idéntico en todas las máquinas y en todos los semestres, y las salidas del material de clase no se desfasan.
 \end{itemize}
 
-Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones. La EIGH no corresponde a ninguna encuesta real; su estructura imita la de una encuesta de ingreso-gasto de las que produce el INEGI.
+Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo del curso. La EIGH no corresponde a ninguna encuesta real; su estructura imita la de una encuesta de ingreso-gasto de las que produce el INEGI.
+
+La Sesión 5 es la excepción deliberada. Sus temas —control de flujo, vectorización y diseño de funciones— son propiedades del lenguaje y no del dato, de modo que tanto la exposición como los ejercicios operan sobre objetos mínimos declarados en el propio script: así un error de programación no se confunde con un defecto de los archivos. La EIGH regresa en la Sesión 6.
 
 % ==============================================================================
 \section{Estructura del curso}
@@ -325,9 +327,9 @@ El curso se organiza en tres bloques a lo largo de 6 sesiones:
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Diseñar funciones de un solo propósito con argumentos definidos y valor de retorno explícito.
     \item Escribir condicionales y \textit{loops} con sintaxis correcta, pre-asignando la salida.
     \item Identificar cuándo una operación se puede vectorizar y reescribirla sin \textit{loop} cuando proceda.
-    \item Diseñar funciones de un solo propósito con argumentos definidos y valor de retorno explícito.
     \item Explicar la resolución de nombres dentro de una función y anticipar problemas de \textit{scoping}.
     \item Validar argumentos, producir errores informativos y capturar fallas en flujos secuenciales con \texttt{tryCatch()}.
     \item Diagnosticar errores con \texttt{traceback()} y \texttt{browser()}, distinguiendo cuándo es apropiada cada técnica.

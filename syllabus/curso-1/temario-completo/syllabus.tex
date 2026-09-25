@@ -189,7 +189,9 @@ El conjunto elegido es la \textbf{Encuesta de Ingresos y Gastos de los Hogares (
     \item \textbf{Estabilidad.} Al generarse con semilla fija, el levantamiento es idéntico en todas las máquinas y en todos los semestres, y las salidas del material de clase no se desfasan.
 \end{itemize}
 
-Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo de las seis sesiones. La EIGH no corresponde a ninguna encuesta real; su estructura imita la de una encuesta de ingreso-gasto de las que produce el INEGI.
+Los ejemplos en clase y los ejercicios del bloque de práctica se construyen sobre estos archivos a lo largo del curso. La EIGH no corresponde a ninguna encuesta real; su estructura imita la de una encuesta de ingreso-gasto de las que produce el INEGI.
+
+La Sesión 5 es la excepción deliberada. Sus temas —control de flujo, vectorización y diseño de funciones— son propiedades del lenguaje y no del dato, de modo que tanto la exposición como los ejercicios operan sobre objetos mínimos declarados en el propio script: así un error de programación no se confunde con un defecto de los archivos. La EIGH regresa en la Sesión 6.
 
 % ==============================================================================
 \section{Estructura del curso}
@@ -398,28 +400,28 @@ La sesión completa las herramientas necesarias para transformar datos crudos en
 
 \sesion{5}{Control de flujo, vectorización y funciones}
 
-La sesión marca la transición del estudiante de consumidor de código a autor de código. Cubre la sintaxis de control de flujo, la vectorización como alternativa por defecto del lenguaje, y las funciones como unidad de reuso.
+La sesión marca la transición del estudiante de consumidor de código a autor de código. Abre con la función como unidad de reuso y desarrolla sobre ella el control de flujo, la vectorización como modo por defecto del lenguaje y el manejo de errores. Es la única sesión que no opera sobre la EIGH: sus temas son propiedades del lenguaje y se ejercitan sobre objetos declarados en el propio programa.
 
 \textbf{Subtemas:}
 
 \begin{itemize}[leftmargin=*, itemsep=2pt]
-    \item \textbf{Condicionales.} Sintaxis de \texttt{if} y \texttt{else}; \texttt{switch()} para ramas múltiples mutuamente excluyentes. \texttt{if} opera sobre escalares; aplicado a un vector emite \textit{warning} o evalúa solo el primer elemento. Distinción: \texttt{if} controla flujo de programa; \texttt{if\_else()} y \texttt{case\_when()} (Sesión 4) construyen variables vectorizadas dentro de \texttt{mutate()}.
-    \item \textbf{\textit{Loops}: \texttt{for} y \texttt{while}.} Sintaxis e iteración. Iteración segura sobre secuencias con \texttt{seq\_along()} y \texttt{seq\_len()}. Iteración sobre listas. Pre-asignación de la salida como buena práctica; consecuencias del crecimiento del vector dentro del \textit{loop}. Control fino con \texttt{break} y \texttt{next}. Escenarios en que el \textit{loop} se justifica: operaciones dependientes del estado previo, \textit{side effects} (lectura y escritura de archivos), ETL secuencial sobre trimestres.
-    \item \textbf{Vectorización como modo por defecto.} R aplica la mayoría de operaciones aritméticas, lógicas y funciones elemento a elemento sobre vectores. Comparación entre código con \textit{loop} y código vectorizado, en claridad y rendimiento. Reglas de \textit{recycling}. Funciones acumuladoras (\texttt{cumsum}, \texttt{cummax}, \texttt{cumprod}). Contrapatrones frecuentes: crecimiento de vector dentro del \textit{loop} frente a pre-asignación; errores \textit{off-by-one} en la iteración por índices.
     \item \textbf{Anatomía y diseño de una función.} Sintaxis (\texttt{function(args) \{ body \}}), argumentos con valor por defecto, argumentos por nombre frente a posicionales, valor de retorno (último valor evaluado o \texttt{return()} explícito). Convención: una función tiene un solo propósito y un nombre que lo expresa. Regla operativa: la repetición de un mismo patrón en tres ocasiones justifica su encapsulamiento en función.
+    \item \textbf{Condicionales.} Sintaxis de \texttt{if} y \texttt{else}; la guardia de una función como primer uso del condicional; \texttt{switch()} para ramas múltiples mutuamente excluyentes, con caso por omisión. \texttt{if} opera sobre escalares: aplicado a un vector es un error desde R 4.2, y antes de esa versión evaluaba solo el primer elemento con \textit{warning}. Distinción: \texttt{if} controla flujo de programa; \texttt{if\_else()} y \texttt{case\_when()} (Sesión 4) construyen variables vectorizadas dentro de \texttt{mutate()}.
+    \item \textbf{\textit{Loops}: \texttt{for} y \texttt{while}.} Sintaxis e iteración. Iteración segura sobre secuencias con \texttt{seq\_along()} y \texttt{seq\_len()}. Iteración sobre listas. Pre-asignación de la salida como buena práctica; consecuencias del crecimiento del vector dentro del \textit{loop}. Control fino con \texttt{break} y \texttt{next}. Escenarios en que el \textit{loop} se justifica: operaciones dependientes del estado previo, \textit{side effects} (lectura y escritura de archivos) y número de pasadas desconocido de antemano.
+    \item \textbf{Vectorización como modo por defecto.} R aplica la mayoría de operaciones aritméticas, lógicas y funciones elemento a elemento sobre vectores. Comparación entre código con \textit{loop} y código vectorizado, en claridad y rendimiento. Reglas de \textit{recycling}. Funciones acumuladoras (\texttt{cumsum}, \texttt{cummax}, \texttt{cumprod}). Contrapatrones frecuentes: crecimiento de vector dentro del \textit{loop} frente a pre-asignación; errores \textit{off-by-one} en la iteración por índices.
     \item \textbf{\textit{Scoping} léxico.} Resolución de nombres en R: ambiente local, padre y global. Razón por la cual una función no contamina el ambiente global por defecto. Distinción entre funciones puras (entrada $\to$ salida, sin efectos colaterales) y funciones con \textit{side effects}. Convención del curso: preferir funciones puras siempre que sea posible.
-    \item \textbf{Manejo de errores y \textit{debugging}.} \texttt{stop()} para errores fatales, \texttt{warning()} para advertencias, \texttt{message()} para información. Validación temprana de argumentos con \texttt{stopifnot()}. Captura de errores con \texttt{tryCatch()} para flujos que deben continuar pese a fallas (caso ETL: ante el fallo de un trimestre, proseguir con los siguientes y reportar al cierre). Diagnóstico con \texttt{traceback()} sobre el \textit{call stack} y \texttt{browser()} como pausa interactiva.
+    \item \textbf{Manejo de errores y \textit{debugging}.} \texttt{stop()} para errores fatales, \texttt{warning()} para advertencias, \texttt{message()} para información. Validación temprana de argumentos con \texttt{stopifnot()}. Captura de errores con \texttt{tryCatch()} para flujos que deben continuar pese a fallas: ante el fallo de un caso del lote, proseguir con los siguientes y reportar al cierre. Diagnóstico con \texttt{traceback()} sobre el \textit{call stack} y \texttt{browser()} como pausa interactiva.
     \item \textbf{Funciones que reciben nombres de columnas: NSE en \texttt{dplyr}.} Razón por la que \texttt{mi\_funcion(df, edad)} falla cuando internamente llama \texttt{filter(df, edad > 18)}. El operador \textit{embrace} \texttt{\{\{~var~\}\}} reenvía un argumento al ámbito de evaluación de \texttt{dplyr}. Operador \texttt{:=} para asignar nombres dinámicos en \texttt{mutate()}.
 \end{itemize}
 
-\practica{Refactor del ETL de la Sesión 4 en funciones de un solo propósito: una que lea y valide una tabla del levantamiento, otra que recodifique las categóricas, otra que produzca un resumen por entidad recibiendo la columna como argumento. Validación de argumentos y captura de fallas con \texttt{tryCatch()}.}
+\practica{Construcción de una calculadora financiera con funciones propias, sobre datos declarados en el propio script: operaciones vectorizadas sobre una serie de rendimientos, simulación con \textit{loop} de una trayectoria que depende del estado previo, una función con argumentos por defecto, \texttt{switch()} y validación con \texttt{stopifnot()}, un resumen por grupo que recibe la columna como argumento, y captura de fallas con \texttt{tryCatch()} sobre un lote de escenarios. Cierra verificando que la simulación iterativa y la fórmula cerrada dan el mismo resultado. Es la única sesión que no opera sobre la EIGH.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
 \begin{enumerate}[leftmargin=*, itemsep=1pt]
+    \item Diseñar funciones de un solo propósito con argumentos definidos y valor de retorno explícito.
     \item Escribir condicionales y \textit{loops} con sintaxis correcta, pre-asignando la salida.
     \item Identificar cuándo una operación se puede vectorizar y reescribirla sin \textit{loop} cuando proceda.
-    \item Diseñar funciones de un solo propósito con argumentos definidos y valor de retorno explícito.
     \item Explicar la resolución de nombres dentro de una función y anticipar problemas de \textit{scoping}.
     \item Validar argumentos, producir errores informativos y capturar fallas en flujos secuenciales con \texttt{tryCatch()}.
     \item Diagnosticar errores con \texttt{traceback()} y \texttt{browser()}, distinguiendo cuándo es apropiada cada técnica.
@@ -459,7 +461,7 @@ Cierre del curso. La primera mitad aborda la programación funcional como paradi
     \item \textbf{Scales, facets, themes y exportación.} \texttt{scale\_x\_continuous}, \texttt{scale\_x\_discrete}, \texttt{scale\_x\_date} y sus análogos para \texttt{y}, \texttt{color} y \texttt{fill}; control de \texttt{limits}, \texttt{breaks} y \texttt{labels}; \texttt{scale\_*\_manual()} con vectores nombrados. \textit{Formatters} del paquete \texttt{scales} (\texttt{label\_percent()}, \texttt{label\_comma()}). \texttt{facet\_wrap} frente a \texttt{facet\_grid}. Themes predefinidos (\texttt{theme\_minimal}, \texttt{theme\_bw}, \texttt{theme\_classic}) y \texttt{theme\_set()} para fijar el tema del proyecto. Exportación con \texttt{ggsave()}: \texttt{width}, \texttt{height}, \texttt{units}, \texttt{dpi}, \texttt{bg = 'white'}. El tratamiento comprehensivo de \texttt{ggplot2} y su ecosistema corresponde al segundo curso.
 \end{itemize}
 
-\practica{Cierre del pipeline: lectura de todos los levantamientos disponibles de la EIGH con \texttt{map()} sobre la función escrita en la Sesión 5, consolidación en un solo \texttt{tibble} y producción de una serie de gráficas de ingreso y gasto por entidad, exportadas a \texttt{output/} con \texttt{walk()}.}
+\practica{Cierre del pipeline: lectura de todos los levantamientos disponibles de la EIGH con \texttt{map()} sobre una función de lectura escrita al inicio del bloque, consolidación en un solo \texttt{tibble} y producción de una serie de gráficas de ingreso y gasto por entidad, exportadas a \texttt{output/} con \texttt{walk()}.}
 
 \medskip
 \noindent\textbf{Objetivos de aprendizaje}
